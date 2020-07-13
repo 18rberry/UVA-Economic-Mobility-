@@ -1,0 +1,51 @@
+<!--Martha Czernuszenko-->
+Iowa State Board of Education Priorities 
+
+
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages:['wordtree']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(
+          [ ['Phrases'],
+            ['Iowa students will become productive citizens in a democratic society and successful participants in a global community'],
+            ['Our mission is to champion excellence for all Iowa students through leadership and service'],
+            ['Goal All learners will have access to quality early childhood education'],
+            ['Goal All learners will meet or exceed literacy and math benchmarks'],
+            ['Goal All learners will have access to differentiated interventions and learning opportunities'],
+            ['Goal All teachers will have access and training, in pre-service and in-service, to best practices in early literacy instruction, and cultural competency'],
+            ['Goal All students will engage in learning Iowa’s rigorous academic standards to prepare them to be college and career ready'],
+            ['Goal Statewide assessment of student learning in English language arts, math, and science will be aligned to Iowa’s academic standards'],
+            ['Goal All schools will deliver equitable access to all grade-level standards with the focus on personalized student-centered learning'],
+            ['Goal All teacher and leader preparation programs in Iowa will be aligned to comprehensive standards and prepare candidates to meet the high expectations of our teacher and leader workforce'],
+            ['Goal All teacher and leader preparation programs in Iowa will develop the competencies candidates need to be culturally responsive to Iowa’s increasingly diverse student population'],
+            ['Goal All students will have equal access to robust Career and Technical Education, work-based learning experiences, and community college credit opportunities through an integrated system'],
+            ['Goal Students will have support in developing a robust career and academic plan'],
+            ['Goal Help achieve the goal of 70 percent of Iowans in the workforce attaining education or training beyond high school by 2025 through innovative community college programs and support services'],
+            ['Goal All Iowa schools will foster a culture and climate in which students feel safe and supported, and bullying and harassment do not exist'],
+            ['Goal All students will have access to mental health services and supports in their schools and communities'],
+            ['Goal All schools will create an environment that promotes social-emotional growth and wellness']
+          ]
+        );
+
+        var options = {
+          wordtree: {
+            format: 'implicit',
+            type: 'suffix',
+            word: 'Goal'
+          }
+        };
+
+        var chart = new google.visualization.WordTree(document.getElementById('wordtree_basic'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="wordtree_basic" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
