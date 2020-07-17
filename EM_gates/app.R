@@ -68,6 +68,9 @@ d <- data.frame(word = names(v),freq=v)
 head(d, 10)
 set.seed(1234)
 
+#Stye page ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 # Landing page --------------------------------------------------------------------------------------------------
 ui <- fluidPage(
@@ -111,7 +114,7 @@ ui <- fluidPage(
                       column(1)),
              fluidRow(width = 12, style = "margin: 20px", 
                       
-                      navlistPanel(widths = c(2, 10),
+                      navlistPanel(widths = c(2, 10), fluid = TRUE,
                                    
                                    tabPanel("Law Enforcement and Policing",
                                             
