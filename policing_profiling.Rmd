@@ -185,6 +185,7 @@ wordcloud(words = d$word, freq = d$freq, min.freq = 2,
           max.words=200, random.order=FALSE, rot.per=0.35, 
           colors=brewer.pal(8, "Dark2"))
 ```
+
 ```{r}
 docs <- Corpus(VectorSource(Virginia_data))
 toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
