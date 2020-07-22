@@ -74,7 +74,7 @@ set.seed(1234)
 
 # Landing page --------------------------------------------------------------------------------------------------
 ui <- fluidPage(
-  theme = shinytheme("paper"),
+  theme = shinytheme("flatly"),
   
   tags$style(type = "text/css", ".recalculating {opacity: 1.0;}"),
   tags$style(
@@ -86,7 +86,7 @@ ui <- fluidPage(
   
   headerPanel(
     img(src = "MyImage.jpg", 
-        class = "topimage", width = "100%", style = "display: block; margin-left: auto; margin-right: auto;" #)
+        class = "topimage", width = "100%", style = "display: block; margin-left: auto; margin-right: auto;" 
     )),
   hr(),
   
@@ -103,18 +103,19 @@ ui <- fluidPage(
            column(1)),
   hr(),
   
-  tabsetPanel(
-    
-    tabPanel(h4("Domains"), 
-             
-             fluidRow(width = 12,
-                      column(1),
-                      column(10, align = 'center', 
-                             h3(strong('Political Capital Domains of Interest'))),
-                      column(1)),
-             fluidRow(width = 12, style = "margin: 20px", 
-                      
-                      navlistPanel(widths = c(2, 10), fluid = TRUE,
+  navbarPage("",
+                      navbarMenu("Domain",
+                                 tabPanel("Overview",
+                                          
+                                          fluidRow(width =12,
+                                                   column(1),
+                                                   column(10, h3(strong( "")),
+                                                          hr(),
+                                                          strong("Composite"),
+                                                          p()),
+                                                   column(1)), 
+                                          fluidRow(width = 12, style = "margin: 20px",
+                                                   plotOutput("", height = '700px'))),
                                    
                                    tabPanel("Law Enforcement and Policing",
                                             
@@ -137,9 +138,64 @@ ui <- fluidPage(
                                                             p()),
                                                      column(1)), 
                                             fluidRow(width = 12, style = "margin: 20px",
-                                                     plotOutput("word_cloud", height = '700px')))
-                                   ))
-             ),
+                                                     plotOutput("word_cloud", height = '700px'))),
+                                   tabPanel("Zoning",
+                                            
+                                            fluidRow(width =12,
+                                                     column(1),
+                                                     column(10, h3(strong( "Education")),
+                                                            hr(),
+                                                            strong("Composite"),
+                                                            p()),
+                                                     column(1)), 
+                                            fluidRow(width = 12, style = "margin: 20px",
+                                                     plotOutput("", height = '700px'))),
+                                   tabPanel("Taxation",
+                                            
+                                            fluidRow(width =12,
+                                                     column(1),
+                                                     column(10, h3(strong( "Education")),
+                                                            hr(),
+                                                            strong("Composite"),
+                                                            p()),
+                                                     column(1)), 
+                                            fluidRow(width = 12, style = "margin: 20px",
+                                                     plotOutput("", height = '700px'))),
+                                   tabPanel("Voting",
+                                            
+                                            fluidRow(width =12,
+                                                     column(1),
+                                                     column(10, h3(strong( "Education")),
+                                                            hr(),
+                                                            strong("Composite"),
+                                                            p()),
+                                                     column(1)), 
+                                            fluidRow(width = 12, style = "margin: 20px",
+                                                     plotOutput("", height = '700px'))),
+                                   tabPanel("Health",
+                                            
+                                            fluidRow(width =12,
+                                                     column(1),
+                                                     column(10, h3(strong( "Education")),
+                                                            hr(),
+                                                            strong("Composite"),
+                                                            p()),
+                                                     column(1)), 
+                                            fluidRow(width = 12, style = "margin: 20px",
+                                                     plotOutput("", height = '700px'))),
+                                   tabPanel("Employment",
+                                            
+                                            fluidRow(width =12,
+                                                     column(1),
+                                                     column(10, h3(strong( "Education")),
+                                                            hr(),
+                                                            strong("Composite"),
+                                                            p()),
+                                                     column(1)), 
+                                            fluidRow(width = 12, style = "margin: 20px",
+                                                     plotOutput("", height = '700px')))
+                                   ),
+  
 
     
     tabPanel(h4("Data, Measures and Methods"), 
@@ -148,6 +204,16 @@ ui <- fluidPage(
                       column(1))),
     
     tabPanel(h4("Acknowledgements and Contacts"), 
+             fluidRow(width = 12, 
+                      column(1, align = "center", h3(strong("Approach"))),
+                      column(1))),
+    
+    tabPanel(h4("Datasets"), 
+             fluidRow(width = 12, 
+                      column(1, align = "center", h3(strong("Approach"))),
+                      column(1))),
+    
+    tabPanel(h4("Team"), 
              fluidRow(width = 12, 
                       column(1, align = "center", h3(strong("Approach"))),
                       column(1)))
