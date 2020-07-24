@@ -1,0 +1,58 @@
+,Subdomain,Subcategory,State,Score
+0,School Climate,Student Discipline,Oregon,1
+1,School Climate,Student Suspensions,Oregon,0.875
+2,School Climate,Disciplinary Approaches Addressing Specific Infractions and Conditions,Oregon,1
+3,School Climate,Prevention and Behavioral Interventions (Non-Punitive),Oregon,1
+4,School Climate,Monitoring and Accountability,Oregon,1
+5,School Climate,"School Resources, Safety Officers, Truant/Attendance Officers",Oregon,0
+6,School Climate,State Education Agency Support,Oregon,1
+7,Early Childhood Education,Kindergarten Requirements,Oregon,0.75
+8,Early Childhood Education,Teacher Quality,Oregon,0.2
+9,Early Childhood Education,School Readiness and Transitions,Oregon,1
+10,Early Childhood Education,"Assessment, Intervention and Retention",Oregon,0.5
+11,Early Childhood Education,Family Engagement,Oregon,0.5
+12,Early Childhood Education,Social Emotional Learning,Oregon,1
+13,Post-Secondary Affordability Policy,Need and Merit Based Financial Aid,Oregon,0.666666667
+14,Post-Secondary Affordability Policy,Financial Aid Policies,Oregon,1
+15,Post- Secondary Affordability Policy,Free College,Oregon,1
+16,Workforce Development Policy,Statewide Apprenticeships,Oregon,0.666666667
+17,Workforce Development Policy,State Policy Models for Connecting Education to Work,Oregon,0
+18,Workforce Development Policy,Secondary Career and Technical Education,Oregon,0.75
+19,School Climate,Student Discipline,Virginia,0.4
+20,School Climate,Student Suspensions,Virginia,0.875
+21,School Climate,Disciplinary Approaches Addressing Specific Infractions and Conditions,Virginia,1
+22,School Climate,Prevention and Behavioral Interventions (Non-Punitive),Virginia,0.666666667
+23,School Climate,Monitoring and Accountability,Virginia,1
+24,School Climate,"School Resources, Safety Officers, Truant/Attendance Officers",Virginia,1
+25,School Climate,State Education Agency Support,Virginia,1
+26,Early Childhood Education,Kindergarten Requirements,Virginia,0.75
+27,Early Childhood Education,Teacher Quality,Virginia,0.6
+28,Early Childhood Education,School Readiness and Transitions,Virginia,0.6
+29,Early Childhood Education,"Assessment, Intervention and Retention",Virginia,1
+30,Early Childhood Education,Family Engagement,Virginia,0
+31,Early Childhood Education,Social Emotional Learning,Virginia,1
+32,Post-Secondary Affordability Policy,Need and Merit Based Financial Aid,Virginia,1
+33,Post-Secondary Affordability Policy,Financial Aid Policies,Virginia,0
+34,Post- Secondary Affordability Policy,Free College,Virginia,1
+35,Workforce Development Policy,Statewide Apprenticeships,Virginia,1
+36,Workforce Development Policy,State Policy Models for Connecting Education to Work,Virginia,1
+37,Workforce Development Policy,Secondary Career and Technical Education,Virginia,0.5
+38,School Climate,Student Discipline,Iowa,0.2
+39,School Climate,Student Suspensions,Iowa,0.5
+40,School Climate,Disciplinary Approaches Addressing Specific Infractions and Conditions,Iowa,0.571428571
+41,School Climate,Prevention and Behavioral Interventions (Non-Punitive),Iowa,0.333333333
+42,School Climate,Monitoring and Accountability,Iowa,0.5
+43,School Climate,"School Resources, Safety Officers, Truant/Attendance Officers",Iowa,0.5
+44,School Climate,State Education Agency Support,Iowa,0
+45,Early Childhood Education,Kindergarten Requirements,Iowa,0.25
+46,Early Childhood Education,Teacher Quality,Iowa,0.8
+47,Early Childhood Education,School Readiness and Transitions,Iowa,0.4
+48,Early Childhood Education,"Assessment, Intervention and Retention",Iowa,1
+49,Early Childhood Education,Family Engagement,Iowa,0
+50,Early Childhood Education,Social Emotional Learning,Iowa,1
+51,Post-Secondary Affordability Policy,Need and Merit Based Financial Aid,Iowa,0.666666667
+52,Post-Secondary Affordability Policy,Financial Aid Policies,Iowa,1
+53,Post- Secondary Affordability Policy,Free College,Iowa,1
+54,Workforce Development Policy,Statewide Apprenticeships,Iowa,0.666666667
+55,Workforce Development Policy,State Policy Models for Connecting Education to Work,Iowa,1
+56,Workforce Development Policy,Secondary Career and Technical Education,Iowa,0.25
