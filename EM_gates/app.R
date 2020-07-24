@@ -20,56 +20,22 @@ library("tm")
 library("SnowballC")
 library("wordcloud")
 library("RColorBrewer")
+library(shinydashboardPlus)
 
 # load data ---------------------------------------------------------------
-Policing_data <- read_excel("~/policing_data.xlsx", 
-                            sheet = "overall", col_types = c("text", 
-                                                             "text", "text", "text", "text", "text", "text"), col_names = c("score_criteria", "sub_domain", "state", "details", "score", "type", "link"))
 
-policing_2 <- read_excel("~/policing_data.xlsx", 
-                         sheet = "Composite", col_types = c("text", 
-                                                            "text", "numeric", "numeric", "numeric", 
-                                                            "numeric", "numeric", "numeric", 
-                                                            "numeric", "numeric", "numeric", 
-                                                            "numeric", "numeric", "numeric", 
-                                                            "numeric", "numeric", "numeric", 
-                                                            "numeric", "numeric"), col_names = c("state", "domain", "stop_iden", "bail_cash", "bail_bond", "CAF_convic", "CAF_burden", "ban_box", "health_care", "pre_natal", "abortion", "learning", "body_cams", "dem", "custodial_sexual_mis", "private_prisons", "death_penalty", "juv_age", "composite" ))
+policing_data <- read_excel("~/policing_data.xlsx", 
+                            sheet = "Final_Composite")
 
-policing_2 <-policing_2[-c(1), ]
+domain_data <- policing_data %>%
+  slice(54:56)
 
-arrest_policies <- policing_2 %>%
-  select(state, domain, stop_iden, bail_cash, bail_bond, CAF_convic, CAF_burden, composite)
+sub_domain_data <- policing_data %>%
+  slice(41:52)
 
-score_data <- Policing_data %>%
-  filter(type == "descriptive") %>%
-  select(score)
-docs <- Corpus(VectorSource(score_data))
-toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
-docs <- tm_map(docs, toSpace, "/")
-docs <- tm_map(docs, toSpace, "@")
-docs <- tm_map(docs, toSpace, "\\|")
-# Convert the text to lower case
-docs <- tm_map(docs, content_transformer(tolower))
-# Remove numbers
-docs <- tm_map(docs, removeNumbers)
-# Remove english common stopwords
-docs <- tm_map(docs, removeWords, stopwords("english"))
-# Remove your own stop word
-# specify your stopwords as a character vector
-docs <- tm_map(docs, removeWords, c("blabla1", "blabla2")) 
-# Remove punctuations
-docs <- tm_map(docs, removePunctuation)
-# Eliminate extra white spaces
-docs <- tm_map(docs, stripWhitespace)
-dtm <- TermDocumentMatrix(docs)
-m <- as.matrix(dtm)
-v <- sort(rowSums(m),decreasing=TRUE)
-d <- data.frame(word = names(v),freq=v)
-head(d, 10)
-set.seed(1234)
-
-#Stye page ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+sub_category_data <- policing_data %>%
+  slice(1:39)
+#plots page ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 # Landing page --------------------------------------------------------------------------------------------------
@@ -94,144 +60,290 @@ ui <- fluidPage(
   
   hr(),
   
+  navbarPage("", 
+             
+             tabPanel(h4("Project Overview"),
+                      flipBox(
+                        id = 1,
+                        header_img = "white.PNG",
+                        main_img = "white.PNG",
+                        front_title = "Overview and Goals",
+                        back_title = "Approach and Ethical Considerations",
+                        "Lorem ipsum is the nonsense filler text that typically demonstrates the font and style of a text in a document or visual demonstration. Originally from Latin, lorem ipsum has no intelligible meaning, but is simply a display of letters and characteristics to be viewed as a sample with given graphical elements in a file.",
+                        verticalProgress(
+                          value = 50,
+                          active = TRUE,
+                          status = "warning",
+                          size = "xs"
+                        ),
+                        back_content = tagList(
+                          column(
+                            width = 12 
+                          ), 
+                          "Lorem ipsum is the nonsense filler text that typically demonstrates the font and style of a text in a document or visual demonstration. Originally from Latin, lorem ipsum has no intelligible meaning, but is simply a display of letters and characteristics to be viewed as a sample with given graphical elements in a file."
+                        )
+                      )
+                      
+  ),
   
-  fluidRow(width = 12,
-           column(1),
-           column(10, 
-                  p(),
-                  p('Description')),
-           column(1)),
-  hr(),
   
-  navbarPage("",
-                      navbarMenu("Domain",
-                                 tabPanel("Overview",
-                                          
-                                          fluidRow(width =12,
-                                                   column(1),
-                                                   column(10, h3(strong( "")),
-                                                          hr(),
-                                                          strong("Composite"),
-                                                          p()),
-                                                   column(1)), 
-                                          fluidRow(width = 12, style = "margin: 20px",
-                                                   plotOutput("", height = '700px'))),
-                                   
-                                   tabPanel("Law Enforcement and Policing",
-                                            
-                                            fluidRow(width =12,
-                                                     column(1),
-                                                     column(10, h3(strong( " Law Enforcement and Policing")),
-                                                            hr(),
-                                                            strong("Composite"),
-                                                            p()),
-                                                     column(1)), 
-                                            fluidRow(width = 12, style = "margin: 20px",
-                                                     plotOutput("policing_plot", height = '700px'))),
-                                   tabPanel("Education",
-                                            
-                                            fluidRow(width =12,
-                                                     column(1),
-                                                     column(10, h3(strong( "Education")),
-                                                            hr(),
-                                                            strong("Composite"),
-                                                            p()),
-                                                     column(1)), 
-                                            fluidRow(width = 12, style = "margin: 20px",
-                                                     plotOutput("word_cloud", height = '700px'))),
-                                   tabPanel("Zoning",
-                                            
-                                            fluidRow(width =12,
-                                                     column(1),
-                                                     column(10, h3(strong( "Education")),
-                                                            hr(),
-                                                            strong("Composite"),
-                                                            p()),
-                                                     column(1)), 
-                                            fluidRow(width = 12, style = "margin: 20px",
-                                                     plotOutput("", height = '700px'))),
-                                   tabPanel("Taxation",
-                                            
-                                            fluidRow(width =12,
-                                                     column(1),
-                                                     column(10, h3(strong( "Education")),
-                                                            hr(),
-                                                            strong("Composite"),
-                                                            p()),
-                                                     column(1)), 
-                                            fluidRow(width = 12, style = "margin: 20px",
-                                                     plotOutput("", height = '700px'))),
-                                   tabPanel("Voting",
-                                            
-                                            fluidRow(width =12,
-                                                     column(1),
-                                                     column(10, h3(strong( "Education")),
-                                                            hr(),
-                                                            strong("Composite"),
-                                                            p()),
-                                                     column(1)), 
-                                            fluidRow(width = 12, style = "margin: 20px",
-                                                     plotOutput("", height = '700px'))),
-                                   tabPanel("Health",
-                                            
-                                            fluidRow(width =12,
-                                                     column(1),
-                                                     column(10, h3(strong( "Education")),
-                                                            hr(),
-                                                            strong("Composite"),
-                                                            p()),
-                                                     column(1)), 
-                                            fluidRow(width = 12, style = "margin: 20px",
-                                                     plotOutput("", height = '700px'))),
-                                   tabPanel("Employment",
-                                            
-                                            fluidRow(width =12,
-                                                     column(1),
-                                                     column(10, h3(strong( "Education")),
-                                                            hr(),
-                                                            strong("Composite"),
-                                                            p()),
-                                                     column(1)), 
-                                            fluidRow(width = 12, style = "margin: 20px",
-                                                     plotOutput("", height = '700px')))
-                                   ),
+  navbarMenu(h4("Domains of analysis"),
+             tabPanel("All",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px'))),
+             
+             tabPanel("Law Enforcement and Policing",
+                      
+                      fluidRow(
+                        navlistPanel(tabPanel("numeric data",
+                                              fluidRow(width =12,
+                                                       column(1),
+                                                       column(10, h3(strong( " Law Enforcement and Policing")),
+                                                              hr(),
+                                                              strong(""),
+                                                              p()),
+                                                       column(1)),
+                                              
+                                              fluidRow(
+                                                sidebarPanel(
+                                                  selectInput("graph", "Select a data level", 
+                                                              choices = c("Domain level", "Sub-domain level", "Sub-category level")
+                                                  )
+                                                )), 
+                                                mainPanel(plotOutput("selected_graph"))),
+                                              tabPanel("textual data")))),
+             
+             tabPanel("Education",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "Education")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px'))),
+             tabPanel("Zoning",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "Education")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px'))),
+             tabPanel("Taxation",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "Education")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px'))),
+             tabPanel("Voting",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "Education")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px'))),
+             tabPanel("Health",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "Education")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px'))),
+             tabPanel("Employment",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "Education")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px')))
+  ),
   
-
-    
-    tabPanel(h4("Data, Measures and Methods"), 
-             fluidRow(width = 12, 
-                      column(12, align = "center", h3(strong("Approach"))),
-                      column(1))),
-    
-    tabPanel(h4("Acknowledgements and Contacts"), 
-             fluidRow(width = 12, 
-                      column(1, align = "center", h3(strong("Approach"))),
-                      column(1))),
-    
-    tabPanel(h4("Datasets"), 
-             fluidRow(width = 12, 
-                      column(1, align = "center", h3(strong("Approach"))),
-                      column(1))),
-    
-    tabPanel(h4("Team"), 
-             fluidRow(width = 12, 
-                      column(1, align = "center", h3(strong("Approach"))),
-                      column(1)))
-    ))
+  navbarMenu(h4("Data, Measures and Methods"),
+             tabPanel("All",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px'))),
+             
+             tabPanel("Law Enforcement and Policing",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( " Law Enforcement and Policing")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px'))),
+             tabPanel("Education",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "Education")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("word_cloud", height = '700px'))),
+             tabPanel("Zoning",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "Education")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px'))),
+             tabPanel("Taxation",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "Education")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px'))),
+             tabPanel("Voting",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "Education")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px'))),
+             tabPanel("Health",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "Education")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px'))),
+             tabPanel("Employment",
+                      
+                      fluidRow(width =12,
+                               column(1),
+                               column(10, h3(strong( "Education")),
+                                      hr(),
+                                      strong("Composite"),
+                                      p()),
+                               column(1)), 
+                      fluidRow(width = 12, style = "margin: 20px",
+                               plotOutput("", height = '700px')))
+  ),
+  
+  
+  
+  tabPanel(h4("Project Team"), 
+           fluidRow(width = 12, 
+                    column(1, align = "center", h3(strong("Approach"))),
+                    column(1))),
+  
+  
+  tabPanel(h4("Acknowledgements & Contacts"), 
+           fluidRow(width = 12, 
+                    column(1, align = "center", h3(strong("Approach"))),
+                    column(1)))
+))
 # server-----------------------------------------------------------------------------------------
 
-server <- function(input, output, session) {
 
-output$policing_plot <- renderPlot({
-  policing_2 %>%
-    ggplot(aes(x=composite, y= domain)) + geom_point(aes(colour=state, size = composite)) 
-}) 
+server <- shinyServer(function(input,output){  
+  
+  plot1 <-   reactive({ domain_data %>%
+    ggplot(aes(x=Composite, y= State)) + 
+      facet_grid(State ~ .) +
+    geom_point(aes(colour = State, size = 2)) +  
+    geom_segment( aes(x= 0, xend= Composite, y= State, yend= State, colour = State))
+                       }) 
+  
+  plot2 <-   reactive({ sub_domain_data %>%
+      ggplot(aes(x= Composite, y= `Sub-domain`))+
+      facet_grid(State ~ .) +
+      geom_point(aes(colour = State, size = 2)) +  
+      geom_segment( aes(x= 0, xend= Composite, y= `Sub-domain`, yend= `Sub-domain`, colour = State)) 
+                         }) 
+  
+  plot3 <- reactive({ sub_category_data %>%
+      ggplot(aes(x=Composite, y= `Sub Categories`)) +
+      facet_grid(State ~ .) +
+      geom_point(aes(colour = State)) +  
+      geom_segment( aes(x= 0, xend= Composite, y= `Sub Categories`, yend= `Sub Categories`, colour = State)) 
+   
+  }) 
+     
+  
+  graphInput <- reactive({
+    switch(input$graph,
+           "Domain level" = plot1(),
+           "Sub-domain level" = plot2(),
+           "Sub-category level" = plot3()
+    )
+  })
+  
+  
+
+  output$selected_graph <- renderPlot({ 
+    graphInput()
+  })
+  
+  
+
+})   
 
 
-output$word_cloud <- renderPlot({ 
-wordcloud(words = d$word, freq = d$freq, min.freq = 2,
-          max.words=200, random.order=FALSE, rot.per=0.35, 
-          colors=brewer.pal(8, "Dark2"))})
-}
+
+
+
+
 # Run the application 
 shinyApp(ui = ui, server = server)
