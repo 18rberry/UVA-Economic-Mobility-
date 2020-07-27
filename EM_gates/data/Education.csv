@@ -38,10 +38,10 @@ Education,Early Childhood Education,Kindergarten Requirements,Does the state req
 Education,Early Childhood Education,Kindergarten Requirements,Does the state require the district to offer kindergarten for half day?,1,1,1
 Education,Early Childhood Education,Kindergarten Requirements,Does the state require the district to offer kindergarten for full day?,1,0,0
 Education,Early Childhood Education,Teacher Quality,What are the teacher-to-student ratio requirements for grades K-3?,0,1,1
-Education,Early Childhood Education,Teacher Quality,What are the requirements for teacher preparation? (Reading),1,1,1
-Education,Early Childhood Education,Teacher Quality,What are the requirements for teacher development? (Reading),0,0,1
-Education,Early Childhood Education,Teacher Quality,What are the requirements for teacher development? (Math),0,1,1
-Education,Early Childhood Education,Teacher Quality,What are the requirements for teacher development? (Math),0,0,0
+Education,Early Childhood Education,Teacher Quality,What are the requirements for teacher preparation in Reading?,1,1,1
+Education,Early Childhood Education,Teacher Quality,What are the requirements for teacher development in Reading?,0,0,1
+Education,Early Childhood Education,Teacher Quality,What are the requirements for teacher prepartion in Math?,0,1,1
+Education,Early Childhood Education,Teacher Quality,What are the requirements for teacher development in Math?,0,0,0
 Education,Early Childhood Education,School Readiness and Transitions,Does the state have an early learning endorsement or license specific to K-3?,1,1,0
 Education,Early Childhood Education,School Readiness and Transitions,Are kindergarten entrance assessments required?,1,1,1
 Education,Early Childhood Education,School Readiness and Transitions,What are states required to do with the results of the KEA?,1,1,1
