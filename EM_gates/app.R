@@ -69,6 +69,7 @@ ui <- fluidPage(
                         main_img = "white.PNG",
                         front_title = "Overview and Goals",
                         back_title = "Approach and Ethical Considerations",
+                        #landing page write- up front side of flip box
                         "Lorem ipsum is the nonsense filler text that typically demonstrates the font and style of a text in a document or visual demonstration. Originally from Latin, lorem ipsum has no intelligible meaning, but is simply a display of letters and characteristics to be viewed as a sample with given graphical elements in a file.",
                         verticalProgress(
                           value = 50,
@@ -80,6 +81,7 @@ ui <- fluidPage(
                           column(
                             width = 12 
                           ), 
+                          #landing page back side of flip box
                           "Lorem ipsum is the nonsense filler text that typically demonstrates the font and style of a text in a document or visual demonstration. Originally from Latin, lorem ipsum has no intelligible meaning, but is simply a display of letters and characteristics to be viewed as a sample with given graphical elements in a file."
                         )
                       )
@@ -92,7 +94,7 @@ ui <- fluidPage(
                       
                       fluidRow(width =12,
                                column(1),
-                               column(10, h3(strong( "")),
+                               column(10, h3(strong("")),
                                       hr(),
                                       strong("Composite"),
                                       p()),
