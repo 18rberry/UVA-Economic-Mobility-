@@ -2,11 +2,15 @@ library(NLP)
 library(ggplot2)
 library(readr)
 library(tidyr)
+
+source("~/git/dspg20uvaEM/EM_gates/data/theme_SDAD.R")
+source("~/git/dspg20uvaEM/EM_gates/data/Colorblind_Palette.R")
+
 #Read in data ----------------------------------------------------------
 education <-read_csv("~/git/dspg20uvaEM/EM_gates/data/Education.csv")
 education <- gather(education, "state", 'score', c(5:7))
-
 head(education)
+
 
 #get length of education
 nrow(education)

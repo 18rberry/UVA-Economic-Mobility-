@@ -2,7 +2,7 @@ library(NLP)
 library(ggplot2)
 
 #Read in data ----------------------------------------------------------
-education <-read.csv("data/Education.csv")
+education <-read.csv("~/git/dspg20uvaEM/EM_gates/data/Education.csv")
 
 head(education)
 

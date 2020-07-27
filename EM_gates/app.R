@@ -24,7 +24,7 @@ library(shinydashboardPlus)
 
 # load data ---------------------------------------------------------------
 
-policing_data <- read_excel("~/policing_data.xlsx", 
+policing_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/policing_data.xlsx", 
                             sheet = "Final_Composite")
 
 domain_data <- policing_data %>%
@@ -70,7 +70,10 @@ ui <- fluidPage(
                         front_title = "Overview and Goals",
                         back_title = "Approach and Ethical Considerations",
                         #landing page write- up front side of flip box
-                        "Lorem ipsum is the nonsense filler text that typically demonstrates the font and style of a text in a document or visual demonstration. Originally from Latin, lorem ipsum has no intelligible meaning, but is simply a display of letters and characteristics to be viewed as a sample with given graphical elements in a file.",
+                        #To add newlines:
+                        #https://stackoverflow.com/questions/26368192/how-to-insert-new-line-in-r-shiny-string 
+                        "As defined by Flora, Flora, and Gasteyer in the 5th edition of their book “Rural Communities: Legacy + Change”, Political Capital is “… a group’s ability to influence the distribution of resources within a social unit, including helping set the agenda of what resources are available. … Political capital consists of organization, connections, voice, and power as citizens turn shared norms and values into standards that are codified into rules, regulations, and resources distributions that are enforced.” (pg 184)", 
+                        "Communities can leverage their political capital to make change when their norms and values are not reflected in the policies that govern them. In keeping with the Community Capitals Framework of asset mapping, we have created a policy asset map for the domains of education, taxation, employment, voting, law enforcement, and housing/zoning with a focus on policies that have the potential to impact economic mobility. By identifying those policies that can impede the economic mobility a community can better strategize for effective change.",
                         verticalProgress(
                           value = 50,
                           active = TRUE,
