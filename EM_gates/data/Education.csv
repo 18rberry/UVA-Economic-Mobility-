@@ -1,0 +1,74 @@
+"""POLICY DOMAINS""","""POLICY DIMENSIONS""","""POLICY SUBCATEGORY""","""POLICY QUESTIONS""",Oregon,Virginia,Iowa
+Education,School Climate,Student Discipline ,Are there use of Multi-Tiered Discipline Approaches?,1,0,0
+Education,School Climate,Student Discipline ,Are there non-punitive approaches outlined as alternatives to suspension or expulsion?,1,1,0
+Education,School Climate,Student Discipline ,When is a school required to involve law enforcement in student discipline?,1,0,1
+Education,School Climate,Student Discipline ,Is the use of corporal punishment allowed?,1,1,0
+Education,School Climate,Student Discipline ,Are there other in-school disciplinary approaches?,1,0,0
+Education,School Climate,Student Suspensions,"How extensive is what a student might be expelled for (3 or more = 1, else = 0)",0,1,1
+Education,School Climate,Student Suspensions,What must a student be suspended of expelled for?,1,1,1
+Education,School Climate,Student Suspensions,Are there alternative schooling options available for students who are suspended or expelled?,1,1,1
+Education,School Climate,Student Suspensions,Are there limitations placed on suspension or expulsion?,1,1,0
+Education,School Climate,Student Suspensions,Are there administrative procedures related to suspension and expulsion?,1,1,1
+Education,School Climate,Student Suspensions,Is there in-school suspension laws and regulations?,1,0,0
+Education,School Climate,Student Suspensions,Does the school board decide who return to school following removal?,0,1,0
+Education,School Climate,Student Suspensions,Use of restraint and seclusion,1,0,0
+Education,School Climate,Student Suspensions,Are there progressive alternative placements?,1,1,0
+Education,School Climate,Disciplinary Approaches Addressing Specific Infractions and Conditions,Are there laws for firearms for anyone?,1,1,0
+Education,School Climate,Disciplinary Approaches Addressing Specific Infractions and Conditions,Are there laws for other weapons?,1,1,1
+Education,School Climate,Disciplinary Approaches Addressing Specific Infractions and Conditions,Are there laws for students with chronic disciplinary issues?,1,1,0
+Education,School Climate,Disciplinary Approaches Addressing Specific Infractions and Conditions,Are there laws for attendance and truancy?,1,1,1
+Education,School Climate,Disciplinary Approaches Addressing Specific Infractions and Conditions,Are there laws for Substance use?,1,1,1
+Education,School Climate,Disciplinary Approaches Addressing Specific Infractions and Conditions,"Are there laws to protect students for Bullying, Harassment or Hazing?",1,1,1
+Education,School Climate,Disciplinary Approaches Addressing Specific Infractions and Conditions,Other Special Infractions or Conditions,1,1,0
+Education,School Climate,Prevention and Behavioral Interventions (Non-Punitive),Are there laws for many progressive violence preventions?,1,1,0
+Education,School Climate,Prevention and Behavioral Interventions (Non-Punitive),Are there behavioral interventions and student support services,1,1,1
+Education,School Climate,Prevention and Behavioral Interventions (Non-Punitive),Are there laws for professional development,1,0,0
+Education,School Climate,Monitoring and Accountability,Does the state outline reporting requirements for suspension and expulsion?,1,1,0
+Education,School Climate,Monitoring and Accountability,Are there parental notifcations?,1,1,1
+Education,School Climate,Monitoring and Accountability,Is there reporting and referrals between schools and law enforcement,1,1,1
+Education,School Climate,Monitoring and Accountability,Disclosure of school records,1,1,1
+Education,School Climate,Monitoring and Accountability,Disclosure of school records -Data Privacy?,1,1,0
+Education,School Climate,Monitoring and Accountability,"Data collection, review, and reporting of disciplinary policies and actions",1,1,0
+Education,School Climate,"School Resources, Safety Officers, Truant/Attendance Officers",Is there authority and power to implement school arrest,0,1,1
+Education,School Climate,"School Resources, Safety Officers, Truant/Attendance Officers",Certification or training,0,1,0
+Education,School Climate,State Education Agency Support,State model policies and implementation support,1,1,0
+Education,School Climate,State Education Agency Support,Funding appropriations,1,1,0
+Education,Early Childhood Education,Kindergarten Requirements,What age exemptions or waivers exist for kindergarten entrance? for opt-in?,1,1,0
+Education,Early Childhood Education,Kindergarten Requirements,Does the state require children to attend kindergarten?,0,1,0
+Education,Early Childhood Education,Kindergarten Requirements,Does the state require the district to offer kindergarten for half day?,1,1,1
+Education,Early Childhood Education,Kindergarten Requirements,Does the state require the district to offer kindergarten for full day?,1,0,0
+Education,Early Childhood Education,Teacher Quality,What are the teacher-to-student ratio requirements for grades K-3?,0,1,1
+Education,Early Childhood Education,Teacher Quality,What are the requirements for teacher preparation in Reading?,1,1,1
+Education,Early Childhood Education,Teacher Quality,What are the requirements for teacher development in Reading?,0,0,1
+Education,Early Childhood Education,Teacher Quality,What are the requirements for teacher prepartion in Math?,0,1,1
+Education,Early Childhood Education,Teacher Quality,What are the requirements for teacher development in Math?,0,0,0
+Education,Early Childhood Education,School Readiness and Transitions,Does the state have an early learning endorsement or license specific to K-3?,1,1,0
+Education,Early Childhood Education,School Readiness and Transitions,Are kindergarten entrance assessments required?,1,1,1
+Education,Early Childhood Education,School Readiness and Transitions,What are states required to do with the results of the KEA?,1,1,1
+Education,Early Childhood Education,School Readiness and Transitions,Are there programs in place to guide the pre-kindergarten to kindergarten transition process?,1,0,0
+Education,Early Childhood Education,School Readiness and Transitions,Does the state have a statutory definition of school readiness? What do states use their definition of school readiness to inform?,1,0,0
+Education,Early Childhood Education,"Assessment, Intervention, and Retention",Are assessments required in grades K-3?,1,1,1
+Education,Early Childhood Education,"Assessment, Intervention, and Retention",What do the results of K-3 assessments inform?,1,1,1
+Education,Early Childhood Education,"Assessment, Intervention, and Retention",Are there interventions available beginning in kindergarten? What are the interventions available for students in grades K-3?,0,1,1
+Education,Early Childhood Education,"Assessment, Intervention, and Retention",Is there a third grade retention policy?,0,1,1
+Education,Early Childhood Education,Family Engagement,"For those states with pre-kindergarten to kindergarten transition guidance, is family engagement a requirement?",1,0,0
+Education,Early Childhood Education,Family Engagement,"For those states with third grade retention policies, is parental input required?",0,0,0
+Education,Early Childhood Education,Social-Emotional Learning,Where is social-emotional development emphasized in statute?,1,1,1
+Education,Post-Secondary Affordability Policy,Need and Merit Based Financial Aid,"Need- and Merit-Based Financial Aid - Is the program need-based, merit-based, a hybrid or based on other criteria?",1,1,1
+Education,Post-Secondary Affordability Policy,Need and Merit Based Financial Aid,Need- and Merit-Based Financial Aid - Is the FAFSA required?,1,1,1
+Education,Post-Secondary Affordability Policy,Need and Merit Based Financial Aid,Need- and Merit-Based Financial Aid - Is a statewide application deadline in place?,0,1,0
+Education,Post-Secondary Affordability Policy,Financial Aid Policies,"Are awards based on academic merit, financial need, or other criteria?",1,1,1
+Education,Post-Secondary Affordability Policy,Financial Aid Policies,Do students need to enroll full-time to receive aid?,1,1,1
+Education,Post-Secondary Affordability Policy,Financial Aid Policies,Is eligibility linked to the date that the student graduated high school?,1,1,1
+Education,Post-Secondary Affordability Policy,Financial Aid Policies,"Does the state define a statewide application deadline, and if so, what is the deadline?",1,1,0
+Education,Post-Secondary Affordability Policy,Financial Aid Policies,Which postsecondary sectors are eligible to participate?,1,1,1
+Education,Post-Secondary Affordability Policy,Free College,Have states enacted legislative bills for free college?,1,0,0
+Education,Post-Secondary Affordability Policy,Free College,Have states considered legislative bills for free college?,1,0,1
+Education,Workforce Development Policy,Statewide Apprenticeships,Does the state have a statute or regulation on apprenticeships?,1,1,1
+Education,Workforce Development Policy,Statewide Apprenticeships,What is the registration agency for apprenticeships in the state? defined at state?,1,1,0
+Education,Workforce Development Policy,Statewide Apprenticeships,Is there a coordinate for a statewide program?,0,1,1
+Education,Workforce Development Policy,State Policy Models for Connecting Education to Work,Does state statute define at least one financial aid program for individuals pursuing a postsecondary credential that is connected to workforce development needs?,0,1,1
+Education,Workforce Development Policy,Secondary Career and Technical Education,How are funds distributed to schools and districts?,1,0,0
+Education,Workforce Development Policy,Secondary Career and Technical Education,Does the state have a CTE diploma or CTE diploma designation?,0,1,0
+Education,Workforce Development Policy,Secondary Career and Technical Education,Does state policy allow students to earn credentials through CTE coursework?,1,1,0
+Education,Workforce Development Policy,Secondary Career and Technical Education,What are the certification and licensure requirements for CTE teachers?,1,0,1
