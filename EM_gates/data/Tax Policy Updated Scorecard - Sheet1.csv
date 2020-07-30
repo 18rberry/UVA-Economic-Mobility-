@@ -1,0 +1,13 @@
+Policy Domain,Policy Dimension ,Policy Questions,Oregon,Virginia,Iowa
+Taxation,Tax Credits,Does the state have Earned Income Tax Credit (EITC)?,1,1,1
+Taxation,Tax Credits,Does the state have Child and Dependent Care Tax Credit (CDCTC)?,1,0,1
+Taxation,Tax Credits,Does the state have adoption tax credits?,0,0,1
+Taxation,Tax Credits,Does the state provide circuit breaker tax relief for propery tax assistance? ,1,0,0
+Taxation,Taxes on Wealth ,Does the state levy a capital gains tax?,1,1,1
+Taxation,Taxes on Wealth ,Does the state levy an estate tax?,1,0,0
+Taxation,Taxes on Wealth ,Does the state levy an inheritance tax?,0,0,1
+Taxation,Taxes Related to Business and Corporations,Does the state levy a corporate income tax?,1,1,1
+Taxation,Taxes Related to Business and Corporations,Does the state require combined reporting for corporate income tax?,1,0,0
+Taxation,Taxes Related to Business and Corporations,How supportive are state tax climates of businesses? (better than the average state),1,1,0
+Taxation,Gini Index,Is the state gini index better than the national gini index?,1,1,1
+Taxation,Gini Index,Has the state's gini index improved over time,0,0,0

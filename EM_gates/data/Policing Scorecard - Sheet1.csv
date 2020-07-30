@@ -1,0 +1,19 @@
+Policy Domain,Policy Subdomain,Policy Questions,Virginia,Iowa,Oregon
+Policing,Arrest Policies,Has the state reverted from stop and identify policies?,1,1,1
+Policing,Arrest Policies,Does the state allow for alternatives to bail in cash?,1,1,1
+Policing,Arrest Policies,Does the state allow for the state search for someone who breaches bail as opposed to a bounty hunt?,0,0,1
+Policing,Arrest Policies,"In the case of civil asset forfeiture, does the state require a conviction in criminal court to forfeit most or all types of property in civil court?",1,1,1
+Policing,Arrest Policies,"In the case of civil asset forfeiture, does the state require the government to bear the burden of proof for innocent-owner claims?",0,1,1
+Policing,Prisoners' Rights,Does the state ban the box?,0,0,1
+Policing,Prisoners' Rights,Does the state have standards that mention both health care for pregnant inmates planning to carry to term and for those who seek an abortion?,0,0,1
+Policing,Prisoners' Rights,Does the state have an administrative regulation on correctional health care that addresses abortion access?,0,0,0
+Policing,Prisoners' Rights,Does the state have standards that mention prenatal health care (not including abortion)?,1,0,0
+Policing,Prisoners' Rights,Does the state have learning support programs for inmates?,1,1,1
+Policing,Incarceration,Has the state turned away from private prisons?,0,1,1
+Policing,Incarceration,Has the state removed the death penalty?,1,1,0
+Policing,Incarceration,Does the state define an age at which a youth can be adjudicated delinquent?,1,0,1
+Policing,Community Policing Practices,Does the state require police officers to wear body cameras?,0,0,1
+Policing,Community Policing Practices,Has the state removed the requirement for the collection of demographic information for motor vehicle stops?,1,1,0
+Policing,Community Policing Practices,Does the state have statutes for custodial sexual misconduct?,1,1,0
+Policing,Community Policing Practices,Does State Law Provide Unemployment Insurance Benefits to Domestic Violence Victims?,0,0,1
+Policing,Community Policing Practices,Does the state have Gun Possession Bar on Individuals Subject to Domestic Violence Protection Orders?,0,1,0
