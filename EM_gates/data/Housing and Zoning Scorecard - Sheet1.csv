@@ -1,0 +1,27 @@
+Policy Domain,Policy Subdomain,Policy Question,Oregon,Virginia,Iowa
+Housing,Assistance,Are there loan assistance programs for first time homeowners,1,1,1
+Housing,Assistance,Are there loan assistance programs for veterans,1,0,1
+Housing,Assistance,Are there loan assistance programs for the disabled,0,0,1
+Housing,Assistance,Are there government offered home loan programs,1,1,1
+Housing,Assistance,Is there rent aid for the elderly population,1,0,1
+Housing,Assistance,Do they offer home price discounts for educators,1,1,1
+Housing,Assistance,Do they offer home price discounts for first responders,1,0,1
+Housing,Assistance,Are there home mortgage interest deductions,1,1,1
+Housing,Financial,Is the state a recipient of the community development block grant (CDBG),1,1,1
+Housing,Financial,Is the state a recipient of the federal HOME block grant,1,0,0
+Housing,Financial,Is the state a recipient of the national housing trust fund block grant,1,0,1
+Housing,Financial,Is there a low rent housing tax exemption,1,1,1
+Housing,Financial,Does the state offer a tax exemption for veterans,0,0,1
+Housing,Financial,Does the state offer a tax exemption for disabled members,1,1,1
+Housing,Financial,The the state offer refundable credit in place of a tax deduction,0,0,1
+Housing,Financial,Does the state offer tax deductions for second homes,0,1,0
+Housing,Financial,Does lower income housing have lower tax rates,0,0,0
+Housing,Development,Are there space restrictions on housing developments,1,1,1
+Housing,Development,are luxury home builds blocked in at-risk neighborhoods,0,0,0
+Housing,Development,protect mobile home rights when considering construction,1,1,1
+Housing,Development,Is racial diversity explicitly emphasized in the states development plans,0,0,0
+Housing,Development,Is economic diversity emphasized in the state's development plans?,1,1,1
+Housing,Development,Is the development of rural housing emphasized in the states development plans?,1,1,1
+Housing,Development,Is transportation diversity considered in the states development plans?,1,1,0
+Housing,Development,Does the state offer incentives to construct low income housing?,1,1,1
+Housing,Development,Does the state offer tax breaks for long-term homeowners?,0,0,0

@@ -1,0 +1,103 @@
+Domain,Subdomain,Question,Virginia,Iowa,Oregon
+Policing,Arrest Policies,Has the state reverted from stop and identify policies?,1,1,1
+Policing,Arrest Policies,Does the state allow for alternatives to bail in cash?,1,1,1
+Policing,Arrest Policies,Does the state allow for the state search for someone who breaches bail as opposed to a bounty hunt?,0,0,1
+Policing,Arrest Policies,"In the case of civil asset forfeiture, does the state require a conviction in criminal court to forfeit most or all types of property in civil court?",1,1,1
+Policing,Arrest Policies,"In the case of civil asset forfeiture, does the state require the government to bear the burden of proof for innocent-owner claims?",0,1,1
+Policing,Prisoners' Rights,Does the state ban the box?,0,0,1
+Policing,Prisoners' Rights,Does the state have standards that mention both health care for pregnant inmates planning to carry to term and for those who seek an abortion?,0,0,1
+Policing,Prisoners' Rights,Does the state have an administrative regulation on correctional health care that addresses abortion access?,0,0,0
+Policing,Prisoners' Rights,Does the state have standards that mention prenatal health care (not including abortion)?,1,0,0
+Policing,Prisoners' Rights,Does the state have an administrative regulation on correctional health care that addresses abortion access?,0,0,0
+Policing,Prisoners' Rights,Does the state have learning support programs for inmates?,1,1,1
+Policing,Incarceration,Has the state turned away from private prisons?,0,1,1
+Policing,Incarceration,Has the state removed the death penalty?,1,1,0
+Policing,Incarceration,Does the state define an age at which a youth can be adjudicated delinquent?,1,0,1
+Policing,Community Policing Practices,Does the state require police officers to wear body cameras?,0,0,1
+Policing,Community Policing Practices,Has the state removed the requirement for the collection of demographic information for motor vehicle stops?,1,1,0
+Policing,Community Policing Practices,Does the state have statutes for custodial sexual misconduct?,1,1,0
+Policing,Community Policing Practices,Does State Law Provide Unemployment Insurance Benefits to Domestic Violence Victims?,0,0,1
+Policing,Community Policing Practices,Does the state have Gun Possession Bar on Individuals Subject to Domestic Violence Protection Orders?,0,1,0
+Housing,Assistance,Are there loan assistance programs for first time homeowners,1,1,1
+Housing,Assistance,Are there loan assistance programs for veterans,0,1,1
+Housing,Assistance,Are there loan assistance programs for the disabled,0,1,0
+Housing,Assistance,Is there rent aid for the elderly population,1,1,1
+Housing,Assistance,Are there government offered home loan programs,0,1,1
+Housing,Assistance,Do they offer home price discounts for educators,1,1,1
+Housing,Assistance,Do they offer home price discounts for first responders,0,1,1
+Housing,Assistance,Are there home mortgage interest deductions,1,1,1
+Housing,Financial,Is the state a recipient of the community development block grant (CDBG),1,1,1
+Housing,Financial,Is the state a recipient of the federal HOME block grant,0,0,1
+Housing,Financial,Is the state a recipient of the national housing trust fund block grant,0,1,1
+Housing,Financial,Is there a low rent housing tax exemption,1,1,1
+Housing,Financial,Does the state offer a tax exemption for veterans,0,1,0
+Housing,Financial,Does the state offer a tax exemption for disabled members,1,1,1
+Housing,Financial,The the state offer refundable credit in place of a tax deduction,0,1,0
+Housing,Financial,Does the state offer tax deductions for second homes,1,0,0
+Housing,Financial,Does lower income housing have lower tax rates,0,0,0
+Housing,Development,Are there space restrictions on housing developments,1,1,1
+Housing,Development,are luxury home builds blocked in at-risk neighborhoods,0,0,0
+Housing,Development,protect mobile home rights when considering construction,1,1,1
+Housing,Development,Is racial diversity explicitly emphasized in the states development plans,0,0,0
+Housing,Development,Is economic diversity emphasized in the state's development plans?,1,1,1
+Housing,Development,Is the development of rural housing emphasized in the states development plans?,1,1,1
+Housing,Development,Is transportation diversity considered in the states development plans?,1,0,1
+Housing,Development,Does the state offer incentives to construct low income housing?,1,1,1
+Housing,Development,Does the state offer tax breaks for long-term homeowners?,0,0,0
+Employment,Wage,Does the state allow localities to pass minimum wage laws?,0,0,0
+Employment,Wage,Is the state minimum wage a living wage for a family of three (2 adults and 1 child) in a majority of the counties/cities?,0,0,0
+Employment,Organizing,Does the state allow union activity (no Right-to-Work law)?,0,0,1
+Employment,Organizing,"Is there collective bargaining for teachers, police, and fire fighters?",0,1,1
+Employment,Organizing,Does the state have a Project Labor Agreement?,0,0,1
+Employment,Protections,Does the state have paid sick leave?,0,0,1
+Employment,Protections,Does the state have paid family leave?,0,0,1
+Employment,Protections,Does the state require private sector pregnant worker accomodation?,0,0,0
+Employment,Protections,Does the state have private sector right to pump policies?,0,0,1
+Employment,Protections,Does the state have a basic equal pay mandate?,1,1,1
+Employment,Protections,"Does the state have a ""No Pay Secrecy"" mandate?",0,0,1
+Employment,Protections,"Does the state have a ""No Private Sector Salary History"" mandate? (asking for salary history not allowed)",0,0,1
+Employment,Protections,Does the state have sexual harassment law?,0,1,1
+Employment,Protections,Does unemployment insurance cover family care reasons?,0,0,1
+Employment,Protections,Does the State Have an Employment Rights Law for Victims of Domestic Violence?,0,0,1
+Employment,Protections,Does the state have an OSHA-approved plan that covers private workplaces?,1,1,1
+Employment,Protections,Does the state have an OSHA-approved plan that covers state/local government workplaces?,1,1,1
+Taxation,Tax Credits,Does the state have Earned Income Tax Credit (EITC)?,1,1,1
+Taxation,Tax Credits,Does the state have Child and Dependent Care Tax Credit (CDCTC)?,0,1,1
+Taxation,Tax Credits,Does the state have adoption tax credits?,0,1,0
+Taxation,Tax Credits,Does the state provide circuit breaker tax relief for propery tax assistance?,0,0,1
+Taxation,Taxes on Wealth,Does the state levy a capital gains tax?,1,1,1
+Taxation,Taxes on Wealth,Does the state levy an estate tax?,0,0,1
+Taxation,Taxes on Wealth,Does the state levy an inheritance tax?,0,1,0
+Taxation,Taxes Related to Business and Corporations,Does the state levy a corporate income tax?,1,1,1
+Taxation,Taxes Related to Business and Corporations,Does the state require combined reporting for corporate income tax?,0,0,1
+Taxation,Taxes Related to Business and Corporations,How supportive are state tax climates of businesses? (better than the average state),1,0,1
+Taxation,Gini Index,Is the state gini index better than the national gini index?,1,1,1
+Taxation,Gini Index,Has the state's gini index improved over time,0,0,0
+Voting,Registration,Does the state have automatic voter registration at the DMV?,1,0,1
+Voting,Registration,Does the state have automatic voter registration at agencies other than the DMV?,0,0,0
+Voting,Registration,Does the state have online registration?,1,1,1
+Voting,Registration,Does the state have Election Day voter registration?,0,1,0
+Voting,Registration,"Is there pre-registration for individuals younger than 18 years of age to register to vote, so they are eligible to cast a ballot when they reach 18?",1,1,1
+Voting,Accessibility,Does that state allow voting with no voter ID documents?,0,0,1
+Voting,Accessibility,Does the state have automatic no excuse absentee/mail-in voting?,0,0,1
+Voting,Accessibility,Does the state have 28 days of early voting?,1,1,1
+Voting,Accessibility,Does the state restore a felon’s right to vote without a Governor’s pardon?,0,0,1
+Education,School Climate,Are other approaches considered for student discipline?,0.4,0.2,1
+Education,School Climate,Are there alternatives for student suspensions and how student-centric are they?,0.875,0.5,0.875
+Education,School Climate,Are there laws/regulations for Disciplinary Approaches Addressing Specific Infractions and Conditions?,1,0.571428571,1
+Education,School Climate,Are there laws for Prevention and Behavioral Interventions (Non-Punitive)?,0.666666667,0.333333333,1
+Education,School Climate,Is there Monitoring and Accountability in place?,1,0.5,1
+Education,School Climate,"Are there School Resources, Safety Officers, Truant/Attendance Officers?",1,0.5,0
+Education,School Climate,State Education Agency Support,1,0,1
+Education,Early Childhood Education,Are there student-centric policies for Kindergarten Requirements?,0.75,0.25,0.75
+Education,Early Childhood Education,Are there teacher prepartion and teacher development to ensure Teacher Quality?,0.6,0.8,0.2
+Education,Early Childhood Education,Are there assessments to ensure School Readiness and Transitions?,0.6,0.4,1
+Education,Early Childhood Education,"Are there Assessment, Intervention and Retention policies?",1,1,0.5
+Education,Early Childhood Education,Are there policies to encourage Family Engagement?,0,0,0.5
+Education,Early Childhood Education,is Social Emotional Learning development emphasized in statutes?,1,1,1
+Education,Post-Secondary Affordability Policy,Are there policies on Need and Merit Based Financial Aid?,1,0.666666667,0.666666667
+Education,Post-Secondary Affordability Policy,Are there Financial Aid Policies?,0,1,1
+Education,Post- Secondary Affordability Policy,Have states considered or enacted legislative bills for free college?,1,1,1
+Education,Workforce Development Policy,Are there policies and state regulations for Statewide Apprenticeships?,1,0.666666667,0.666666667
+Education,Workforce Development Policy,Does state statute define at least one financial aid program for individuals pursuing a postsecondary credential that is connected to workforce development needs?,1,1,0
+Education,Workforce Development Policy,"How are funds distributed, CTE regulation, and training postively affect Secondary Career and Technical Education?",0.5,0.25,0.75
