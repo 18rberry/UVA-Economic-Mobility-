@@ -1,6 +1,6 @@
 library(ggplot2)
-source("~/git/dspg20uvaEM/EM_gates/data/theme_SDAD.R")
-source("~/git/dspg20uvaEM/EM_gates/data/Colorblind_Palette.R")
+source("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/theme_SDAD.R")
+source("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Colorblind_Palette.R")
 
 Dimensions<-rep(c("Voter Registration", "Voting Accessibility"), c(3*5, 3*4)) #3=number of states*number of dimension questions
 #When you put your questions in the first question will be on the bottom row of the heat map.
@@ -23,7 +23,7 @@ Dimensions<-rep(c("Voter Registration", "Voting Accessibility"), c(3*5, 3*4)) #3
 VOTE<-data.frame(Dimensions, Questions, States, Scores)
 
 ggplot(VOTE, aes(y=Questions, x=States, fill=factor(Scores))) +
-  geom_tile(color="grey90", lwd=1) + 
+  geom_tile(color="grey90", lwd=1) +
   coord_equal() +
   theme_SDAD() +
   ggplot2::annotate("text", x=rep(c(1:3), length(unique(Questions))),
