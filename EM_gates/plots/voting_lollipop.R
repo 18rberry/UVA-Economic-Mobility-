@@ -6,17 +6,17 @@ library(plotly)
 
 setwd('~/git/dspg20uvaEM/EM_gates/plots/Output_images')
 
-#import data
-data<- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
+#import data 
+data<- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
 
 #slice the data to just your domain
 emp_data <- data %>%
   slice(9:11)
-emp_data
+
 #from your domain-specific data, slice for just the composite row (don't filter because that may be wierd)
 composite_emp <- data %>%
   slice(12)
-composite_emp
+
 #gather the data to compress the diff scores into one state and score variable
 plot_data_1 <- emp_data %>%
   gather("state", "score", c(3:5))
@@ -26,14 +26,6 @@ comp_data <- composite_emp %>%
 
 
 
-<<<<<<< HEAD
-plot_data_1 %>%
-  ggplot(aes(x=score, y= state)) +
-  geom_point(aes(colour = state)) +
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state))
-
-#to get a subdomain-wise plot slice the data for your domain for just the row that pertains to the specific subdomain
-=======
 #Composite Overall Score for Employment
 png("employment_domain_plot.png", width = 600, height = 400)
 ggplot(aes(x=score, y= state), data = comp_data) +
@@ -52,7 +44,6 @@ fig
 
 # Organizing (subdomain)
 #to get a subdomain-wise plot slice the data for your domain for just the row that pertains to the specific subdomain 
->>>>>>> ab864386f5ca4149b0705cf0676496836fd6dffd
 org <- emp_data %>%
   slice(1)
 #and then follow the same process as before  
@@ -67,16 +58,6 @@ ggplot(aes(x=score, y= state), data = plot_data_org) +
   ggtitle("Worker Organizing Policies")
 dev.off()
 
-<<<<<<< HEAD
-#and then follow the same process as before
-plot_data_2 <- org %>%
-  gather("state", "score", c(3:5))
-
-org_plot <- plot_data_2 %>%
-  ggplot(aes(x=score, y= state)) +
-  geom_point(aes(colour = state)) +
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state))
-=======
 
 # Protections (subdomain)
 protect <- emp_data %>%
@@ -93,7 +74,6 @@ ggplot(aes(x=score, y= state), data = plot_data_protect) +
   ggtitle("Worker Protection Policies")
 dev.off()
 
->>>>>>> ab864386f5ca4149b0705cf0676496836fd6dffd
 
 # Wage (subdomain)
 wage <- emp_data %>%
