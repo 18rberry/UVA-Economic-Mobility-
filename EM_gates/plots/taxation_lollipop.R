@@ -23,7 +23,7 @@ plot_data_1 <- tax_data %>%
 
 
 plot_data_1 <- plot_data_1 %>%
-  ggplot(aes(x=score, y= state, text = paste("Subdomain: ", Subdomain))) +
+  ggplot(aes(x=score, y= state, text = paste("Subdomain:", Subdomain))) +
   geom_point(aes(colour = state)) +
   geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
   ggtitle("Taxation By State")
@@ -40,12 +40,14 @@ display.subdomain <- function(index) {
   plot_data_2 <- org %>%
     gather("state", "score", c(3:5))
   org_plot <- plot_data_2 %>%
-    ggplot(aes(x=score, y= state)) +
+    ggplot(aes(x=score, y= state, text = paste("Score:", score))) +
     geom_point(aes(colour = state)) +
     geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
-    ggtitle(paste("Subdomain:", title))
+    ggtitle(paste("Tax Policy Dimension:", title))
 }
 
-credit <- display.subdomain(2)
-credit
+wealth <- display.subdomain(3)
+wealth
+
+ggplotly(wealth, tooltip = "text")
 
