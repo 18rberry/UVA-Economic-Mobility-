@@ -4,6 +4,8 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 
+setwd('~/git/dspg20uvaEM/EM_gates/plots/Output_images')
+
 #import data 
 data<- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
 
@@ -21,11 +23,15 @@ plot_data_1 <- emp_data %>%
 comp_data <- composite_emp %>%
   gather("state", "score", c(3:5))
 
+
+
+
 #Composite Overall Score for Employment
 png("employment_domain_plot.png", width = 600, height = 400)
 ggplot(aes(x=score, y= state), data = comp_data) +
   geom_point(aes(colour = state)) +  
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) 
+  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
+  ggtitle("Employment Policy Dimensions")
 dev.off()
 
 #grouped bar chart w/ all subdomains
@@ -48,7 +54,8 @@ plot_data_org <- org %>%
 png("employment_sub_org.png", width = 600, height = 400)
 ggplot(aes(x=score, y= state), data = plot_data_org) +
   geom_point(aes(colour = state)) +  
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) 
+  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
+  ggtitle("Worker Organizing Policies")
 dev.off()
 
 
