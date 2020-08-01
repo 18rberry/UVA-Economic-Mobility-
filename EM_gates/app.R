@@ -23,9 +23,11 @@ library("RColorBrewer")
 library(shinydashboardPlus)
 library(tidyr)
 
-# load data ---------------------------------------------------------------
-
+# load data -----------------------------------------------------------------------------
 em_data <- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
+
+#----------------------------
+#Law Enforcement / Policing Data
 law_data <- em_data %>%
   slice(5:8)
 composite_law <- law_data %>%
@@ -44,6 +46,33 @@ incarceration<- law_data %>%
   slice(3)
 plot_data_4 <- incarceration %>%
   gather("state", "score", c(3:5))
+
+#-----------------
+#Employment Data
+emp_data <- em_data %>%
+  slice(9:12)
+
+composite_emp <- emp_data %>%
+  slice(4)
+emp_plot_data_comp <- composite_emp %>%
+  gather("state", "score", c(3:5))
+
+org <- emp_data %>%
+  slice(1)
+emp_plot_data_org <- org %>%
+  gather("state", "score", c(3:5))
+
+protect <- emp_data %>%
+  slice(2)
+emp_plot_data_protect <- protect  %>%
+  gather("state", "score", c(3:5))
+
+wage<- emp_data %>%
+  slice(3)
+emp_plot_data_wage <- wage %>%
+  gather("state", "score", c(3:5))
+
+
 
 #plots page ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -73,10 +102,12 @@ ui <- fluidPage(
   navbarPage("", 
              
              tabPanel(h4("Project Overview"),
+                      fluidRow( mainPanel(img(height = 300, width = 400, src = "summary_3states.png"))     # How can this be centered? Does it need to be an output in the server function instead?
+                      ),
                       flipBox(
                         id = 1,
-                        header_img = "white.PNG",
-                        main_img = "white.PNG",
+                        header_img = "white.png",
+                        main_img = "white.png",
                         front_title = "Overview and Goals",
                         back_title = "Approach and Ethical Considerations",
                         #landing page write- up front side of flip box
@@ -98,7 +129,6 @@ ui <- fluidPage(
                           "Lorem ipsum is the nonsense filler text that typically demonstrates the font and style of a text in a document or visual demonstration. Originally from Latin, lorem ipsum has no intelligible meaning, but is simply a display of letters and characteristics to be viewed as a sample with given graphical elements in a file."
                         )
                       )
-                      
              ),
              
              
@@ -151,7 +181,8 @@ p("For Incarceration Practices policies, all three states perform equally with a
 
 p("For Community Policing Practices, both Oregon and Virginia perform at a 0.4/1 while Iowa does better with a 0.6/1."),
 
-p("Overall, under our scoring criteria Oregon and Iowa do equally the best in terms of law enforcement policies with a 0.67/1 and Virginia does the worst with a 0.53/1.  ")),
+p("Overall, under our scoring criteria Oregon and Iowa do equally the best in terms of law enforcement policies with a 0.67/1 and Virginia does the worst with a 0.53/1.  ")
+),
                                                                   column(1)),
                                                          
                                                          fluidRow( mainPanel(img(height = 300, width = 400, src = "heat_map_law.png"))
@@ -252,44 +283,56 @@ p("Overall, under our scoring criteria Oregon and Iowa do equally the best in te
                                                          )),
                                                 tabPanel("References")
                                    ))),
-                        tabPanel("Voting",
+tabPanel("Voting",
+         
+         fluidRow(
+           navlistPanel(tabPanel("Composites",
+                                 fluidRow(width =12,
+                                          column(1),
+                                          column(10, h3(strong("Voting")),
+                                                 hr(),
+                                                 strong(""),
+                                                 p()),
+                                          column(1)),
                                  
                                  fluidRow(
-                                   navlistPanel(tabPanel("Composites",
-                                                         fluidRow(width =12,
-                                                                  column(1),
-                                                                  column(10, h3(strong()),
-                                                                         hr(),
-                                                                         strong(""),
-                                                                         p()),
-                                                                  column(1)),
-                                                         
-                                                         fluidRow(
-                                                           sidebarPanel(
-                                                             selectInput("", "Subdomain", 
-                                                                         choices = c("Domain level", "", "", "")
-                                                             ) , 
-                                                             mainPanel(uiOutput(""))))),
-                                                tabPanel("Heat Map",
-                                                         fluidRow(width =12,
-                                                                  column(1),
-                                                                  column(10, h3(strong("Heat map for individual policy question")),
-                                                                         hr(),
-                                                                         strong(""),
-                                                                         p()),
-                                                                  column(1)),
-                                                         
-                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = ""))
-                                                         )),
-                                                tabPanel("References")
+                                   sidebarPanel(
+                                     selectInput("graphvote", "Subdomain", 
+                                                 choices = c("Domain level", "Voting Accessibility", "Voting Registration")
+                                     ) , 
+                                     mainPanel(uiOutput("imgvote"))))),
+                        tabPanel("Vote Heat Map",                               
+                                 fluidRow(width =12,
+                                          column(1),
+                                          column(10, h3(strong("Heat map for individual policy question")),
+                                                 hr(),
+                                                 strong(""),
+                                                 p(" 
+The heatmap visualizes two subdomains and 9 voting policy questions.  A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy.
+A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility.
+                                                                           Our results show the following:
+                                                                           "),
+                                                 p("In terms of_________ policies, Virginia performs the worst with a ____/1 while Oregon performs the best with a _____/1."),
+                                                 
+                                                 p("For Incarceration Practices policies, all three states perform equally with a ____/1."),
+                                                 
+                                                 p("For __________, both Oregon and Virginia perform at a ____/1 while Iowa does better with a _____/1."),
+                                                 
+                                                 p("Overall, under our scoring criteria Oregon and Iowa do equally the best in terms of employment policies with a ____/1 and Virginia does the worst with ____/1.  ")
+                                          ),
+                                          column(1)),
+                                 
+                                 fluidRow( mainPanel(img(height = 300, width = 400, src = "heat_map_vote.png"))
+                                 )),
+                        tabPanel("References")
                                    ))),
-                        tabPanel("Employment",
+tabPanel("Employment",
                                  
                                  fluidRow(
                                    navlistPanel(tabPanel("Composites",
                                                          fluidRow(width =12,
                                                                   column(1),
-                                                                  column(10, h3(strong()),
+                                                                  column(10, h3(strong("Employment")),
                                                                          hr(),
                                                                          strong(""),
                                                                          p()),
@@ -297,20 +340,32 @@ p("Overall, under our scoring criteria Oregon and Iowa do equally the best in te
                                                          
                                                          fluidRow(
                                                            sidebarPanel(
-                                                             selectInput("", "Subdomain", 
-                                                                         choices = c("Domain level", "", "", "")
+                                                             selectInput("graphemp", "Subdomain", 
+                                                                         choices = c("Domain level", "Worker Organizing Policies", "Worker Protections", "Wage Policies")
                                                              ) , 
-                                                             mainPanel(uiOutput(""))))),
-                                                tabPanel("Heat Map",
+                                                             mainPanel(uiOutput("imgemp"))))),
+                                                tabPanel("Emp Heat Map",                               #Is it ok that this name is used above?
                                                          fluidRow(width =12,
                                                                   column(1),
                                                                   column(10, h3(strong("Heat map for individual policy question")),
                                                                          hr(),
                                                                          strong(""),
-                                                                         p("")),
+                                                                         p(" 
+The heatmap visualized the three subdomains and the 17 employment policy questions.  A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy.
+A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility.
+                                                                           Our results show the following:
+                                                                           "),
+                                                                         p("In terms of_________ policies, Virginia performs the worst with a ____/1 while Oregon performs the best with a _____/1."),
+                                                                         
+                                                                         p("For Incarceration Practices policies, all three states perform equally with a ____/1."),
+                                                                         
+                                                                         p("For __________, both Oregon and Virginia perform at a ____/1 while Iowa does better with a _____/1."),
+                                                                         
+                                                                         p("Overall, under our scoring criteria Oregon and Iowa do equally the best in terms of employment policies with a ____/1 and Virginia does the worst with ____/1.  ")
+                                                                         ),
                                                                   column(1)),
                                                          
-                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = ""))
+                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = "heat_map_employment.png"))
                                                          )),
                                                 tabPanel("References")
                                    )))
@@ -368,7 +423,7 @@ p("Overall, under our scoring criteria Oregon and Iowa do equally the best in te
                                  
                                  fluidRow(width =12,
                                           column(1),
-                                          column(10, h3(strong( "Education")),
+                                          column(10, h3(strong( "Housing and Zoning")),
                                                  hr(),
                                                  strong("Composite"),
                                                  p()),
@@ -379,7 +434,7 @@ p("Overall, under our scoring criteria Oregon and Iowa do equally the best in te
                                  
                                  fluidRow(width =12,
                                           column(1),
-                                          column(10, h3(strong( "Education")),
+                                          column(10, h3(strong( "Taxation")),
                                                  hr(),
                                                  strong("Composite"),
                                                  p()),
@@ -390,29 +445,19 @@ p("Overall, under our scoring criteria Oregon and Iowa do equally the best in te
                                  
                                  fluidRow(width =12,
                                           column(1),
-                                          column(10, h3(strong( "Education")),
+                                          column(10, h3(strong( "Voting")),
                                                  hr(),
                                                  strong("Composite"),
                                                  p()),
                                           column(1)), 
                                  fluidRow(width = 12, style = "margin: 20px",
                                           plotOutput("", height = '700px'))),
-                        tabPanel("Health",
-                                 
-                                 fluidRow(width =12,
-                                          column(1),
-                                          column(10, h3(strong( "Education")),
-                                                 hr(),
-                                                 strong("Composite"),
-                                                 p()),
-                                          column(1)), 
-                                 fluidRow(width = 12, style = "margin: 20px",
-                                          plotOutput("", height = '700px'))),
+
                         tabPanel("Employment",
                                  
                                  fluidRow(width =12,
                                           column(1),
-                                          column(10, h3(strong( "Education")),
+                                          column(10, h3(strong( "Employment")),
                                                  hr(),
                                                  strong("Composite"),
                                                  p()),
@@ -445,7 +490,7 @@ p("Overall, under our scoring criteria Oregon and Iowa do equally the best in te
 
 server <- shinyServer(function(input,output){  
   
-  
+  # Law Enforcement Plots Rendering
   output$imglaw <- renderUI({
     if(input$graphlaw == "Domain level"){            
       img(height = 300, width = 400, src = "law_domain_plot.png")
@@ -453,21 +498,45 @@ server <- shinyServer(function(input,output){
     else if(input$graphlaw == "Arrest and Court Proceedings"){
       img(height = 300, width = 400, src = "law_sub_arrest.png")
     }
-    
-    
     else if(input$graphlaw == "Incarceration Practices"){
       img(height = 300, width = 400, src = "law_sub_incarceration.png")
     }
     else if(input$graphlaw == "Community Policing"){
       img(height = 300, width = 400, src = "law_sub_community.png")
     } 
-    
+  }) 
+  
+  # Employment Plots Rendering
+  output$imgemp <- renderUI({
+    if(input$graphemp == "Domain level"){            
+      img(height = 300, width = 400, src = "employment_domain_plot.png")
+    }                                        
+    else if(input$graphemp == "Worker Organizing Policies"){
+      img(height = 300, width = 400, src = "employment_sub_org.png")
+    }
+    else if(input$graphemp == "Worker Protections"){
+      img(height = 300, width = 400, src = "employment_sub_protect.png")
+    }
+    else if(input$graphemp == "Wage Policies"){
+      img(height = 300, width = 400, src = "employment_sub_wage.png")
+    } 
+  }) 
+  
+  # Voting Plots Rendering
+  output$imgvote <- renderUI({
+    if(input$graphvote == "Domain level"){            
+      img(height = 300, width = 400, src = "vote_domain_plot.png")
+    }                                        
+    else if(input$graphvote == "Voting Accessibility"){
+      img(height = 300, width = 400, src = "vote_sub_access.png")
+    }
+    else if(input$graphvote == "Voting Registration"){
+      img(height = 300, width = 400, src = "vote_sub_reg.png")
+    }
   }) 
   
   
-  
 }) 
-
 
 
 

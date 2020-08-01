@@ -1,4 +1,7 @@
 library(ggplot2)
+
+setwd('~/git/dspg20uvaEM/EM_gates/plots/Output_images')
+
 source("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/theme_SDAD.R")
 source("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Colorblind_Palette.R")
 
@@ -22,6 +25,9 @@ Dimensions<-rep(c("Voter Registration", "Voting Accessibility"), c(3*5, 3*4)) #3
     Scores<-ifelse(Scores==1,"Yes", "No")
 VOTE<-data.frame(Dimensions, Questions, States, Scores)
 
+
+png("heat_map_vote.png", width = 800, height = 800)
+
 ggplot(VOTE, aes(y=Questions, x=States, fill=factor(Scores))) +
   geom_tile(color="grey90", lwd=1) +
   coord_equal() +
@@ -42,6 +48,8 @@ ggplot(VOTE, aes(y=Questions, x=States, fill=factor(Scores))) +
   theme(axis.text.y=element_text(size=10, hjust=1.0, colour="#2a2a2b"),
         axis.text.x=element_text(size=13, hjust=0.5, colour="#2a2a2b"),
         legend.position="none")
+dev.off()
+
 
 #Instructions for Exporting
 #Save the heatmap as a .png file

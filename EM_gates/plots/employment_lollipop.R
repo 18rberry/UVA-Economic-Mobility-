@@ -24,35 +24,26 @@ comp_data <- composite_emp %>%
   gather("state", "score", c(3:5))
 
 
-
-
-<<<<<<< HEAD
-plot_data_1 %>%
-  ggplot(aes(x=score, y= state)) +
-  geom_point(aes(colour = state)) +
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state))
-
-#to get a subdomain-wise plot slice the data for your domain for just the row that pertains to the specific subdomain
-=======
+  
+  #rerun this
 #Composite Overall Score for Employment
 png("employment_domain_plot.png", width = 600, height = 400)
 ggplot(aes(x=score, y= state), data = comp_data) +
   geom_point(aes(colour = state)) +  
   geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
-  ggtitle("Employment Sub-Domains")
+  ggtitle("Employment Policies")
 dev.off()
 
 # Interactive grouped bar chart w/ all subdomains
-fig <- plot_ly(emp_data, x = ~Subdomain, y = ~Oregon, type = 'bar', name = 'Oregon')
-fig <- fig %>% add_trace(y = ~Iowa, name = 'Iowa')
-fig <- fig %>% add_trace(y = ~Virginia, name = 'Virginia')
-fig <- fig %>% layout(title = 'Employment Policies', barmode = 'group')
-fig
+#fig <- plot_ly(emp_data, x = ~Subdomain, y = ~Oregon, type = 'bar', name = 'Oregon')
+#fig <- fig %>% add_trace(y = ~Iowa, name = 'Iowa')
+#fig <- fig %>% add_trace(y = ~Virginia, name = 'Virginia')
+#fig <- fig %>% layout(title = 'Employment Policies', barmode = 'group')
+#fig
 
 
 # Organizing (subdomain)
 #to get a subdomain-wise plot slice the data for your domain for just the row that pertains to the specific subdomain 
->>>>>>> ab864386f5ca4149b0705cf0676496836fd6dffd
 org <- emp_data %>%
   slice(1)
 #and then follow the same process as before  
@@ -67,16 +58,6 @@ ggplot(aes(x=score, y= state), data = plot_data_org) +
   ggtitle("Worker Organizing Policies")
 dev.off()
 
-<<<<<<< HEAD
-#and then follow the same process as before
-plot_data_2 <- org %>%
-  gather("state", "score", c(3:5))
-
-org_plot <- plot_data_2 %>%
-  ggplot(aes(x=score, y= state)) +
-  geom_point(aes(colour = state)) +
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state))
-=======
 
 # Protections (subdomain)
 protect <- emp_data %>%
@@ -93,7 +74,6 @@ ggplot(aes(x=score, y= state), data = plot_data_protect) +
   ggtitle("Worker Protection Policies")
 dev.off()
 
->>>>>>> ab864386f5ca4149b0705cf0676496836fd6dffd
 
 # Wage (subdomain)
 wage <- emp_data %>%
