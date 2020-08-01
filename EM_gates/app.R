@@ -47,31 +47,6 @@ incarceration<- law_data %>%
 plot_data_4 <- incarceration %>%
   gather("state", "score", c(3:5))
 
-#-----------------
-#Employment Data
-emp_data <- em_data %>%
-  slice(9:12)
-
-composite_emp <- emp_data %>%
-  slice(4)
-emp_plot_data_comp <- composite_emp %>%
-  gather("state", "score", c(3:5))
-
-org <- emp_data %>%
-  slice(1)
-emp_plot_data_org <- org %>%
-  gather("state", "score", c(3:5))
-
-protect <- emp_data %>%
-  slice(2)
-emp_plot_data_protect <- protect  %>%
-  gather("state", "score", c(3:5))
-
-wage<- emp_data %>%
-  slice(3)
-emp_plot_data_wage <- wage %>%
-  gather("state", "score", c(3:5))
-
 
 
 #plots page ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -106,8 +81,8 @@ ui <- fluidPage(
                       ),
                       flipBox(
                         id = 1,
-                        header_img = "white.png",
-                        main_img = "white.png",
+                        #header_img = "white.png",   #commented these out to remove excess white space, but nothing changed
+                        #main_img = "white.png",
                         front_title = "Overview and Goals",
                         back_title = "Approach and Ethical Considerations",
                         #landing page write- up front side of flip box
