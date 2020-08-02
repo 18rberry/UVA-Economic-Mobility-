@@ -22,6 +22,7 @@ library("wordcloud")
 library("RColorBrewer")
 library(shinydashboardPlus)
 library(tidyr)
+library(readr)
 
 # load data ---------------------------------------------------------------
 
