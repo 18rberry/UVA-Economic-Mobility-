@@ -50,11 +50,11 @@ png("vote_sub_access.png", width = 600, height = 400)
 ggplot(aes(x=score, y= state), data = plot_data_access) +
   geom_point(aes(colour = state)) +  
   geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
-  ggtitle("Worker Organizing Policies")
+  ggtitle("Voting Accessibility")
 dev.off()
 
 
-# REgistration (subdomain)
+# Registration (subdomain)
 reg <- vote_data %>%
   slice(2)
 #and then follow the same process as before  

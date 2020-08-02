@@ -4,10 +4,10 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 
-setwd('~/git/dspg20uvaEM/EM_gates/plots/Output_images')
+setwd('~/git/dspg20uvaEM/EM_gates/WWW')
 
 #import data
-data<- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
+data<- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
 
 #slice the data to just your domain
 emp_data <- data %>%
@@ -24,8 +24,7 @@ comp_data <- composite_emp %>%
   gather("state", "score", c(3:5))
 
 
-  
-  #rerun this
+
 #Composite Overall Score for Employment
 png("employment_domain_plot.png", width = 600, height = 400)
 ggplot(aes(x=score, y= state), data = comp_data) +
