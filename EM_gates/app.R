@@ -22,6 +22,7 @@ library("wordcloud")
 library("RColorBrewer")
 library(shinydashboardPlus)
 library(tidyr)
+library(readr)
 
 # load data -----------------------------------------------------------------------------
 em_data <- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
