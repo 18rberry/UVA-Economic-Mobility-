@@ -106,9 +106,9 @@ ggplot(plot_data, aes(y=Questions, x=States, fill=factor(Scores))) +
   geom_hline(yintercept=15.5, color=cbPalette[1], lwd=4) +
   geom_hline(yintercept=17.5, color=cbPalette[1], lwd=4) +
   #Title of the policy domains (you will need to change y)
-  ggplot2::annotate("text", x=2, y=17.5,label="Wage", fontface=2, color="black") +
-  ggplot2::annotate("text", x=2, y=15.5,label="Organizing", fontface=2, color="black") +
-  ggplot2::annotate("text", x=2, y=12.5,label="Protections", fontface=2, color="black") +
+  ggplot2::annotate("text", x=2, y=17.5,label="Wage", fontface=2, color="black",size = 2) +
+  ggplot2::annotate("text", x=2, y=15.5,label="Organizing", fontface=2, color="black",size = 2) +
+  ggplot2::annotate("text", x=2, y=12.5,label="Protections", fontface=2, color="black",size = 2) + #
   theme(axis.text.y=element_text(size=10, hjust=1.0, colour="#2a2a2b"),
         axis.text.x=element_text(size=13, hjust=0.5, colour="#2a2a2b"),
         legend.position="none")
