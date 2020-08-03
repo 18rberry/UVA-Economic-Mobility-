@@ -4,20 +4,52 @@ library(readr)
 library(rlist)
 
 setwd('~/git/TestDSPG/dspg20uvaEM/EM_gates/WWW')
-
 source("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/theme_SDAD.R")
 source("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Colorblind_Palette.R")
-
 score_card <- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Final Scorecard - Sheet1.csv")
+
+heatmap.for.subdomain <-function(domain, subdomain) {
+  subdomain_card <- score_card %>%
+    filter(Domain == domain & Subdomain == subdomain)
+  print(subdomain_card)
+  question_list <- subdomain_card$Question
+  nrows <- nrow(subdomain_card)
+  print(nrows)
+  new_dimension <- rep(subdomain, 3 * nrows)
+  new_questions <- factor(c(1: nrows), labels = question_list)
+  new_questions <- rep(new_questions, rep(3, nrows))
+  States <- rep(c("VA", "IA", "OR"), nrows)
+  States<-ordered(States, levels=c("VA","IA","OR"))
+  #will need to manually input the scores
+  Scores <- c(1, 1, 1, 0, 0, 1, 0, 1, 0)
+  Scores<-ifelse(Scores==1,"Yes", "No")
+  VOTE<-data.frame(new_dimension, new_questions, States, Scores)
+  intercept <- nrows + 0.5
+
+  ggplot(VOTE, aes(y=new_questions, x=States, fill=factor(Scores))) +
+    geom_tile(color="grey90", lwd=1) +
+    coord_equal() +
+    theme_SDAD() +
+    ggplot2::annotate("text", x=rep(c(1:3), length(unique(new_questions))),
+                      y=rep(c(1:length(unique(new_questions))), each=3),
+                      label=Scores) +
+    scale_fill_manual(values=cbPalette[c(3,2,1)]) +
+    xlab("") + ylab("") +
+    geom_hline(yintercept= intercept, color=cbPalette[1], lwd=4) +
+    ggplot2::annotate("text", x=2, y= intercept,label= subdomain, fontface=2, color="black", size = 2) +
+    theme(axis.text.y=element_text(size=10, hjust=1.0, colour="#2a2a2b"),
+          axis.text.x=element_text(size=13, hjust=0.5, colour="#2a2a2b"),
+          legend.position="none")
+}
+
+wealth <- heatmap.for.subdomain("Taxation", "Taxes on Wealth")
+wealth
+
+
+#taxation heat map
 taxation_card <- score_card %>%
-  filter(Domain == 'Taxation')
-subdomain_list <- c("Tax Credits", "Taxes on Wealth", "Business Tax", "Gini Index")
+  filter(Domain == "Taxation")
 question_list <- taxation_card$Question
-Dimensions<-rep(subdomain_list,
-                c(3*4, 3*3, 3*3, 3*2)) #3=number of states*number of dimension questions
-#When you put your questions in the first question will be on the bottom row of the heat map.
-#First create a numeric vector the length of the number of questions and then assign the questions to the numeric vector,
-#so they will appear in the correct order. You need to use the factor to assign the questions to the numbers.
 Questions <-factor(c(1:12), labels= question_list)
 Questions<-rep(Questions, rep(3, 12)) #3=number of states, 9=number of questions
 States<-rep(c("VA","IA","OR"), 12) #9=number of questions
@@ -26,8 +58,6 @@ Scores <- c(1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1,
             0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0)
 Scores<-ifelse(Scores==1,"Yes", "No")
 VOTE<-data.frame(Dimensions, Questions, States, Scores)
-
-png("taxation_heatmap.png", width = 600, height = 400)
 ggplot(VOTE, aes(y=Questions, x=States, fill=factor(Scores))) +
   geom_tile(color="grey90", lwd=1) +
   coord_equal() +
@@ -51,9 +81,3 @@ ggplot(VOTE, aes(y=Questions, x=States, fill=factor(Scores))) +
         axis.text.x=element_text(size=13, hjust=0.5, colour="#2a2a2b"),
         legend.position="none")
 
-dev.off()
-
-#Instructions for Exporting
-#Save the heatmap as a .png file
-#make sure you check maintain aspect ratio
-#the height should be 70*the number of rows in the heatmap
