@@ -116,7 +116,7 @@ within a social unit, including helping set the agenda of what resources are ava
                       )), 
              
              navbarMenu(h4("Domains of analysis"),
-                        tabPanel("All",
+                        tabPanel("Summary",
 
                                  fluidRow(width =12,
                                           column(1),
@@ -132,29 +132,36 @@ within a social unit, including helping set the agenda of what resources are ava
 
                                  fluidRow(
                                    navlistPanel(
-                                                 tabPanel("Visualizations",
+                                                 tabPanel("Compopsite",
                                                           fluidRow(width =4,
                                                                    column(1),
-                                                                   column(10, h3(strong( " Visualizations")),
-                                                                          hr(),
-                                                                          strong(""),
-                                                                          p()),
-                                                                   column(1)),
+                                                                   column(12, h4(strong("The plots below demonstrate the numeric comspoites calculated using policy
+                                                                                        data for each subdomain, allowing for comparison between the nature of a given policy dimension in each state.")),
+                                                                          
+                                  column(1))),
+                                                          hr(),
                                                           
                                                           fluidRow( 
-                                                                    sidebarPanel(
+                                                                    sidebarPanel( width = 4,
                                                                       selectInput("graphlaw", "Subdomain", 
                                                                                   choices = c("Domain level", "Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
-                                                                      ) , 
-                                                                      mainPanel( uiOutput("imglaw"), align = "center"))),
+                                                                      )), 
+                                                                      mainPanel(  uiOutput("imglaw"), align = "center"))),
+                                  
+                                                 tabPanel("Policy Asset Map",
+                                                   fluidRow(width =4,
+                                                          column(1),
+                                                          column(10,
+                                                                 strong("The plots below demonstrate the existence (yes) or non-existence (no) of policies in the states considered based on the policy questions that were asked."),
+                                                              
+                                                          column(1))),
+                                                   hr(),
                                                                      
-                                                          fluidRow( sidebarPanel( 
+                                                          fluidRow(sidebarPanel( width = 4,
                                                                        selectInput("graphlawheat", "Subdomain", 
                                                                                    choices = c("Domain level", "Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
-                                                                       ) , 
-                                                                       mainPanel(uiOutput("imglawheat"), align = "center"))
-                                                                     
-                                                          )),
+                                                                       )) , 
+                                                                       mainPanel(uiOutput("imglawheat"), align = "center"))),
                                                  
                                                  
                                                  tabPanel("Results and Analysis",
@@ -178,10 +185,7 @@ within a social unit, including helping set the agenda of what resources are ava
                                                                           p("Overall, under our scoring criteria Oregon and Iowa do equally the best in terms of law enforcement policies with a 0.67/1 and Virginia does the worst with a 0.53/1.  ")),
                                                                    column(1))
                                                           
-                                                          ),
-                                                 tabPanel( width =4,
-                                                   "References")
-                                                 ))),
+                                                 ) ))),
                         
                         tabPanel("Taxation",
 
@@ -202,7 +206,7 @@ within a social unit, including helping set the agenda of what resources are ava
                                                                                      "Taxes Related to Business", "Gini Index")
                                                              ) ,
                                                              mainPanel(uiOutput("imgtax"))))),
-                                                tabPanel("Heat Map",
+                                                tabPanel("Policy Asset Map",
                                                          fluidRow(width =12,
                                                                   column(1),
                                                                   column(10, h3(strong("Heat map for individual policy question")),
@@ -225,8 +229,7 @@ within a social unit, including helping set the agenda of what resources are ava
                                                                   column(1)),
 
                                                          fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png"))
-                                                         )),
-                                                tabPanel("References")
+                                                         ))
                                    ))),
 tabPanel("Housing and Zoning",
 
@@ -255,18 +258,24 @@ tabPanel("Housing and Zoning",
                                                  p("The heatmap visualizes the three subdomains and the housing policies that influence them. A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy. A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility. Our results show the following:"),
                                                  p("In terms of Housing Assistance policies, Virginia performs the worst with a score of 0.5/1, and Iowa performs the best with a score of 1/1. While Oregon performs well with a score of 0.88, it still demonstrates room for improvement."),
 
-                                                 p("For Housing Development policies, Oregon and Iowa perform the same with a score of 0.67/1, and Iowa falls behind with a score of 0.56/1. All three states demonstrate room for improvement."),
+                                                         fluidRow(
+                                                           sidebarPanel(
+                                                             selectInput("", "Subdomain",
+                                                                         choices = c("Domain level", "", "", "")
+                                                             ) ,
+                                                             mainPanel(uiOutput(""))))),
+                                                tabPanel("Policy Asset Map",
+                                                         fluidRow(width =12,
+                                                                  column(1),
+                                                                  column(10, h3(strong("Heat map for individual policy question")),
+                                                                         hr(),
+                                                                         strong(""),
+                                                                         p()),
+                                                                  column(1)),
 
-                                                 p("For Housing Financial Policies, Virginia performs the worst with a score of 0.44/1, and Iowa performs the best with a score of .67/1. All three states demonstrate room for improvement."),
+                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = ""))
+                                                         ))
 
-                                                 p("Overall, under our scoring criteria, Iowa has the greatest number of policies that advance economic mobility while Virginia has the least, indicating that Virginia is the state with the most room for improvement. Oregon’s score falls in the middle of the two but is closer to Iowa than Virginia.")
-                                          ),
-
-                                          column(1)),
-
-                                 fluidRow( mainPanel(img(height = 300, width = 400, src = "housing_heat_map.png"))
-                                 )),
-                        tabPanel("References")
                                    ))),
 
                         tabPanel("Education",
@@ -290,7 +299,7 @@ tabPanel("Housing and Zoning",
 
 
 
-                                                tabPanel("Heat Map",
+                                                tabPanel("Policy Asset Map",
                                                          fluidRow(width =12,
                                                                   column(1),
                                                                   column(10, h3(strong("Heat Map for Education Subcategories")),
@@ -326,50 +335,9 @@ tabPanel("Box Plot (Will take few seconds to load)",
            titlePanel("Box Plot of Education Policies"),
            mainPanel(uiOutput("bp")
            )
-         )),
+         ))
+))),
 
-                                                tabPanel("References",
-
-
-                                                                  fluidRow(width =12,
-                                                                           column(1),
-                                                                           column(10, h3(strong("Data Sources and References")),
-
-                                                                                  br(),
-                                                                                  h3("Data Sources"),
-                                                                                  tags$a(href="https://www.ecs.org/research-reports/key-issues/postsecondary-affordability/", "Education Commission of The States: Postsecondary Affordability"),
-                                                                                  br(),
-                                                                                  tags$a(href="https://www.ecs.org/research-reports/key-issues/early-childhood-education/", "Education Commission of The States: Early Childhood Education"),
-                                                                                  br(),
-                                                                                  tags$a(href="https://www.ecs.org/research-reports/key-issues/workforce-development/", "Education Commission of The States: Workforce Development"),
-                                                                                  br(),
-                                                                                  tags$a(href="https://www.ecs.org/research-reports/key-issues/school-climate/", "Education Commission of The States: School Climate"),
-                                                                                  br(),
-                                                                                  tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Oregon%20School%20Discipline%20Laws%20and%20Regulations.pdf/", "Oregon Compilation of School Discipline Laws and Regulations"),
-                                                                                  br(),
-                                                                                  tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Virginia%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Virginia Compilation of School Discipline Laws and Regulations"),
-                                                                                  br(),
-                                                                                  tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Iowa%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Iowa Compilation of School Discipline Laws and Regulations"),
-                                                                                  br(),
-                                                                                  h3("References"),
-
-                                                                                  tags$a(href="https://www.brookings.edu/research/hitting-kids-american-parenting-and-physical-punishment/", "Brookings Corporal Punishment"),
-                                                                                  br(),
-                                                                                  tags$a(href="https://www.pnas.org/content/116/17/8255", "PNAS Corporal Punishment"),
-                                                                                  br(),
-                                                                                  tags$a(href="https://www.ecs.org/50-state-comparison-postsecondary-education-funding/", "ECS Early Childhood Programs as Economic Development Tool"),
-                                                                                  br(),
-                                                                                  tags$a(href="https://cew.georgetown.edu/cew-reports/recovery-job-growth-and-education-requirements-through-2020/", "Georgetown Job Growth and Education Requirements through 2020"),
-                                                                                  br(),
-                                                                                  tags$a(href="https://www.luminafoundation.org/news-and-views/does-higher-education-really-increase-economic-mobility/", "Lumina Foundation: Does higher education really increase economic mobility?")
-
-
-                                                                           ),
-                                                                           column(1)),
-                                                                  fluidRow(width = 12, style = "margin: 20px",
-                                                                           plotOutput("", height = '700px'))
-
-                                   )))),
 
 tabPanel("Voting",
 
@@ -389,7 +357,7 @@ tabPanel("Voting",
                                                  choices = c("Domain level", "Voting Accessibility", "Voting Registration")
                                      ) ,
                                      mainPanel(uiOutput("imgvote"))))),
-                        tabPanel("Vote Heat Map",
+                        tabPanel("Policy Asset Map",
                                  fluidRow(width =12,
                                           column(1),
                                           column(10, h3(strong("Heat map for individual policy question")),
@@ -411,8 +379,7 @@ A summary of the overall scores for each state is presented below, with a higher
                                           column(1)),
 
                                  fluidRow( mainPanel(img(height = 300, width = 400, src = "heat_map_vote.png"))
-                                 )),
-                        tabPanel("References")
+                                 ))
                                    ))),
 tabPanel("Employment",
 
@@ -432,7 +399,7 @@ tabPanel("Employment",
                                                                          choices = c("Domain level", "Worker Organizing Policies", "Worker Protections", "Wage Policies")
                                                              ) ,
                                                              mainPanel(uiOutput("imgemp"))))),
-                                                tabPanel("Policy Asset Map",                               #Is it ok that this name is used above?
+                                                tabPanel("Polict Asset Map",                               
                                                          fluidRow(width =12,
                                                                   column(1),
                                                                   column(10, h3(strong("Heat map for individual policy question")),
@@ -454,13 +421,12 @@ A summary of the overall scores for each state is presented below, with a higher
                                                                   column(1)),
 
                                                          fluidRow( mainPanel(img(height = 300, width = 400, src = "heat_map_employment.png"))
-                                                         )),
-                                                tabPanel("References")
+                                                         ))
                                    )))                        
                         ),
              
              navbarMenu(h4("Data, Measures and Methods"),
-                        tabPanel("All",
+                        tabPanel("Summary",
 
                                  fluidRow(width =12,
                                           column(1),
@@ -475,7 +441,10 @@ A summary of the overall scores for each state is presented below, with a higher
 
                         tabPanel("Law Enforcement",
 
-                                 fluidRow(width =12,
+                                 fluidRow(
+                                   navlistPanel(
+                                   tabPanel( "Background",
+                                   width =12,
                                           column(1),
                                           column(10, h3(strong( " Law Enforcement")),
                                                  hr(),
@@ -493,9 +462,49 @@ A summary of the overall scores for each state is presented below, with a higher
                                                  p("a. Arrest and Court Proceeding Policies- Arrest and Court Proceedings Policies focused on the process of arresting and trying individuals in court. In this subdomain we analysed stop and identify, bail, and civil asset forfeiture policies. Practices in these areas target distinct socio-economic groups differently and exploring them gives a sense of how individuals in the community are impacted by them. For example, paying cash bail or having your assets seized has an affect on and is affected by an individual’s financial standing. In addition to this set of binary data, we descriptively explored zero tolerance policies related to driving under the influence. "),
                                                  p("b. Incarceration Practices- Incarceration Practices covers the practices and policies that impact individuals held in state facilities. We focus on inmates’ rights as well as the equitability and social justness of practices within the facility and upon return to their communities. We focus on the type of state facilities (eg public and private) as well as policies within the facility. Specifically, we assess the ability to acquire skills and certifications, as well as the ability to access necessary healthcare. Additionally, we consider youth adjudication and the death penalty. "),
                                                  p("c Community Policing Practices- Community Policing Practices explores the standards that officers must abide by in policing the community with a focus on the equality of the standards. For example, custodial sexual misconduct policies are analysed, both numerically and qualitatively, to assess how states hold officers accountable for allegations of misconduct against them by an individual in their custody. In addition, body camera usage, demographic information collection and domestic violence- related polices are considered in this subdomain. We also qualitatively assess the nature of officer training programmes in the states, particularly those pertaining to treating individuals with mental health issues.  ")),
-                                          column(1)),
-                                 fluidRow(width = 12, style = "margin: 20px",
-                                          plotOutput("", height = '700px'))),
+                                          column(1)
+                                   ),
+                                   
+                                   tabPanel("References",
+                                            
+                                            
+                                            fluidRow(width =12,
+                                                     column(1),
+                                                     column(10, h3(strong("Data Sources and References")),
+                                                            
+                                                            br(),
+                                                            h3("Data Sources"),
+                                                            tags$a(href="https://www.ecs.org/research-reports/key-issues/postsecondary-affordability/", "Education Commission of The States: Postsecondary Affordability"),
+                                                            br(),
+                                                            tags$a(href="https://www.ecs.org/research-reports/key-issues/early-childhood-education/", "Education Commission of The States: Early Childhood Education"),
+                                                            br(),
+                                                            tags$a(href="https://www.ecs.org/research-reports/key-issues/workforce-development/", "Education Commission of The States: Workforce Development"),
+                                                            br(),
+                                                            tags$a(href="https://www.ecs.org/research-reports/key-issues/school-climate/", "Education Commission of The States: School Climate"),
+                                                            br(),
+                                                            tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Oregon%20School%20Discipline%20Laws%20and%20Regulations.pdf/", "Oregon Compilation of School Discipline Laws and Regulations"),
+                                                            br(),
+                                                            tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Virginia%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Virginia Compilation of School Discipline Laws and Regulations"),
+                                                            br(),
+                                                            tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Iowa%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Iowa Compilation of School Discipline Laws and Regulations"),
+                                                            br(),
+                                                            h3("References"),
+                                                            
+                                                            tags$a(href="https://www.brookings.edu/research/hitting-kids-american-parenting-and-physical-punishment/", "Brookings Corporal Punishment"),
+                                                            br(),
+                                                            tags$a(href="https://www.pnas.org/content/116/17/8255", "PNAS Corporal Punishment"),
+                                                            br(),
+                                                            tags$a(href="https://www.ecs.org/50-state-comparison-postsecondary-education-funding/", "ECS Early Childhood Programs as Economic Development Tool"),
+                                                            br(),
+                                                            tags$a(href="https://cew.georgetown.edu/cew-reports/recovery-job-growth-and-education-requirements-through-2020/", "Georgetown Job Growth and Education Requirements through 2020"),
+                                                            br(),
+                                                            tags$a(href="https://www.luminafoundation.org/news-and-views/does-higher-education-really-increase-economic-mobility/", "Lumina Foundation: Does higher education really increase economic mobility?")
+                                                            
+                                                            
+                                                     )))
+                                            
+                                   )
+                                   )),
                         tabPanel("Education",
 
                                  fluidRow(width =12,
@@ -709,20 +718,46 @@ A summary of the overall scores for each state is presented below, with a higher
                                        div(class="panel-body", width = "600px", 
                                            align = "center", 
                                            div( 
-                                             tags$img(src = "teamphotos/KATHRYN.jpg", 
+                                             tags$img(src = "vicki.jpg", 
                                                       width = "100px", height = "100px") 
                                            ), 
                                            div( 
-                                             tags$h5("Kathryn Linehan"), 
+                                             tags$h5("Vicki Lancaster"), 
                                              tags$h6( tags$i("Principal Investigator")) 
                                            ), 
                                            div( 
-                                             "Vicki Lancaster" 
+                                             "Vicki Lancaster is a Principal Scientist at the Social & Decision Analytics Division (SDAD) of the Biocomplexity Institute & Initiative at the University of Virginia. 
+                                             Her areas of expertise are experimental design, visualizations, data analysis and interpretation. " 
                                            ) 
                                        ) 
                                    ) 
                             ), 
-                            column(1)), 
+                            column(1),
+                          
+                         
+                            # Cesar 
+                            column(2, 
+                                   div(class="panel panel-default", 
+                                       div(class="panel-body", width = "600px", 
+                                           align = "center", 
+                                           div( 
+                                             tags$img(src = "cm.png", 
+                                                      width = "100px", height = "100px") 
+                                           ), 
+                                           div( 
+                                             tags$h5("Cesar Montalvo"), 
+                                             tags$h6( tags$i("Postdoctoral Research Associate")) 
+                                           ), 
+                                           div( 
+                                             "Cesar Montalvo is a Postdoctoral Research Associate in the Social and Decision Analytics Division at the Biocomplexity Institute and Initiative from the UVA.  Master’s degree in economics from Iowa State University, Ph.D. in Applied Mathematics 
+                                             for Life and Social Sciences from Arizona State University.  
+                                             He works at the interface of economics, statistics, mathematical models and public policy." 
+                                           ) 
+                                       ) 
+                                   ) 
+                            ), 
+                            column(1)),
+                       
                           h2("Project Sponsors"), 
                           p("[Photos, information, and/or links about your sponsor go about here. You may want to use materials that your sponsors have already shared with you about their institution or coordinate with your stakeholders to include pertinent information here.]"), 
                           h2("Acknowledgements"), 
@@ -734,7 +769,7 @@ A summary of the overall scores for each state is presented below, with a higher
                       fluidRow(width = 12, 
                                column(1, align = "center", h3(strong("Approach"))),
                                column(1)))
-             )) 
+             ))
 
 
 
