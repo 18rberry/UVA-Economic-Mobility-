@@ -197,37 +197,47 @@ p("Overall, under our scoring criteria Oregon and Iowa do equally the best in te
                                                          )),
                                                 tabPanel("References")
                                    ))),
-                        tabPanel("Zoning",
+tabPanel("Housing and Zoning",
+
+         fluidRow(
+           navlistPanel(tabPanel("Composites",
+                                 fluidRow(width =12,
+                                          column(1),
+                                          column(10, h3(strong()),
+                                                 hr(),
+                                                 strong(""),
+                                                 p()),
+                                          column(1)),
 
                                  fluidRow(
-                                   navlistPanel(tabPanel("Composites",
-                                                         fluidRow(width =12,
-                                                                  column(1),
-                                                                  column(10, h3(strong()),
-                                                                         hr(),
-                                                                         strong(""),
-                                                                         p()),
-                                                                  column(1)),
+                                   sidebarPanel(
+                                     selectInput("", "Subdomain",
+                                                 choices = c("Domain level", "Housing Assistance Policies", "Housing Development Policies", "Housing Financial Policies")
+                                     ) ,
+                                     mainPanel(uiOutput(""))))),
+                        tabPanel("Heat Map",
+                                 fluidRow(width =12,
+                                          column(1),
+                                          column(10, h3(strong("Heat map for individual policy question")),
+                                                 hr(),
+                                                 strong(""),
+                                                 p("The heatmap visualizes the three subdomains and the housing policies that influence them. A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy. A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility. Our results show the following:"),
+                                                 p("In terms of Housing Assistance policies, Virginia performs the worst with a score of 0.5/1, and Iowa performs the best with a score of 1/1. While Oregon performs well with a score of 0.88, it still demonstrates room for improvement."),
 
-                                                         fluidRow(
-                                                           sidebarPanel(
-                                                             selectInput("", "Subdomain",
-                                                                         choices = c("Domain level", "", "", "")
-                                                             ) ,
-                                                             mainPanel(uiOutput(""))))),
-                                                tabPanel("Heat Map",
-                                                         fluidRow(width =12,
-                                                                  column(1),
-                                                                  column(10, h3(strong("Heat map for individual policy question")),
-                                                                         hr(),
-                                                                         strong(""),
-                                                                         p()),
-                                                                  column(1)),
+                                                 p("For Housing Development policies, Oregon and Iowa perform the same with a score of 0.67/1, and Iowa falls behind with a score of 0.56/1. All three states demonstrate room for improvement."),
 
-                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = ""))
-                                                         )),
-                                                tabPanel("References")
+                                                 p("For Housing Financial Policies, Virginia performs the worst with a score of 0.44/1, and Iowa performs the best with a score of .67/1. All three states demonstrate room for improvement."),
+
+                                                 p("Overall, under our scoring criteria, Iowa has the greatest number of policies that advance economic mobility while Virginia has the least, indicating that Virginia is the state with the most room for improvement. Oregon’s score falls in the middle of the two but is closer to Iowa than Virginia.")
+                                          ),
+
+                                          column(1)),
+
+                                 fluidRow( mainPanel(img(height = 300, width = 400, src = "housing_heat_map.png"))
+                                 )),
+                        tabPanel("References")
                                    ))),
+
                         tabPanel("Education",
 
                                  fluidRow(
