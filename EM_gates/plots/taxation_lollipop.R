@@ -4,6 +4,9 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 
+
+setwd('~/git/TestDSPG/dspg20uvaEM/EM_gates/WWW')
+
 #import data
 data<- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
 data
@@ -18,17 +21,17 @@ composite_tax <- data %>%
   slice(17)
 
 #gather the data to compress the diff scores into one state and score variable
-plot_data_1 <- tax_data %>%
+plot_data_1 <- composite_tax %>%
   gather("state", "score", c(3:5))
 
-
-plot_data_1 <- plot_data_1 %>%
-  ggplot(aes(x=score, y= state, text = paste("Subdomain:", Subdomain))) +
+png("tax_domain_plot.png", width = 600, height = 400)
+ggplot(aes(x=score, y= state), data = plot_data_1) +
   geom_point(aes(colour = state)) +
   geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
-  ggtitle("Taxation By State")
+  ggtitle("Taxation Policies")
+dev.off()
 
-ggplotly(plot_data_1, tooltip = "text")
+#ggplotly(plot_data_1, tooltip = "text")
 
 #generate subdomain wise plot by plugging in desired index
 display.subdomain <- function(index) {
@@ -39,15 +42,26 @@ display.subdomain <- function(index) {
   #same process as above
   plot_data_2 <- org %>%
     gather("state", "score", c(3:5))
-  org_plot <- plot_data_2 %>%
-    ggplot(aes(x=score, y= state, text = paste("Score:", score))) +
+  # org_plot <- plot_data_2 %>%
+  ggplot(aes(x=score, y= state, text = paste("Score:", score)), data = plot_data_2) +
     geom_point(aes(colour = state)) +
     geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
     ggtitle(paste("Tax Policy Dimension:", title))
 }
 
-wealth <- display.subdomain(3)
-wealth
+#gini index plot
+png("tax_sub_gini_index.png", width = 600, height = 400)
+display.subdomain(1)
+dev.off()
 
-ggplotly(wealth, tooltip = "text")
+png("tax_sub_credits.png", width = 600, height = 400)
+display.subdomain(2)
+dev.off()
 
+png("tax_sub_wealth.png", width = 600, height = 400)
+display.subdomain(3)
+dev.off()
+
+png("tax_sub_business.png", width = 600, height = 400)
+display.subdomain(4)
+dev.off()
