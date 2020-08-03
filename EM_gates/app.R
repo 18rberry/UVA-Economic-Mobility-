@@ -25,7 +25,7 @@ library(tidyr)
 library(readr)
 
 # load data -----------------------------------------------------------------------------
-em_data <- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
+em_data <- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
 
 #----------------------------
 #Law Enforcement / Policing Data
@@ -172,7 +172,7 @@ p("Overall, under our scoring criteria Oregon and Iowa do equally the best in te
                                    navlistPanel(tabPanel("Composites",
                                                          fluidRow(width =12,
                                                                   column(1),
-                                                                  column(10, h3(strong()),
+                                                                  column(10, h3(strong( "Taxation")),
                                                                          hr(),
                                                                          strong(""),
                                                                          p()),
@@ -180,20 +180,34 @@ p("Overall, under our scoring criteria Oregon and Iowa do equally the best in te
 
                                                          fluidRow(
                                                            sidebarPanel(
-                                                             selectInput("", "Subdomain",
-                                                                         choices = c("Domain level", "", "", "")
+                                                             selectInput("graphtax", "Subdomain",
+                                                                         choices = c("Domain level", "Tax Credits", "Taxes on Wealth",
+                                                                                     "Taxes Related to Business", "Gini Index")
                                                              ) ,
-                                                             mainPanel(uiOutput(""))))),
+                                                             mainPanel(uiOutput("imgtax"))))),
                                                 tabPanel("Heat Map",
                                                          fluidRow(width =12,
                                                                   column(1),
                                                                   column(10, h3(strong("Heat map for individual policy question")),
                                                                          hr(),
                                                                          strong(""),
-                                                                         p()),
+                                                                         p("The heatmap visualizes the four subdomains and the tax policies that influence them.
+                                                                           A “Yes” identifies the presence of the policy in the state while a “No” represents a lack
+                                                                           of the policy. A summary of the overall scores for each state is presented below, with a higher number
+                                                                           representing an increased number of policies that promote economic mobility.
+                                                                           Our results show the following: "),
+                                                                         p(strong("Tax credits:"), " Oregon and Iowa perform the highest with a score of 0.75.
+                                                                           On the other hand, Virginia holds a measly score of 0.25, highlighting a need for improvement."),
+                                                                         p(strong("Wealth-related taxes:"), "Oregon and Iowa perform the highest with a score of 0.667.
+                                                                           In contrast, Virginia holds the lowest score of 0.333, highlighting a need for improvement.  "),
+                                                                         p(strong("Taxes related to businesses and corporations:"), "Oregon demonstrates outstanding performance with a score of 1.
+                                                                           In contrast, Virginia and Iowa had scores of 0.667 and 0.333 respectively, highlighting a need for improvement.  "),
+                                                                         p(strong("Gini index:"), "all states had a score of 0.5. All states could improve in this policy domain aspect")
+                                                                         ),
+
                                                                   column(1)),
 
-                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = ""))
+                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png"))
                                                          )),
                                                 tabPanel("References")
                                    ))),
@@ -489,8 +503,24 @@ A summary of the overall scores for each state is presented below, with a higher
                                           column(1),
                                           column(10, h3(strong( "Taxation")),
                                                  hr(),
-                                                 strong("Composite"),
-                                                 p()),
+                                                 strong("Background"),
+                                                 p("In examining how policies affect economic mobility, it is crucial to further explore taxation policy.
+                                                   Taxation boosts economic mobility because it influences individuals’ accumulation of wealth and affects absolute or relative mobility,
+                                                   whether that be inter or intra generational. Tax revenues are used to fund goods that drive mobility, such as education and health, and tax deduction and credit policies
+                                                   lower the cost of mobility enhancing goods. Taxation can also lead to the redistribution of wealth, an important part of combating wealth inequality."),
+                                                 p("Since 1979, income inequality in the United States has increased dramatically. In every state, the average income of the top 5% of households is at least 10 times
+                                                   that of the bottom 20%. State taxes often work to further this inequity because of their regressive structure. Furthermore, state taxes disproportionately
+                                                   affect higher income families and individuals. Thus, it is vital to understand how states can implement more progressive tax policies and re-evaluate regressive
+                                                   structures to boost overall economic mobility. Our research identified four main subdomains of tax policy: tax credits, wealth-related taxes, business tax policy, and the Gini index."),
+                                                 p(strong("a. Tax credits"), "are negative marginal tax rates, or tax incentives, that reduce tax liability and boost tax refunds, therefore improving economic mobility for low-income individuals.
+                                                   They ease low- to moderate-income family burdens by providing appropriate financial support for expenses like childcare, income tax, and property tax.  "),
+                                                 p(strong("b: Taxes on inherited wealth"), "such as the estate and inheritance tax, largely only affect the wealthiest taxpayers. These taxes help redistribute income and wealth and thus improve economic mobility for the millions of low- and middle-class Americans.
+                                                   Because wealth is concentrated in the hands of few mostly white Americans, wealth-related taxes help upend financial barriers for low-income people, who are predominantly people of color.  "),
+                                                 p(strong("c: Businesses"), "create opportunities for employment, thus increasing incomes, and provide access to services that increase future earning potentials.
+                                                   States play a significant role in supporting businesses by nullifying corporate tax avoidance strategies to equalize the playing field between multimillion-dollar corporations and small businesses, as well as creating a tax climate that fosters entrepreneurial efforts. "),
+                                                 p(strong("d.  The Gini coefficient"), "is a measure of statistical dispersion intended to represent income or wealth inequality in a nation or area. Because the Gini coefficient measures inequality after the effects of taxes, by understanding how Gini indexes change as a result
+                                                   of tax policies and financial redistribution, we can better understand how tax policy can support economic mobility.  ")
+                                                 ),
                                           column(1)),
                                  fluidRow(width = 12, style = "margin: 20px",
                                           plotOutput("", height = '700px'))),
@@ -596,6 +626,25 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "vote_sub_reg.png")
     }
   })
+  #Taxation Plots Rendering
+  output$imgtax <- renderUI({
+    if(input$graphtax == "Domain level"){
+      img(height = 300, width = 400, src = "tax_domain_plot.png")
+    }
+    else if(input$graphtax == "Tax Credits"){
+      img(height = 300, width = 400, src = "tax_sub_credits.png")
+    }
+    else if(input$graphtax == "Taxes on Wealth"){
+      img(height = 300, width = 400, src = "tax_sub_wealth.png")
+    }
+    else if(input$graphtax == "Taxes Related to Business"){
+      img(height = 300, width = 400, src = "tax_sub_business.png")
+    }
+    else if(input$graphtax == "Gini Index"){
+      img(height = 300, width = 400, src = "tax_sub_gini_index.png")
+    }
+
+  })
 
   # Education Plots Rendering
   output$imgedu <- renderUI({
@@ -615,8 +664,6 @@ server <- shinyServer(function(input,output){
     else if(input$graphedu == "Workforce Development Policies"){
       img(height = 300, width = 400, src = "education_workforcedev.png")
     }
-
-
   })
 
 
