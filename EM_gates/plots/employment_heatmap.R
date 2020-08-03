@@ -1,9 +1,8 @@
 library(ggplot2)
+library(readxl)
 
 #setwd("~/Documents/DSPG/EM project")
 
-#source("theme_SDAD.R")
-#source("Colorblind_Palette.R")
 source("~/git/dspg20uvaEM/EM_gates/data/theme_SDAD.R")
 source("~/git/dspg20uvaEM/EM_gates/data/Colorblind_Palette.R")
 
