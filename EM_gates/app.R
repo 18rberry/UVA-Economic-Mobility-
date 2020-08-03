@@ -25,7 +25,7 @@ library(tidyr)
 library(readr)
 
 # load data -----------------------------------------------------------------------------
-em_data <- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
+em_data <- read_csv('data/Composite Scorecard - Sheet2.csv')
 
 #----------------------------
 #Law Enforcement / Policing Data
