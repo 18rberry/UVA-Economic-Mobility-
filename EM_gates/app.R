@@ -24,9 +24,11 @@ library(shinydashboardPlus)
 library(tidyr)
 library(readr)
 
-# load data ---------------------------------------------------------------
+# load data -----------------------------------------------------------------------------
+em_data <- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
 
-em_data <- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
+#----------------------------
+#Law Enforcement / Policing Data
 law_data <- em_data %>%
   slice(5:8)
 composite_law <- law_data %>%
@@ -46,13 +48,15 @@ incarceration<- law_data %>%
 plot_data_4 <- incarceration %>%
   gather("state", "score", c(3:5))
 
+
+
 #plots page ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 # Landing page --------------------------------------------------------------------------------------------------
 ui <- fluidPage(
   theme = shinytheme("flatly"),
-  
+
   tags$style(type = "text/css", ".recalculating {opacity: 1.0;}"),
   tags$style(
     ".leaflet .legend {width:200px; text-align: left;}",
@@ -60,19 +64,19 @@ ui <- fluidPage(
     ".leaflet .legend label{float:left; text-align: left;}"
   ),
   tags$head(tags$style(HTML(" .sidebar { font-size: 40%; } "))),
-  
+
   headerPanel(
-    img(src = "MyImage.jpg", 
-        class = "topimage", width = "100%", style = "display: block; margin-left: auto; margin-right: auto;" 
+    img(src = "MyImage.jpg",
+        class = "topimage", width = "100%", style = "display: block; margin-left: auto; margin-right: auto;"
     )),
   hr(),
-  
+
   fluidRow(width = 12,style = "margin = 20px",  column(12, align = "center", h2(strong("Political Community Capital ")))),
-  
+
   hr(),
-  
-  navbarPage("", 
-             
+
+  navbarPage("",
+
              tabPanel(h4("Project Overview"),
                       boxPlus(
                         title = "",
@@ -101,19 +105,19 @@ within a social unit, including helping set the agenda of what resources are ava
              
              navbarMenu(h4("Domains of analysis"),
                         tabPanel("All",
-                                 
+
                                  fluidRow(width =12,
                                           column(1),
                                           column(10, h3(strong("")),
                                                  hr(),
                                                  strong("Composite"),
                                                  p()),
-                                          column(1)), 
+                                          column(1)),
                                  fluidRow(width = 12, style = "margin: 20px",
                                           plotOutput("", height = '700px'))),
-                        
+
                         tabPanel("Law Enforcement",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                                  tabPanel("Visualizations",
@@ -168,38 +172,52 @@ within a social unit, including helping set the agenda of what resources are ava
                                                  ))),
                         
                         tabPanel("Taxation",
-                                 
+
                                  fluidRow(
                                    navlistPanel(tabPanel("Composites",
                                                          fluidRow(width =12,
                                                                   column(1),
-                                                                  column(10, h3(strong()),
+                                                                  column(10, h3(strong( "Taxation")),
                                                                          hr(),
                                                                          strong(""),
                                                                          p()),
                                                                   column(1)),
-                                                         
+
                                                          fluidRow(
                                                            sidebarPanel(
-                                                             selectInput("", "Subdomain", 
-                                                                         choices = c("Domain level", "", "", "")
-                                                             ) , 
-                                                             mainPanel(uiOutput(""))))),
+                                                             selectInput("graphtax", "Subdomain",
+                                                                         choices = c("Domain level", "Tax Credits", "Taxes on Wealth",
+                                                                                     "Taxes Related to Business", "Gini Index")
+                                                             ) ,
+                                                             mainPanel(uiOutput("imgtax"))))),
                                                 tabPanel("Heat Map",
                                                          fluidRow(width =12,
                                                                   column(1),
                                                                   column(10, h3(strong("Heat map for individual policy question")),
                                                                          hr(),
                                                                          strong(""),
-                                                                         p()),
+                                                                         p("The heatmap visualizes the four subdomains and the tax policies that influence them.
+                                                                           A “Yes” identifies the presence of the policy in the state while a “No” represents a lack
+                                                                           of the policy. A summary of the overall scores for each state is presented below, with a higher number
+                                                                           representing an increased number of policies that promote economic mobility.
+                                                                           Our results show the following: "),
+                                                                         p(strong("Tax credits:"), " Oregon and Iowa perform the highest with a score of 0.75.
+                                                                           On the other hand, Virginia holds a measly score of 0.25, highlighting a need for improvement."),
+                                                                         p(strong("Wealth-related taxes:"), "Oregon and Iowa perform the highest with a score of 0.667.
+                                                                           In contrast, Virginia holds the lowest score of 0.333, highlighting a need for improvement.  "),
+                                                                         p(strong("Taxes related to businesses and corporations:"), "Oregon demonstrates outstanding performance with a score of 1.
+                                                                           In contrast, Virginia and Iowa had scores of 0.667 and 0.333 respectively, highlighting a need for improvement.  "),
+                                                                         p(strong("Gini index:"), "all states had a score of 0.5. All states could improve in this policy domain aspect")
+                                                                         ),
+
                                                                   column(1)),
-                                                         
-                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = ""))
+
+                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png"))
                                                          )),
                                                 tabPanel("References")
                                    ))),
                         tabPanel("Zoning",
-                                 
+
                                  fluidRow(
                                    navlistPanel(tabPanel("Composites",
                                                          fluidRow(width =12,
@@ -209,12 +227,12 @@ within a social unit, including helping set the agenda of what resources are ava
                                                                          strong(""),
                                                                          p()),
                                                                   column(1)),
-                                                         
+
                                                          fluidRow(
                                                            sidebarPanel(
-                                                             selectInput("", "Subdomain", 
+                                                             selectInput("", "Subdomain",
                                                                          choices = c("Domain level", "", "", "")
-                                                             ) , 
+                                                             ) ,
                                                              mainPanel(uiOutput(""))))),
                                                 tabPanel("Heat Map",
                                                          fluidRow(width =12,
@@ -224,13 +242,13 @@ within a social unit, including helping set the agenda of what resources are ava
                                                                          strong(""),
                                                                          p()),
                                                                   column(1)),
-                                                         
+
                                                          fluidRow( mainPanel(img(height = 300, width = 400, src = ""))
                                                          )),
                                                 tabPanel("References")
                                    ))),
                         tabPanel("Education",
-                                 
+
                                  fluidRow(
                                    navlistPanel(tabPanel("Composites",
                                                          fluidRow(width =12,
@@ -240,191 +258,297 @@ within a social unit, including helping set the agenda of what resources are ava
                                                                          strong(""),
                                                                          p()),
                                                                   column(1)),
-                                                         
+
                                                          fluidRow(
                                                            sidebarPanel(
-                                                             selectInput("", "Subdomain", 
-                                                                         choices = c("Domain level", "", "", "")
-                                                             ) , 
-                                                             mainPanel(uiOutput(""))))),
+                                                             selectInput("graphedu", "Subdomain",
+                                                                         choices = c("Domain Level", "School Climate Policies", "Early Childhood Education Policies", "Post-Secondary Affordability Policies", "Workforce Development Policies")
+                                                             ) ,
+                                                             mainPanel(uiOutput("imgedu"))))),
+
+
+
                                                 tabPanel("Heat Map",
                                                          fluidRow(width =12,
                                                                   column(1),
-                                                                  column(10, h3(strong("Heat map for individual policy question")),
+                                                                  column(10, h3(strong("Heat Map for Education Subcategories")),
                                                                          hr(),
                                                                          strong(""),
-                                                                         p()),
+                                                                         p("This heatmap visualizes 19 subcategories of education (derived from 73 education policy questions) A 1 means that the policy advances economic mobility, while a <1 means that the policy hinders economic mobility.")),
                                                                   column(1)),
-                                                         
-                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = ""))
+
+                                                         fluidRow( mainPanel(img(height = 650, width = 650, align = "right", src = "Education_heatmap.PNG"))
                                                          )),
-                                                tabPanel("References")
+                                                tabPanel("Analysis & Results",
+                                                         fluidRow(width =12,
+                                                                  column(1),
+                                                                  column(10, h3(strong("Analysis & Results")),
+                                                                         hr(),
+                                                                         strong(""),
+                                                                         p("The heatmap visualized the 19 subcategories within four domains and the education policies that influence them. Our results show the following:"),
+
+p("For School Climate Policies, Iowa has the lowest score of .37/1. This is primarily because Iowa does not have many laws/regulations for school climate as well as has practices of corporal punishment and a lack of limitations on suspensions and expulsion."),
+
+p("For Early Childhood Education Policies,Virginia and Oregon scored the highest while Iowa scored slightly lower.  However, states vary in different subcategories from student-centric policies to ensuring teacher quality."),
+
+p("For Post-Secondary Affordability Policies, Oregon scored the highest with .89/1 while Iowa and Virginia scored in the 60th percentile. This difference is primarily caused by the differences if states have considered and enacted free college policies as well as merit and need based policies."),
+
+p("For Workforce Development Policies, Oregon scored the lowest with a score of .47/1. This is primarily caused by not having a state statue define at least one financial aid program."),
+
+p("Overall, under our scoring criteria, each state can improve in different subdomains as there is not a consistent state with the highest ranking. Iowa does have the lowest education capital score primarily because of school climate policies while Virginia has the highest score among these three states.")),
+                                                                  column(1)),
+fluidRow( mainPanel(img(height = 300, width = 400, align = "right", src = "educationtable.PNG"))
+)),
+tabPanel("Box Plot (Will take few seconds to load)",
+         fluidRow(
+           titlePanel("Box Plot of Education Policies"),
+           mainPanel(uiOutput("bp")
+           )
+         )),
+
+                                                tabPanel("References",
+
+
+                                                                  fluidRow(width =12,
+                                                                           column(1),
+                                                                           column(10, h3(strong("Data Sources and References")),
+
+                                                                                  br(),
+                                                                                  h3("Data Sources"),
+                                                                                  tags$a(href="https://www.ecs.org/research-reports/key-issues/postsecondary-affordability/", "Education Commission of The States: Postsecondary Affordability"),
+                                                                                  br(),
+                                                                                  tags$a(href="https://www.ecs.org/research-reports/key-issues/early-childhood-education/", "Education Commission of The States: Early Childhood Education"),
+                                                                                  br(),
+                                                                                  tags$a(href="https://www.ecs.org/research-reports/key-issues/workforce-development/", "Education Commission of The States: Workforce Development"),
+                                                                                  br(),
+                                                                                  tags$a(href="https://www.ecs.org/research-reports/key-issues/school-climate/", "Education Commission of The States: School Climate"),
+                                                                                  br(),
+                                                                                  tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Oregon%20School%20Discipline%20Laws%20and%20Regulations.pdf/", "Oregon Compilation of School Discipline Laws and Regulations"),
+                                                                                  br(),
+                                                                                  tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Virginia%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Virginia Compilation of School Discipline Laws and Regulations"),
+                                                                                  br(),
+                                                                                  tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Iowa%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Iowa Compilation of School Discipline Laws and Regulations"),
+                                                                                  br(),
+                                                                                  h3("References"),
+
+                                                                                  tags$a(href="https://www.brookings.edu/research/hitting-kids-american-parenting-and-physical-punishment/", "Brookings Corporal Punishment"),
+                                                                                  br(),
+                                                                                  tags$a(href="https://www.pnas.org/content/116/17/8255", "PNAS Corporal Punishment"),
+                                                                                  br(),
+                                                                                  tags$a(href="https://www.ecs.org/50-state-comparison-postsecondary-education-funding/", "ECS Early Childhood Programs as Economic Development Tool"),
+                                                                                  br(),
+                                                                                  tags$a(href="https://cew.georgetown.edu/cew-reports/recovery-job-growth-and-education-requirements-through-2020/", "Georgetown Job Growth and Education Requirements through 2020"),
+                                                                                  br(),
+                                                                                  tags$a(href="https://www.luminafoundation.org/news-and-views/does-higher-education-really-increase-economic-mobility/", "Lumina Foundation: Does higher education really increase economic mobility?"),
+
+
+                                                                           ),
+                                                                           column(1)),
+                                                                  fluidRow(width = 12, style = "margin: 20px",
+                                                                           plotOutput("", height = '700px')),
+
+                                   )))),
+
+tabPanel("Voting",
+
+         fluidRow(
+           navlistPanel(tabPanel("Composites",
+                                 fluidRow(width =12,
+                                          column(1),
+                                          column(10, h3(strong("Voting")),
+                                                 hr(),
+                                                 strong(""),
+                                                 p()),
+                                          column(1)),
+
+                                 fluidRow(
+                                   sidebarPanel(
+                                     selectInput("graphvote", "Subdomain",
+                                                 choices = c("Domain level", "Voting Accessibility", "Voting Registration")
+                                     ) ,
+                                     mainPanel(uiOutput("imgvote"))))),
+                        tabPanel("Vote Heat Map",
+                                 fluidRow(width =12,
+                                          column(1),
+                                          column(10, h3(strong("Heat map for individual policy question")),
+                                                 hr(),
+                                                 strong(""),
+                                                 p("
+The heatmap visualizes two subdomains and 9 voting policy questions.  A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy.
+A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility.
+                                                                           Our results show the following:
+                                                                           "),
+                                                 p("In terms of_________ policies, Virginia performs the worst with a ____/1 while Oregon performs the best with a _____/1."),
+
+                                                 p("For Incarceration Practices policies, all three states perform equally with a ____/1."),
+
+                                                 p("For __________, both Oregon and Virginia perform at a ____/1 while Iowa does better with a _____/1."),
+
+                                                 p("Overall, under our scoring criteria Oregon and Iowa do equally the best in terms of employment policies with a ____/1 and Virginia does the worst with ____/1.  ")
+                                          ),
+                                          column(1)),
+
+                                 fluidRow( mainPanel(img(height = 300, width = 400, src = "heat_map_vote.png"))
+                                 )),
+                        tabPanel("References")
                                    ))),
-                        tabPanel("Voting",
-                                 
+tabPanel("Employment",
+
                                  fluidRow(
                                    navlistPanel(tabPanel("Composites",
                                                          fluidRow(width =12,
                                                                   column(1),
-                                                                  column(10, h3(strong()),
+                                                                  column(10, h3(strong("Employment")),
                                                                          hr(),
                                                                          strong(""),
                                                                          p()),
                                                                   column(1)),
-                                                         
+
                                                          fluidRow(
                                                            sidebarPanel(
-                                                             selectInput("", "Subdomain", 
-                                                                         choices = c("Domain level", "", "", "")
-                                                             ) , 
-                                                             mainPanel(uiOutput(""))))),
-                                                tabPanel("Heat Map",
+                                                             selectInput("graphemp", "Subdomain",
+                                                                         choices = c("Domain level", "Worker Organizing Policies", "Worker Protections", "Wage Policies")
+                                                             ) ,
+                                                             mainPanel(uiOutput("imgemp"))))),
+                                                tabPanel("Emp Heat Map",                               #Is it ok that this name is used above?
                                                          fluidRow(width =12,
                                                                   column(1),
                                                                   column(10, h3(strong("Heat map for individual policy question")),
                                                                          hr(),
                                                                          strong(""),
-                                                                         p()),
+                                                                         p("
+The heatmap visualized the three subdomains and the 17 employment policy questions.  A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy.
+A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility.
+                                                                           Our results show the following:
+                                                                           "),
+                                                                         p("In terms of_________ policies, Virginia performs the worst with a ____/1 while Oregon performs the best with a _____/1."),
+
+                                                                         p("For Incarceration Practices policies, all three states perform equally with a ____/1."),
+
+                                                                         p("For __________, both Oregon and Virginia perform at a ____/1 while Iowa does better with a _____/1."),
+
+                                                                         p("Overall, under our scoring criteria Oregon and Iowa do equally the best in terms of employment policies with a ____/1 and Virginia does the worst with ____/1.  ")
+                                                                         ),
                                                                   column(1)),
-                                                         
-                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = ""))
+
+                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = "heat_map_employment.png"))
                                                          )),
                                                 tabPanel("References")
-                                   ))),
-                        tabPanel("Employment",
-                                 
-                                 fluidRow(
-                                   navlistPanel(tabPanel("Composites",
-                                                         fluidRow(width =12,
-                                                                  column(1),
-                                                                  column(10, h3(strong()),
-                                                                         hr(),
-                                                                         strong(""),
-                                                                         p()),
-                                                                  column(1)),
-                                                         
-                                                         fluidRow(
-                                                           sidebarPanel(
-                                                             selectInput("", "Subdomain", 
-                                                                         choices = c("Domain level", "", "", "")
-                                                             ) , 
-                                                             mainPanel(uiOutput(""))))),
-                                                tabPanel("Heat Map",
-                                                         fluidRow(width =12,
-                                                                  column(1),
-                                                                  column(10, h3(strong("Heat map for individual policy question")),
-                                                                         hr(),
-                                                                         strong(""),
-                                                                         p("")),
-                                                                  column(1)),
-                                                         
-                                                         fluidRow( mainPanel(img(height = 300, width = 400, src = ""))
-                                                         )),
-                                                tabPanel("References")
-                                   )))
-                        
+                                   )))                        
                         ),
              
              navbarMenu(h4("Data, Measures and Methods"),
                         tabPanel("All",
-                                 
+
                                  fluidRow(width =12,
                                           column(1),
                                           column(10, h3(strong( "")),
                                                  hr(),
                                                  strong("Composite"),
                                                  p()),
-                                          column(1)), 
+                                          column(1)),
                                  fluidRow(width = 12, style = "margin: 20px",
                                           plotOutput("", height = '700px'))),
-                        
+
                         tabPanel("Law Enforcement",
-                                 
+
                                  fluidRow(width =12,
                                           column(1),
                                           column(10, h3(strong( " Law Enforcement")),
                                                  hr(),
                                                  strong("Background"),
                                                  p("Law enforcement policies play an essential role in economic
-                                                   mobility in American communities. Having a criminal record 
-                                                   is shown to make getting a job difficult and, with half of US 
-                                                   children having at least one parent with a criminal record, 
+                                                   mobility in American communities. Having a criminal record
+                                                   is shown to make getting a job difficult and, with half of US
+                                                   children having at least one parent with a criminal record,
                                                    economic progression becomes challenging for children of those
-                                                   convicted too. Moreover, the ramifications of a criminal record or an encounter with the law are felt most by male citizens of colour, 
+                                                   convicted too. Moreover, the ramifications of a criminal record or an encounter with the law are felt most by male citizens of colour,
                                                    particularly Hispanic or Black men, having a significant impact on the economic mobility of
-                                                   entire communities. Therefore, law enforcement becomes an increasingly important aspect of 
+                                                   entire communities. Therefore, law enforcement becomes an increasingly important aspect of
                                                    political capital that must be studied to understand economic mobility.  "),
                                                  p("Our research on law enforcement practices and policies resulted in the identification of three main subdomains of interest: arrest and court proceedings, incarceration and community policing practices. The three subdomain comprise of 20 policy questions which assess the existence or non-existence of a practice in the binary 1/0 format detailed in the scoring outline. In addition to such binary data, the research also yielded qualitative data that provides greater nuance to the nature of a policy in a given state. The entire dataset, both binary and qualitative, can be found by clicking on the “download CSV” button below.  "),
                                                  p("a. Arrest and Court Proceeding Policies- Arrest and Court Proceedings Policies focused on the process of arresting and trying individuals in court. In this subdomain we analysed stop and identify, bail, and civil asset forfeiture policies. Practices in these areas target distinct socio-economic groups differently and exploring them gives a sense of how individuals in the community are impacted by them. For example, paying cash bail or having your assets seized has an affect on and is affected by an individual’s financial standing. In addition to this set of binary data, we descriptively explored zero tolerance policies related to driving under the influence. "),
                                                  p("b. Incarceration Practices- Incarceration Practices covers the practices and policies that impact individuals held in state facilities. We focus on inmates’ rights as well as the equitability and social justness of practices within the facility and upon return to their communities. We focus on the type of state facilities (eg public and private) as well as policies within the facility. Specifically, we assess the ability to acquire skills and certifications, as well as the ability to access necessary healthcare. Additionally, we consider youth adjudication and the death penalty. "),
-                                                 p("c Community Policing Practices- Community Policing Practices explores the standards that officers must abide by in policing the community with a focus on the equality of the standards. For example, custodial sexual misconduct policies are analysed, both numerically and qualitatively, to assess how states hold officers accountable for allegations of misconduct against them by an individual in their custody. In addition, body camera usage, demographic information collection and domestic violence- related polices are considered in this subdomain. We also qualitatively assess the nature of officer training programmes in the states, particularly those pertaining to treating individuals with mental health issues.  ")), 
-                                          column(1)), 
+                                                 p("c Community Policing Practices- Community Policing Practices explores the standards that officers must abide by in policing the community with a focus on the equality of the standards. For example, custodial sexual misconduct policies are analysed, both numerically and qualitatively, to assess how states hold officers accountable for allegations of misconduct against them by an individual in their custody. In addition, body camera usage, demographic information collection and domestic violence- related polices are considered in this subdomain. We also qualitatively assess the nature of officer training programmes in the states, particularly those pertaining to treating individuals with mental health issues.  ")),
+                                          column(1)),
                                  fluidRow(width = 12, style = "margin: 20px",
                                           plotOutput("", height = '700px'))),
                         tabPanel("Education",
-                                 
+
                                  fluidRow(width =12,
                                           column(1),
                                           column(10, h3(strong( "Education")),
                                                  hr(),
-                                                 strong("Composite"),
-                                                 p()),
-                                          column(1)), 
+                                                 strong("Background"),
+                                                 p("Education is a key aspect of enabling economic mobility. Education is multi-faceted and different policies can enable or hinder crucial components of economic mobility. For example, Timothy Bartik (Senior Economist at W.E. Upjohn Institute for Employment Research) states that for every one dollar invested in high quality early childhood programs, a state economy will get a two to three dollar return on investment. Furthermore, a finding from Georgetown University’s Center on Education and the Workforce, projected that 64 percent of the job openings in 2020 will require some post-secondary education."),
+                                                 p("With guidance in our literature review from examples like these, our team identified four main subdomains within education: school climate, early childhood education, post-secondary affordability, and workforce development. Within these four main subdomains, we found 19 subcategories which are derived from 73 policy questions.  "),
+                                                 p("a. As defined by the National School Climate Center, “School climate refers to the quality and character of school life. School climate is based on patterns of students', parents' and school personnel's experience of school life and reflects norms, goals, values, interpersonal relationships, teaching and learning practices, and organizational structures. A sustainable, positive school climate fosters youth development and learning necessary for a productive, contributing and satisfying life in a democratic society.” School climate policies groups them by disciplinary approaches addressing suspensions, specific infractions and conditions; prevention and non-punitive behavioral interventions; monitoring and accountability; school resources for safety and truant/attendance officers; and state education agency support."),
+                                                 p("b. Early childhood education includes those school years from pre-kindergarten to the third grade. Early childhood education policies groups them by kindergarten requirements; teacher quality; school readiness and transitions; assessment intervention and retention; family engagement; and social-emotional learning."),
+                                                p("c. Post-secondary education is the educational level following the completion of secondary education (high school) Post-secondary education includes non-degree credentials such as certifications, licenses, and work experience programs, as well as college and professional degrees.  Post-secondary affordability policies grouped them by, need and merit based financial aid; financial aid; and free college."),
+                                                p("d.The Federal Workforce Innovation and Opportunity Act (WIOA) encourages state policymakers to seek ways to connect education, job seekers, and employers in their states by developing a one-stop delivery system that provides information on career and training services, access to employer programs and activities, and access to real-time labor market information. Workforce development policies grouped them by, statewide apprenticeships; connecting education to work; and post-secondary career and technical education."),
+                                                ),
+                                          column(1)),
                                  fluidRow(width = 12, style = "margin: 20px",
                                           plotOutput("word_cloud", height = '700px'))),
                         tabPanel("Zoning",
-                                 
+
                                  fluidRow(width =12,
                                           column(1),
-                                          column(10, h3(strong( "Education")),
+                                          column(10, h3(strong( "Housing and Zoning")),
                                                  hr(),
                                                  strong("Composite"),
                                                  p()),
-                                          column(1)), 
+                                          column(1)),
                                  fluidRow(width = 12, style = "margin: 20px",
                                           plotOutput("", height = '700px'))),
                         tabPanel("Taxation",
-                                 
+
                                  fluidRow(width =12,
                                           column(1),
-                                          column(10, h3(strong( "Education")),
+                                          column(10, h3(strong( "Taxation")),
                                                  hr(),
-                                                 strong("Composite"),
-                                                 p()),
-                                          column(1)), 
+                                                 strong("Background"),
+                                                 p("In examining how policies affect economic mobility, it is crucial to further explore taxation policy.
+                                                   Taxation boosts economic mobility because it influences individuals’ accumulation of wealth and affects absolute or relative mobility,
+                                                   whether that be inter or intra generational. Tax revenues are used to fund goods that drive mobility, such as education and health, and tax deduction and credit policies
+                                                   lower the cost of mobility enhancing goods. Taxation can also lead to the redistribution of wealth, an important part of combating wealth inequality."),
+                                                 p("Since 1979, income inequality in the United States has increased dramatically. In every state, the average income of the top 5% of households is at least 10 times
+                                                   that of the bottom 20%. State taxes often work to further this inequity because of their regressive structure. Furthermore, state taxes disproportionately
+                                                   affect higher income families and individuals. Thus, it is vital to understand how states can implement more progressive tax policies and re-evaluate regressive
+                                                   structures to boost overall economic mobility. Our research identified four main subdomains of tax policy: tax credits, wealth-related taxes, business tax policy, and the Gini index."),
+                                                 p(strong("a. Tax credits"), "are negative marginal tax rates, or tax incentives, that reduce tax liability and boost tax refunds, therefore improving economic mobility for low-income individuals.
+                                                   They ease low- to moderate-income family burdens by providing appropriate financial support for expenses like childcare, income tax, and property tax.  "),
+                                                 p(strong("b: Taxes on inherited wealth"), "such as the estate and inheritance tax, largely only affect the wealthiest taxpayers. These taxes help redistribute income and wealth and thus improve economic mobility for the millions of low- and middle-class Americans.
+                                                   Because wealth is concentrated in the hands of few mostly white Americans, wealth-related taxes help upend financial barriers for low-income people, who are predominantly people of color.  "),
+                                                 p(strong("c: Businesses"), "create opportunities for employment, thus increasing incomes, and provide access to services that increase future earning potentials.
+                                                   States play a significant role in supporting businesses by nullifying corporate tax avoidance strategies to equalize the playing field between multimillion-dollar corporations and small businesses, as well as creating a tax climate that fosters entrepreneurial efforts. "),
+                                                 p(strong("d.  The Gini coefficient"), "is a measure of statistical dispersion intended to represent income or wealth inequality in a nation or area. Because the Gini coefficient measures inequality after the effects of taxes, by understanding how Gini indexes change as a result
+                                                   of tax policies and financial redistribution, we can better understand how tax policy can support economic mobility.  ")
+                                                 ),
+                                          column(1)),
                                  fluidRow(width = 12, style = "margin: 20px",
                                           plotOutput("", height = '700px'))),
                         tabPanel("Voting",
-                                 
+
                                  fluidRow(width =12,
                                           column(1),
-                                          column(10, h3(strong( "Education")),
+                                          column(10, h3(strong( "Voting")),
                                                  hr(),
                                                  strong("Composite"),
                                                  p()),
-                                          column(1)), 
+                                          column(1)),
                                  fluidRow(width = 12, style = "margin: 20px",
                                           plotOutput("", height = '700px'))),
-                        tabPanel("Health",
-                                 
-                                 fluidRow(width =12,
-                                          column(1),
-                                          column(10, h3(strong( "Education")),
-                                                 hr(),
-                                                 strong("Composite"),
-                                                 p()),
-                                          column(1)), 
-                                 fluidRow(width = 12, style = "margin: 20px",
-                                          plotOutput("", height = '700px'))),
+
                         tabPanel("Employment",
-                                 
+
                                  fluidRow(width =12,
                                           column(1),
-                                          column(10, h3(strong( "Education")),
+                                          column(10, h3(strong( "Employment")),
                                                  hr(),
                                                  strong("Composite"),
                                                  p()),
-                                          column(1)), 
+                                          column(1)),
                                  fluidRow(width = 12, style = "margin: 20px",
                                           plotOutput("", height = '700px')))
                         ),
@@ -596,25 +720,32 @@ within a social unit, including helping set the agenda of what resources are ava
 # server-----------------------------------------------------------------------------------------
 
 
-server <- shinyServer(function(input,output){  
-  
-  
+server <- shinyServer(function(input,output){
+
+  #getPage<-function() {
+   # return(includeHTML("boxplot.html"))
+  #}
+  #output$inc<-renderUI({getPage()})
+
+  output$bp <- renderUI({
+    includeHTML("boxplot.html")
+  })
+
+  # Law Enforcement Plots Rendering
   output$imglaw <- renderUI({
     if(input$graphlaw == "Domain level"){            
       img(height = 300, width = 400, src = "law_domain_plot.png", align = "left")
     }                                        
+
     else if(input$graphlaw == "Arrest and Court Proceedings"){
       img(height = 300, width = 400, src = "law_sub_arrest.png")
     }
-    
-    
     else if(input$graphlaw == "Incarceration Practices"){
       img(height = 300, width = 400, src = "law_sub_incarceration.png")
     }
     else if(input$graphlaw == "Community Policing"){
       img(height = 300, width = 400, src = "law_sub_community.png")
-    } 
-    
+    }
   })
   
   output$imglawheat <- renderUI({
@@ -623,27 +754,20 @@ server <- shinyServer(function(input,output){
     }                                        
     else if(input$graphlawheat == "Arrest and Court Proceedings"){
       img(height = 300, width = 400, src = "")
-    }
-    
-    
+    }       
     else if(input$graphlawheat == "Incarceration Practices"){
       img(height = 300, width = 400, src = "")
     }
     else if(input$graphlawheat == "Community Policing"){
       img(height = 300, width = 400, src = "")
-    }   
-    
-    
-  }) 
+    }
+      }) 
   
   
   
 }) 
 
 
-
-
-# Run the application 
-shinyApp(ui = ui, server = server) 
-
+# Run the application
+shinyApp(ui = ui, server = server)
 

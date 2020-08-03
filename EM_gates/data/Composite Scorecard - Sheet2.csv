@@ -1,4 +1,4 @@
-Domain ,Subdomain,Oregon Score,Iowa Score,Virginia Score 
+Domain ,Subdomain,Oregon,Iowa,Virginia 
 Housing,Assistance,0.875,1,0.5
 Housing,Development,0.667,0.556,0.667
 Housing,Financial,0.556,0.667,0.444
