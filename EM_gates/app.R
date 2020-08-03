@@ -27,14 +27,10 @@ library(DT)
 
 
 # load data -----------------------------------------------------------------------------
-<<<<<<< Updated upstream
-em_data <- read_csv('data/Composite Scorecard - Sheet2.csv')
-=======
 em_data <- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
 
 #full data, not composites
 all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final.xlsx")
-
 
 
 #---------------------------------
@@ -42,9 +38,6 @@ all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final.xls
 emp_dt_data<- all_data %>%
   filter(domain == 'Employment')
 
-
-
->>>>>>> Stashed changes
 
 #----------------------------
 #Law Enforcement / Policing Data
