@@ -3,7 +3,7 @@ library(dplyr)
 library(readr)
 library(rlist)
 
-setwd("~/Documents/DSPG/EM project")
+setwd('~/git/TestDSPG/dspg20uvaEM/EM_gates/WWW')
 
 source("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/theme_SDAD.R")
 source("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Colorblind_Palette.R")
@@ -11,7 +11,7 @@ source("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Colorblind_Palette.R")
 score_card <- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Final Scorecard - Sheet1.csv")
 taxation_card <- score_card %>%
   filter(Domain == 'Taxation')
-subdomain_list <- c("Tax Credits", "Taxes on Wealth", "Taxes Related to Business and Corporations", "Gini Index")
+subdomain_list <- c("Tax Credits", "Taxes on Wealth", "Business Tax", "Gini Index")
 question_list <- taxation_card$Question
 Dimensions<-rep(subdomain_list,
                 c(3*4, 3*3, 3*3, 3*2)) #3=number of states*number of dimension questions
@@ -27,6 +27,7 @@ Scores <- c(1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1,
 Scores<-ifelse(Scores==1,"Yes", "No")
 VOTE<-data.frame(Dimensions, Questions, States, Scores)
 
+png("taxation_heatmap.png", width = 600, height = 400)
 ggplot(VOTE, aes(y=Questions, x=States, fill=factor(Scores))) +
   geom_tile(color="grey90", lwd=1) +
   coord_equal() +
@@ -42,15 +43,15 @@ ggplot(VOTE, aes(y=Questions, x=States, fill=factor(Scores))) +
   geom_hline(yintercept=10.5, color=cbPalette[1], lwd=4) +
   geom_hline(yintercept=12.5, color=cbPalette[1], lwd=4) +
   #Title of the policy domains (you will need to change y)
-  ggplot2::annotate("text", x=2, y=12.5,label= subdomain_list[1], fontface=2, color="black") +
-  ggplot2::annotate("text", x=2, y=10.5,label= subdomain_list[2], fontface=2, color="black") +
-  ggplot2::annotate("text", x=2, y=7.5,label= subdomain_list[3], fontface=2, color="black") +
-  ggplot2::annotate("text", x=2, y=4.5,label= subdomain_list[4], fontface=2, color="black") +
+  ggplot2::annotate("text", x=2, y=12.5,label= subdomain_list[4], fontface=2, color="black", size = 2) +
+  ggplot2::annotate("text", x=2, y=10.5,label= subdomain_list[3], fontface=2, color="black", size = 2) +
+  ggplot2::annotate("text", x=2, y=7.5,label= subdomain_list[2], fontface=2, color="black", size = 2) +
+  ggplot2::annotate("text", x=2, y=4.5,label= subdomain_list[1], fontface=2, color="black", size = 2) +
   theme(axis.text.y=element_text(size=10, hjust=1.0, colour="#2a2a2b"),
         axis.text.x=element_text(size=13, hjust=0.5, colour="#2a2a2b"),
         legend.position="none")
 
-
+dev.off()
 
 #Instructions for Exporting
 #Save the heatmap as a .png file
