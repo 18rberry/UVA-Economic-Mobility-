@@ -1421,19 +1421,18 @@ server <- shinyServer(function(input,output){
   
   
   # Housing & Zoning Plots Rendering
-  output$imglaw <- renderUI({
+  output$imghouse <- renderUI({
     if(input$graphhouse == "Domain level"){            
-      img(height = 300, width = 400, src = "law_domain_plot.png", align = "left")
+      img(height = 300, width = 400, src = "composite_housing_lollipop.png", align = "left")
     }                                        
-    
-    else if(input$graphhouse == "Arrest and Court ProceedingsHousing Assistance Policies"){
-      img(height = 300, width = 400, src = "law_sub_arrest.png")
+    else if(input$graphhouse == "Housing Assistance Policies"){
+      img(height = 300, width = 400, src = "assistance_lollipop.png")
     }
     else if(input$graphhouse == "Housing Development Policies"){
-      img(height = 300, width = 400, src = "law_sub_incarceration.png")
+      img(height = 300, width = 400, src = "development_lollipop.png")
     }
     else if(input$graphhouse == "Housing Financial Policies"){
-      img(height = 300, width = 400, src = "law_sub_community.png")
+      img(height = 300, width = 400, src = "financial_lollipop.png")
     }
   })
   
@@ -1444,7 +1443,7 @@ server <- shinyServer(function(input,output){
     else if(input$graphhouseheat == "Housing Assistance Policies"){
       img(height = 300, width = 400, src = "")
     }       
-    else if(input$graphhouseheat == "Housing Development Policies "){
+    else if(input$graphhouseheat == "Housing Development Policies"){
       img(height = 300, width = 400, src = "")
     }
     else if(input$graphhouseheat == "Housing Financial Policies"){

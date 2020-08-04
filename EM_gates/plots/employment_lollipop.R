@@ -30,7 +30,8 @@ png("employment_domain_plot.png", width = 600, height = 400)
 ggplot(aes(x=score, y= state), data = comp_data) +
   geom_point(aes(colour = state)) +  
   geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
-  ggtitle("Employment Policies")
+  ggtitle("Employment Policies") +
+  theme(legend.position = "none", axis.title.y  = element_blank())
 dev.off()
 
 # Interactive grouped bar chart w/ all subdomains
@@ -54,7 +55,8 @@ png("employment_sub_org.png", width = 600, height = 400)
 ggplot(aes(x=score, y= state), data = plot_data_org) +
   geom_point(aes(colour = state)) +  
   geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
-  ggtitle("Worker Organizing Policies")
+  ggtitle("Worker Organizing Policies") +
+  theme(legend.position = "none", axis.title.y  = element_blank())
 dev.off()
 
 
@@ -70,7 +72,8 @@ png("employment_sub_protect.png", width = 600, height = 400)
 ggplot(aes(x=score, y= state), data = plot_data_protect) +
   geom_point(aes(colour = state)) +  
   geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
-  ggtitle("Worker Protection Policies")
+  ggtitle("Worker Protection Policies") +
+  theme(legend.position = "none", axis.title.y  = element_blank())
 dev.off()
 
 
@@ -87,6 +90,7 @@ ggplot(aes(x=score, y= state), data = plot_data_wage) +
   geom_point(aes(colour = state)) +  
   geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
   xlim(-0.01, 1) +
-  ggtitle("Wage Policies")
+  ggtitle("Wage Policies") +
+  theme(legend.position = "none", axis.title.y  = element_blank())
 
 dev.off()
