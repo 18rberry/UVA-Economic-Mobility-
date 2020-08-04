@@ -1,3 +1,6 @@
+#Published Dashboard URL
+# https://vatsala-ramanan.shinyapps.io/EM_gates/
+
 library(shiny)
 library(sf)
 library(leaflet)
@@ -24,6 +27,7 @@ library(shinydashboardPlus)
 library(tidyr)
 library(readr)
 library(DT)
+library(reshape2)
 
 
 # load data -----------------------------------------------------------------------------
@@ -31,6 +35,12 @@ em_data <- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Composite Scorecar
 
 #full data, not composites
 all_data <- read_excel("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/em_master_data_final.xlsx")
+
+
+# prep data for interactive composite plot
+mdata <- melt(em_data, id.vars = c("Domain", "Subdomain") , measure.vars = c("Virginia", "Iowa", "Oregon" ))
+mdata<- mdata %>% rename( state=variable, score = value)
+av_mdata <- mdata 
 
 
 #---------------------------------
@@ -48,7 +58,7 @@ house_dt_data<- all_data %>%
   filter(domain == 'Housing')
 
 law_dt_data<- all_data %>%
-  filter(domain == 'Policing')
+  filter(domain == 'Law Enforcement')
 
 tax_dt_data<- all_data %>%
   filter(domain == 'Taxation')
@@ -129,11 +139,11 @@ ui <- fluidPage(
                           housing/zoning with a focus on policies that have the potential to impact economic mobility.
                           By identifying those policies that can impede the economic mobility a community can better strategize for effective change."),
                         h1("Approach and Ethical Considerations"),
-                        p("This project benefits 'public good' in identifying and assessin policies that can later be aggregated
-                          and used to determine public policy. While this project is essential to undertake, doing so comes with the ethical challenges and risks. First,
-                          the way we defined 'political capital' and hand coded is determined by our own understanding of the economic mobility. Moreover, the process of creating a
-                          comspoite indicator, in the creation of binary scoring cards, reduces the policies to their bare minimum and can strip them of their nuance. Consulting domain and policy experts,
-                          providing the raw dataset and including the source of each policy information allows us to minimise the impact of biases on our process.",
+                        p("This project benefits 'public good' in identifying and assessing policies that can later be aggregated
+                          and used to influence public policy. While this project is essential to undertake, doing so comes with ethical challenges and risks. First, 
+                          the way we defined 'political capital' and collected data is determined by our understanding of economic mobility. Moreover, the process of creating
+                          composite indicators, by constructing binary scoring cards, reduces the policies to their bare minimum and can strip them of nuance. Consulting domain and policy experts, 
+                          providing our raw dataset and including the source of each policy measure allows us to minimise the impact of biases on our process.",
                           br(),
                           br())
                         )),
@@ -149,21 +159,23 @@ ui <- fluidPage(
                                                    "Political capital takes various forms of participation and representation of groups and individuals in the community.  This project seeks to summarize several aspects of political capital that largely affect economic mobility of communities.  The information focuses on six domains that include the following:",
                                                    br(),
                                                    br(),
-                                                   "Law Enforcement and Criminal Justice", br(),
-                                                   "Taxation", br(),
-                                                   "Housing and Zoning", br(),
-                                                   "Education", br(),
-                                                   "Voting", br(),
-                                                   "Employment", br(),
-                                                   br(),
-                                                   "Estimating a quantitative measure of the existence of political capital is a challenging task. We propose the quantification of the identified policy domains into an index. This index consists of sub-domains (subject areas) which contain specific questions about existence of policies related to Economic Mobility. For instance, the Law Enforcement and Criminal Justice domain is explained with the following structure: "
-                                                   ),
-                                                 img(height = 390, width = 750, src = "taxonomy_graphic.png", align = "center")
-                                                 ),
-                                          column(1)),
-                                 fluidRow(width = 12, style = "margin: 20px",
-                                          plotOutput("", height = '700px'))),
 
+                                                   "1. Law Enforcement and Criminal Justice", br(),
+                                                   "2. Taxation", br(), 
+                                                   "3. Housing and Zoning", br(),
+                                                   "4. Education", br(),
+                                                   "5. Voting", br(),
+                                                   "6. Employment", br(),
+                                                   br(),
+                                                   img(height = 450, width = 750, src = "taxonomy_graphic.png", align = "center"),
+                                                   br(),
+                                                   "Estimating a quantitative measure of the existence of political capital is a challenging task. We propose the quantification of the identified policy domains into an index. 
+                                                   This index consists of sub-domains (subject areas) which contain specific questions about existence of policies related to Economic Mobility. For instance, the Law Enforcement
+                                                   and Criminal Justice domain is explained by the diagram above. "
+                                                   )
+                                                 ),
+                                          column(1))),
+    #-------------------------------------------------------------Law Enforcement
                         tabPanel("Law Enforcement",
 
                                  fluidRow(
@@ -232,13 +244,13 @@ ui <- fluidPage(
                                                                             A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility.
                                                                             Our results show the following:"),
                                                                           p(img( src = "heat_table.jpg")),
-                                                                          p("In terms of Arrest and Court Proceedings policies, Virginia performs the worst with a 0.60/1 while Oregon performs the best with a 1.00/1."),
-
-                                                                          p("For Incarceration Practices policies, all three states perform equally with a 0.60/1."),
-
-                                                                          p("For Community Policing Practices, both Oregon and Virginia perform at a 0.40/1 while Iowa does better with a 0.60/1."),
-
-                                                                          p("Overall, under our scoring criteria Oregon and Iowa do equally the best in terms of law enforcement policies with a 0.67/1 and Virginia does the worst with a 0.53/1.  ")),
+                                                                          p(strong("Arrest and Court Proceedings:"), ", Virginia performs the worst with a 0.60/1 while Oregon performs the best with a 1.00/1."),
+                                                                          
+                                                                          p(strong("Incarceration:"), ", all three states perform equally with a 0.60/1."),
+                                                                          
+                                                                          p(strong("Community Policing:"), ", both Oregon and Virginia perform at a 0.40/1 while Iowa does better with a 0.60/1."),
+                                                                          
+                                                                          p(strong("Overall:"), ", under our scoring criteria Oregon and Iowa do equally the best in terms of law enforcement policies with a 0.67/1 and Virginia does the worst with a 0.53/1.  ")),
                                                                    column(1))
 
                                                  ) ))),
@@ -712,13 +724,37 @@ representing an increased number of policies that promote economic mobility.
 
 
 
-
+#-------- Data & Methods ---------------------------------------------------------------------------------------
 
 
              navbarMenu(h4("Data, Measures & Methods"),
                         tabPanel("Summary",
                                  fluidRow(
                                    navlistPanel(
+
+                                     tabPanel( "Composite Scores",
+                                               fluidRow(width =12,
+                                                        column(1),
+                                                        column(10,
+                                                               
+                                                               h3("Composite index for all subdomains for the three states."),
+                                                               p("Takes a couple seconds to load.")),
+                                                        column(1)),
+                                               column(2), 
+                                               column(10, h3(strong("")),
+                                                      
+                                                      strong(""),
+                                                      p()),
+                                               mainPanel(width=12, align = "center", 
+                                                         body <- dashboardBody(
+                                                           plotlyOutput("cesarplot")
+                                                         )
+                                               ),
+                                               column(2)
+                                               
+
+                                     ), #close tab
+                                     
                                      tabPanel( "Scoring Methods",
                                                width =12,
                                                column(1),
@@ -728,17 +764,18 @@ representing an increased number of policies that promote economic mobility.
                                                       br(),
                                                       p("If the existence of a state’s policy exhibits potential to advance economic mobility, we assigned a value of 1. If the state lacks a particular law or regulation, we assign 0.  We", strong("assumed"), "if a state does not have laws or regulations, more variability could occur with respect to mobility and, consequently, improvement of socio-economic advancement may be delayed.  For instance, Student Discipline is one of the sub-domains identified within political capital of Education. We included multiple questions for Student Discipline, such as: “Is there a ban on corporal punishment?” According to Brookings, students subject to corporal punishment performed worse than their peers in non-punitive environments. If a state banned corporal punishment, we ranked the state with 1. If they did not ban corporal punishment, we ranked the state with 0."),
                                                       br(),
-                                                      p("Some subcategories have multiple questions. In order to standardize, we summed the scores across the policy questions within the subcategory by state, then divided by the number of questions in the subcategory.  A similar approach was used for subdomain scores. Our final index also has a similar approach.   The following table summarizes each domain of political capital and the number of subdomains, subcategories and policy questions.
+                                                      p("Some subcategories have multiple questions. In order to standardize, we summed the scores across the policy questions within the subcategory by state, then divided by the number of questions in the subcategory.  A similar approach was used for subdomain scores. Our final index also has a similar approach.   The following table summarizes each domain of political capital and the number of subdomains, subcategories and policy questions.
                                                       ")),
                                                       column(1),
-                                               img(height = 390, width = 890, src = "domain_category_counts_table.png", align = "center")
+                                               column(10,
+                                               img(height = 132 , width = 750, src = "domain_table.PNG"))
                                      ), #close tab
 
                                      tabPanel( "View the Data",
                                                width =12,
                                                column(1),
-                                               column(10,
-                                                      h1(strong("All Data")),
+                                               column(10, 
+                                                      h3(strong("All Data")),
                                                       hr(),
                                                       DT::dataTableOutput("all_data_table"),
                                                       column(1))
@@ -1439,19 +1476,19 @@ server <- shinyServer(function(input,output){
 
 
   # Housing & Zoning Plots Rendering
-  output$imglaw <- renderUI({
-    if(input$graphhouse == "Domain level"){
-      img(height = 300, width = 400, src = "law_domain_plot.png", align = "left")
-    }
 
-    else if(input$graphhouse == "Arrest and Court ProceedingsHousing Assistance Policies"){
-      img(height = 300, width = 400, src = "law_sub_arrest.png")
+  output$imghouse <- renderUI({
+    if(input$graphhouse == "Domain level"){            
+      img(height = 300, width = 400, src = "composite_housing_lollipop.png", align = "left")
+    }                                        
+    else if(input$graphhouse == "Housing Assistance Policies"){
+      img(height = 300, width = 400, src = "assistance_lollipop.png")
     }
     else if(input$graphhouse == "Housing Development Policies"){
-      img(height = 300, width = 400, src = "law_sub_incarceration.png")
+      img(height = 300, width = 400, src = "development_lollipop.png")
     }
     else if(input$graphhouse == "Housing Financial Policies"){
-      img(height = 300, width = 400, src = "law_sub_community.png")
+      img(height = 300, width = 400, src = "financial_lollipop.png")
     }
   })
 
@@ -1461,8 +1498,8 @@ server <- shinyServer(function(input,output){
     }
     else if(input$graphhouseheat == "Housing Assistance Policies"){
       img(height = 300, width = 400, src = "")
-    }
-    else if(input$graphhouseheat == "Housing Development Policies "){
+    }       
+    else if(input$graphhouseheat == "Housing Development Policies"){
       img(height = 300, width = 400, src = "")
     }
     else if(input$graphhouseheat == "Housing Financial Policies"){
@@ -1523,11 +1560,11 @@ server <- shinyServer(function(input,output){
   output$imgvoteheat <- renderUI({
     if(input$graphvoteheat == "Domain level"){
       img(height = 300, width = 400, src = "Voting HeatMap.png", align = "left")
-    }
-    else if(input$graphlawheat == "Voting Accessibility"){
+    }                                        
+    else if(input$graphvoteheat == "Voting Accessibility"){
       img(height = 300, width = 400, src = "")
-    }
-    else if(input$graphlawheat == "Voting Registration"){
+    }       
+    else if(input$graphvoteheat == "Voting Registration"){
       img(height = 300, width = 400, src = "")
     }
   })
@@ -1535,7 +1572,7 @@ server <- shinyServer(function(input,output){
 
   # Education Plots Rendering
   output$imgedu <- renderUI({
-    if(input$graphedu == "Domain Level"){
+    if(input$graphedu == "Domain level"){
       img(height = 300, width = 400, src = "edu_composite.png")
     }
     else if(input$graphedu == "School Climate Policies"){
@@ -1599,9 +1636,23 @@ server <- shinyServer(function(input,output){
   output$emptable = DT::renderDataTable({
     emp_dt_data
   })
-
-
-})
+  
+  # Interactive Plot summary 3 states by subdomain - ALL COMPOSITES
+  output$cesarplot <- renderPlotly({
+    qn <- ggplot(av_mdata, aes(x=1, y=score)) +
+      geom_point(aes(colour = factor(state)), position = position_jitter(width = 1), 
+                 size = 2, show.legend = TRUE)+
+      xlab("") + ylab("Composite index") +
+      geom_boxplot(aes(y=score),  alpha = 0.2, width = .3, colour = "BLACK")+
+      theme(legend.position="bottom", axis.text.y = element_blank(), axis.ticks.y = element_blank())+
+      coord_flip()
+    
+    ggplotly(qn) %>%
+      layout(legend = list(orientation = "h", x = 0.25, y = -0.4))
+      })
+  
+   
+}) # close the server 
 
 
 # Run the application
