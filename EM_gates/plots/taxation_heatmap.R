@@ -8,7 +8,13 @@ source("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/theme_SDAD.R")
 source("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Colorblind_Palette.R")
 score_card <- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Final Scorecard - Sheet1.csv")
 
-heatmap.for.subdomain <-function(domain, subdomain) {
+credit_scores <- c(1, 1, 1, 1, 0, 1,
+                   0, 0, 1, 1, 0, 0)
+wealth_scores <- c(1, 1, 1, 1, 0, 0, 0, 0, 1)
+business_scores <- c(1, 1, 1, 1, 0, 0, 1, 1, 0)
+gini_scores <- c(1, 1, 1, 0, 0, 0)
+
+heatmap.for.subdomain <-function(domain, subdomain, scores) {
   subdomain_card <- score_card %>%
     filter(Domain == domain & Subdomain == subdomain)
   print(subdomain_card)
@@ -21,7 +27,7 @@ heatmap.for.subdomain <-function(domain, subdomain) {
   States <- rep(c("VA", "IA", "OR"), nrows)
   States<-ordered(States, levels=c("VA","IA","OR"))
   #will need to manually input the scores
-  Scores <- c(1, 1, 1, 0, 0, 1, 0, 1, 0)
+  Scores <- scores
   Scores<-ifelse(Scores==1,"Yes", "No")
   VOTE<-data.frame(new_dimension, new_questions, States, Scores)
   intercept <- nrows + 0.5
@@ -42,13 +48,32 @@ heatmap.for.subdomain <-function(domain, subdomain) {
           legend.position="none")
 }
 
-wealth <- heatmap.for.subdomain("Taxation", "Taxes on Wealth")
-wealth
+# png("tax_heat_credits.png", width = 600, height = 400)
+# credits <- heatmap.for.subdomain("Taxation", "Tax Credits", credit_scores)
+# credits
+# dev.off()
+#
+# png("tax_heat_wealth.png", width = 600, height = 400)
+# wealth <- heatmap.for.subdomain("Taxation", "Taxes on Wealth", wealth_scores)
+# wealth
+# dev.off()
 
+png("tax_heat_business.png", width = 600, height = 400)
+business <- heatmap.for.subdomain("Taxation", "Taxes Related to Business and Corporations",
+                                  business_scores)
+business
+dev.off()
+
+
+png("tax_heat_gini.png", width = 600, height = 400)
+gini <- heatmap.for.subdomain("Taxation", "Gini Index", gini_scores)
+gini
+dev.off()
 
 #taxation heat map
 taxation_card <- score_card %>%
   filter(Domain == "Taxation")
+taxation_card$Subdomain
 question_list <- taxation_card$Question
 subdomain_list <- c("Tax Credits", "Taxes on Wealth", "Taxes Related to Business and Corporations", "Gini Index")
 Dimensions<-rep(subdomain_list,
