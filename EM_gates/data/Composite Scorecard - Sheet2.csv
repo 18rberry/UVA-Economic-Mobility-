@@ -3,10 +3,10 @@ Housing,Assistance,0.875,1,0.5
 Housing,Development,0.667,0.556,0.667
 Housing,Financial,0.556,0.667,0.444
 Housing,Composite,0.699,0.741,0.537
-Policing,Arrest and Court Proceedings Policies,1,0.8,0.6
-Policing,Community Policing Practices,0.4,0.6,0.4
-Policing,Incarceration Practices,0.6,0.6,0.6
-Policing,Composite,0.667,0.667,0.533
+Law Enforcement,Arrest and Court Proceedings Policies,1,0.8,0.6
+Law Enforcement,Community Policing Practices,0.4,0.6,0.4
+Law Enforcement,Incarceration Practices,0.6,0.6,0.6
+Law Enforcement,Composite,0.667,0.667,0.533
 Employment,Organizing,1,0.333,0
 Employment,Protections,0.917,0.333,0.25
 Employment,Wage,0,0,0
