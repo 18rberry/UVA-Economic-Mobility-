@@ -149,21 +149,22 @@ ui <- fluidPage(
                                                    "Political capital takes various forms of participation and representation of groups and individuals in the community.  This project seeks to summarize several aspects of political capital that largely affect economic mobility of communities.  The information focuses on six domains that include the following:",
                                                    br(),
                                                    br(),
-                                                   "Law Enforcement and Criminal Justice", br(),
-                                                   "Taxation", br(), 
-                                                   "Housing and Zoning", br(),
-                                                   "Education", br(),
-                                                   "Voting", br(),
-                                                   "Employment", br(),
+                                                   "1. Law Enforcement and Criminal Justice", br(),
+                                                   "2. Taxation", br(), 
+                                                   "3. Housing and Zoning", br(),
+                                                   "4. Education", br(),
+                                                   "5. Voting", br(),
+                                                   "6. Employment", br(),
                                                    br(),
-                                                   "Estimating a quantitative measure of the existence of political capital is a challenging task. We propose the quantification of the identified policy domains into an index. This index consists of sub-domains (subject areas) which contain specific questions about existence of policies related to Economic Mobility. For instance, the Law Enforcement and Criminal Justice domain is explained with the following structure: "
-                                                   ),
-                                                 img(height = 390, width = 750, src = "taxonomy_graphic.png", align = "center")
+                                                   img(height = 450, width = 750, src = "taxonomy_graphic.png", align = "center"),
+                                                   br(),
+                                                   "Estimating a quantitative measure of the existence of political capital is a challenging task. We propose the quantification of the identified policy domains into an index. 
+                                                   This index consists of sub-domains (subject areas) which contain specific questions about existence of policies related to Economic Mobility. For instance, the Law Enforcement
+                                                   and Criminal Justice domain is explained by the diagram above. "
+                                                   )
                                                  ),
-                                          column(1)),
-                                 fluidRow(width = 12, style = "margin: 20px",
-                                          plotOutput("", height = '700px'))),
-
+                                          column(1))),
+    #-------------------------------------------------------------Law Enforcement
                         tabPanel("Law Enforcement",
 
                                  fluidRow(
@@ -232,11 +233,11 @@ ui <- fluidPage(
                                                                             A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility.
                                                                             Our results show the following:"),  
                                                                           p(img( src = "heat_table.jpg")),
-                                                                          p("In terms of Arrest and Court Proceedings policies, Virginia performs the worst with a 0.60/1 while Oregon performs the best with a 1.00/1."),
+                                                                          p("For", strong("Arrest and Court Proceedings policies"), ", Virginia performs the worst with a 0.60/1 while Oregon performs the best with a 1.00/1."),
                                                                           
-                                                                          p("For Incarceration Practices policies, all three states perform equally with a 0.60/1."),
+                                                                          p("For", strong("Incarceration Practices policies"), ", all three states perform equally with a 0.60/1."),
                                                                           
-                                                                          p("For Community Policing Practices, both Oregon and Virginia perform at a 0.40/1 while Iowa does better with a 0.60/1."),
+                                                                          p("For", strong("Community Policing Practices"), ", both Oregon and Virginia perform at a 0.40/1 while Iowa does better with a 0.60/1."),
                                                                           
                                                                           p("Overall, under our scoring criteria Oregon and Iowa do equally the best in terms of law enforcement policies with a 0.67/1 and Virginia does the worst with a 0.53/1.  ")),
                                                                    column(1))
@@ -728,17 +729,18 @@ representing an increased number of policies that promote economic mobility.
                                                       br(),
                                                       p("If the existence of a state’s policy exhibits potential to advance economic mobility, we assigned a value of 1. If the state lacks a particular law or regulation, we assign 0.  We", strong("assumed"), "if a state does not have laws or regulations, more variability could occur with respect to mobility and, consequently, improvement of socio-economic advancement may be delayed.  For instance, Student Discipline is one of the sub-domains identified within political capital of Education. We included multiple questions for Student Discipline, such as: “Is there a ban on corporal punishment?” According to Brookings, students subject to corporal punishment performed worse than their peers in non-punitive environments. If a state banned corporal punishment, we ranked the state with 1. If they did not ban corporal punishment, we ranked the state with 0."),
                                                       br(),
-                                                      p("Some subcategories have multiple questions. In order to standardize, we summed the scores across the policy questions within the subcategory by state, then divided by the number of questions in the subcategory.  A similar approach was used for subdomain scores. Our final index also has a similar approach.   The following table summarizes each domain of political capital and the number of subdomains, subcategories and policy questions.
+                                                      p("Some subcategories have multiple questions. In order to standardize, we summed the scores across the policy questions within the subcategory by state, then divided by the number of questions in the subcategory.  A similar approach was used for subdomain scores. Our final index also has a similar approach.   The following table summarizes each domain of political capital and the number of subdomains, subcategories and policy questions.
                                                       ")),
                                                       column(1),
-                                               img(height = 390, width = 890, src = "domain_category_counts_table.png", align = "center")
+                                               column(10,
+                                               img(height = 132 , width = 750, src = "domain_table.PNG"))
                                      ), #close tab
                                      
                                      tabPanel( "View the Data",
                                                width =12,
                                                column(1),
                                                column(10, 
-                                                      h1(strong("All Data")),
+                                                      h3(strong("All Data")),
                                                       hr(),
                                                       DT::dataTableOutput("all_data_table"),
                                                       column(1))
