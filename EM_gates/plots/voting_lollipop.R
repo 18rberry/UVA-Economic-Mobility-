@@ -31,8 +31,8 @@ comp_data <- composite_vote %>%
 png("vote_domain_plot.png", width = 600, height = 400)
 ggplot(aes(x=score, y= state), data = comp_data) +
   geom_point(aes(colour = state)) +
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
-  ggtitle("Voting Policies")
+  geom_segment( aes(x= 0, xend= score, yend= state, colour = state)) +
+  theme(legend.position = "none", axis.title.y  = element_blank())
 dev.off()
 
 
@@ -49,8 +49,8 @@ plot_data_access <- access %>%
 png("vote_sub_access.png", width = 600, height = 400)
 ggplot(aes(x=score, y= state), data = plot_data_access) +
   geom_point(aes(colour = state)) +
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
-  ggtitle("Voting Accessibility")
+  geom_segment( aes(x= 0, xend= score, yend= state, colour = state)) +
+  theme(legend.position = "none", axis.title.y  = element_blank())
 dev.off()
 
 
@@ -65,8 +65,8 @@ plot_data_reg <- reg %>%
 png("vote_sub_reg.png", width = 600, height = 400)
 ggplot(aes(x=score, y= state), data = plot_data_reg) +
   geom_point(aes(colour = state)) +
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
-  ggtitle("Voting Registration Policies")
+  geom_segment( aes(x= 0, xend= score, yend= state, colour = state)) +
+  theme(legend.position = "none", axis.title.y  = element_blank())
 dev.off()
 
 

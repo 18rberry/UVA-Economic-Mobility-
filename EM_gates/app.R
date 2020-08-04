@@ -1,3 +1,6 @@
+#Published Dashboard URL
+# https://vatsala-ramanan.shinyapps.io/EM_gates/
+
 library(shiny)
 library(sf)
 library(leaflet)
@@ -24,6 +27,7 @@ library(shinydashboardPlus)
 library(tidyr)
 library(readr)
 library(DT)
+library(reshape2)
 
 
 # load data -----------------------------------------------------------------------------
@@ -31,6 +35,12 @@ em_data <- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet
 
 #full data, not composites
 all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final.xlsx")
+
+
+# prep data for interactive composite plot
+mdata <- melt(em_data, id.vars = c("Domain", "Subdomain") , measure.vars = c("Virginia", "Iowa", "Oregon" ))
+mdata<- mdata %>% rename( state=variable, score = value)
+av_mdata <- mdata 
 
 
 #---------------------------------
@@ -713,17 +723,36 @@ representing an increased number of policies that promote economic mobility.
 
 
 
-
+#-------- Data & Methods ---------------------------------------------------------------------------------------
 
              
              navbarMenu(h4("Data, Measures & Methods"),
                         tabPanel("Summary",
                                  fluidRow(
                                    navlistPanel(
-                                     
-                                     
-                                     #plotlyOutput("myplot")
-                                     
+
+                                     tabPanel( "Composite Scores",
+                                               fluidRow(width =12,
+                                                        column(1),
+                                                        column(10,
+                                                               
+                                                               h3("Composite index for all subdomains for the three states."),
+                                                               p("Takes a couple seconds to load.")),
+                                                        column(1)),
+                                               column(2), 
+                                               column(10, h3(strong("")),
+                                                      
+                                                      strong(""),
+                                                      p()),
+                                               mainPanel(width=12, align = "center", 
+                                                         body <- dashboardBody(
+                                                           plotlyOutput("cesarplot")
+                                                         )
+                                               ),
+                                               column(2)
+                                               
+
+                                     ), #close tab
                                      
                                      tabPanel( "Scoring Methods",
                                                width =12,
@@ -1590,23 +1619,18 @@ server <- shinyServer(function(input,output){
   
   ##############START ADD ##############
   # Plot summary 3 states by subdomain
-  masterdata <- read_csv("~/Documents/proj_git/lastRev/EM_gates/data/em_master_data_final_I.csv")
-  mdata <- melt(masterdata, id.vars = c("domain", "sub_domain", "questions") , measure.vars = c("Virginia", "Iowa", "Oregon" ))
-  mdata<- mdata %>% rename( state=variable)
-  av_mdata <- mdata %>% group_by(state, domain, sub_domain) %>% summarise(mean= mean(value))
-  
-  output$myplot <- renderPlotly({
-    qn <- ggplot(av_mdata, aes(x=1, y=mean)) +
-      geom_point(aes(text= sub_domain, colour = factor(state)), position = position_jitter(width = 1), 
+  output$cesarplot <- renderPlotly({
+    qn <- ggplot(av_mdata, aes(x=1, y=score)) +
+      geom_point(aes(colour = factor(state)), position = position_jitter(width = 1), 
                  size = 2, show.legend = TRUE)+
       xlab("") + ylab("Composite index") +
-      geom_boxplot(aes(y=mean),  alpha = 0.2, width = .3, colour = "BLACK")+
+      geom_boxplot(aes(y=score),  alpha = 0.2, width = .3, colour = "BLACK")+
       theme(legend.position="bottom", axis.text.y = element_blank(), axis.ticks.y = element_blank())+
       coord_flip()
     
     ggplotly(qn) %>%
       layout(legend = list(orientation = "h", x = 0.25, y = -0.4))
-  })
+      })
   
   ##############FINISH ADD ##############
   
