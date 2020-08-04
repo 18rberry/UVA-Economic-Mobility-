@@ -720,6 +720,11 @@ representing an increased number of policies that promote economic mobility.
                         tabPanel("Summary",
                                  fluidRow(
                                    navlistPanel(
+                                     
+                                     
+                                     #plotlyOutput("myplot")
+                                     
+                                     
                                      tabPanel( "Scoring Methods",
                                                width =12,
                                                column(1),
@@ -1583,8 +1588,30 @@ server <- shinyServer(function(input,output){
     emp_dt_data
   })
   
+  ##############START ADD ##############
+  # Plot summary 3 states by subdomain
+  masterdata <- read_csv("~/Documents/proj_git/lastRev/EM_gates/data/em_master_data_final_I.csv")
+  mdata <- melt(masterdata, id.vars = c("domain", "sub_domain", "questions") , measure.vars = c("Virginia", "Iowa", "Oregon" ))
+  mdata<- mdata %>% rename( state=variable)
+  av_mdata <- mdata %>% group_by(state, domain, sub_domain) %>% summarise(mean= mean(value))
   
-}) 
+  output$myplot <- renderPlotly({
+    qn <- ggplot(av_mdata, aes(x=1, y=mean)) +
+      geom_point(aes(text= sub_domain, colour = factor(state)), position = position_jitter(width = 1), 
+                 size = 2, show.legend = TRUE)+
+      xlab("") + ylab("Composite index") +
+      geom_boxplot(aes(y=mean),  alpha = 0.2, width = .3, colour = "BLACK")+
+      theme(legend.position="bottom", axis.text.y = element_blank(), axis.ticks.y = element_blank())+
+      coord_flip()
+    
+    ggplotly(qn) %>%
+      layout(legend = list(orientation = "h", x = 0.25, y = -0.4))
+  })
+  
+  ##############FINISH ADD ##############
+  
+  
+}) # close the server 
 
 
 # Run the application
