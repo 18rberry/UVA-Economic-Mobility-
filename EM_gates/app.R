@@ -61,6 +61,10 @@ plot_data_4 <- incarceration %>%
   gather("state", "score", c(3:5))
 
 
+#dataTable data
+emp_dt_data<- all_data %>%
+  filter(domain == 'Employment')
+
 
 #plots page ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -100,20 +104,26 @@ ui <- fluidPage(
                         collapsible = FALSE,
                         h1("Project Overview"),
                         img(height = 300, width = 400, src = "summary_3states.png", align = "center"),
-                        p("As defined by Flora, Flora, and Gasteyer in the 5th edition of their book “Rural Communities: Legacy + Change”, Political Capital is “… a group’s ability to influence the distribution of resources 
-within a social unit, including helping set the agenda of what resources are available. … Political capital consists of organization, connections, voice, and power as citizens turn shared norms and values into standards that are codified into rules, regulations, and resources distributions that are enforced.” (pg 184), 
-                          Communities can leverage their political capital to make change when their norms and values are not reflected in the policies that govern them. 
-                          In keeping with the Community Capitals Framework of asset mapping, we have created a policy asset map 
-                          for the domains of education, taxation, employment, voting, law enforcement, and 
+                        h4("Political Capital definition:"),
+                        p("“… a group’s ability to influence the distribution of resources 
+                          within a social unit, including helping set the agenda of what resources are available. … Political capital consists of organization, connections, voice, and power as citizens turn shared norms and values into standards that are codified into rules, regulations, and resources distributions that are enforced,”",
+                          br(),
+                          "as defined by Flora, Flora, and Gasteyer in the 5th edition of their book", em("Rural Communities: Legacy + Change"), "(pg 184).",
+                          br(),
+                          br(),
+                          "Communities can leverage their political capital to make change when their norms and values are not reflected in the policies that govern them. 
+                          In keeping with the Community Capitals Framework of asset mapping, we have created a policy asset map for the domains of education, taxation, employment, voting, law enforcement, and 
                           housing/zoning with a focus on policies that have the potential to impact economic mobility.
-                          By identifying those policies that can impede the economic mobility a community can better strategize for effective change."),
+                          By identifying those policies that can impede the economic mobility a community can better strategize for effective change."), 
                         h1("Approach and Ethical Considerations"),
                         p("This project benefits 'public good' in identifying and assessin policies that can later be aggregated
                           and used to determine public policy. While this project is essential to undertake, doing so comes with the ethical challenges and risks. First, 
                           the way we defined 'political capital' and hand coded is determined by our own understanding of the economic mobility. Moreover, the process of creating a
                           comspoite indicator, in the creation of binary scoring cards, reduces the policies to their bare minimum and can strip them of their nuance. Consulting domain and policy experts, 
-                          providing the raw dataset and including the source of each policy information allows us to minimise the impact of biases on our process.")
-                      )), 
+                          providing the raw dataset and including the source of each policy information allows us to minimise the impact of biases on our process.",
+                          br(),
+                          br())
+                        )), 
              
              navbarMenu(h4("Domains of analysis"),
                         tabPanel("Summary",
@@ -132,19 +142,17 @@ within a social unit, including helping set the agenda of what resources are ava
 
                                  fluidRow(
                                    navlistPanel(
-                                                 tabPanel("Compopsite",
-                                                          fluidRow(width =4,
-                                                                   column(1),
-                                                                   column(12, h4(strong("The plots below demonstrate the numeric comspoites calculated using policy
-                                                                                        data for each subdomain, allowing for comparison between the nature of a given policy dimension in each state.")),
-                                                                          
-                                  column(1))),
-                                                          hr(),
-                                                          
-                                                          fluidRow( 
-                                                                    sidebarPanel( width = 4,
-                                                                      selectInput("graphlaw", "Subdomain", 
-                                                                                  choices = c("Domain level", "Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
+                                     tabPanel("Composite Indicators",
+                                              fluidRow(width =4,
+                                                       column(1),
+                                                       column(12, h4(strong("The plots below demonstrate the numeric comspoites calculated using policy data for each subdomain, allowing for comparison between the nature of a given policy dimension in each state.")),
+                                                              column(1))),
+                                              hr(),
+                                              
+                                              fluidRow( 
+                                                sidebarPanel( width = 4,
+                                                              selectInput("graphlaw", "Subdomain", 
+                                                                          choices = c("Domain level", "Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
                                                                       )), 
                                                                       mainPanel(  uiOutput("imglaw"), align = "center"))),
                                   
@@ -231,40 +239,26 @@ within a social unit, including helping set the agenda of what resources are ava
                                                          fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png"))
                                                          ))
                                    ))),
-tabPanel("Housing and Zoning",
-
-         fluidRow(
-           navlistPanel(tabPanel("Composites",
-                                 fluidRow(width =12,
+                        tabPanel("Housing and Zoning",
+                                 fluidRow(
+                                   navlistPanel(
+                                     tabPanel("Composites",
+                                                         fluidRow(width =12,
                                           column(1),
                                           column(10, h3(strong()),
                                                  hr(),
                                                  strong(""),
                                                  p()),
                                           column(1)),
-
-                                 fluidRow(
-                                   sidebarPanel(
-                                     selectInput("", "Subdomain",
+                                          
+                                          fluidRow(
+                                            sidebarPanel(
+                                              selectInput("", "Subdomain",
                                                  choices = c("Domain level", "Housing Assistance Policies", "Housing Development Policies", "Housing Financial Policies")
-                                     ) ,
-                                     mainPanel(uiOutput(""))))),
-                        tabPanel("Heat Map",
-                                 fluidRow(width =12,
-                                          column(1),
-                                          column(10, h3(strong("Heat map for individual policy question")),
-                                                 hr(),
-                                                 strong(""),
-                                                 p("The heatmap visualizes the three subdomains and the housing policies that influence them. A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy. A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility. Our results show the following:"),
-                                                 p("In terms of Housing Assistance policies, Virginia performs the worst with a score of 0.5/1, and Iowa performs the best with a score of 1/1. While Oregon performs well with a score of 0.88, it still demonstrates room for improvement."),
-
-                                                         fluidRow(
-                                                           sidebarPanel(
-                                                             selectInput("", "Subdomain",
-                                                                         choices = c("Domain level", "", "", "")
-                                                             ) ,
-                                                             mainPanel(uiOutput(""))))),
-                                                tabPanel("Policy Asset Map",
+                                                 )) ,
+                                            mainPanel(uiOutput("")))),
+                                     
+                                     tabPanel("Policy Asset Map",
                                                          fluidRow(width =12,
                                                                   column(1),
                                                                   column(10, h3(strong("Heat map for individual policy question")),
@@ -274,9 +268,23 @@ tabPanel("Housing and Zoning",
                                                                   column(1)),
 
                                                          fluidRow( mainPanel(img(height = 300, width = 400, src = ""))
-                                                         ))
-
-                                   ))),
+                                                         )),
+                                     
+                                     tabPanel("Heat Map",
+                                              fluidRow(width =12,
+                                                       column(1),
+                                                       column(10, h3(strong("Heat map for individual policy question"))),
+                                                       hr(),
+                                                       strong(""),
+                                                       p("The heatmap visualizes the three subdomains and the housing policies that influence them. A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy. A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility. Our results show the following:"),
+                                                       p("In terms of Housing Assistance policies, Virginia performs the worst with a score of 0.5/1, and Iowa performs the best with a score of 1/1. While Oregon performs well with a score of 0.88, it still demonstrates room for improvement."),
+                                                       fluidRow(
+                                                         sidebarPanel(
+                                                           selectInput("", "Subdomain",
+                                                                       choices = c("Domain level", "", "", "")
+                                                           ) ,
+                                                           mainPanel(uiOutput(""))))))
+                                     ))),
 
                         tabPanel("Education",
 
@@ -318,31 +326,28 @@ tabPanel("Housing and Zoning",
                                                                          strong(""),
                                                                          p("The heatmap visualized the 19 subcategories within four domains and the education policies that influence them. Our results show the following:"),
 
-p("For School Climate Policies, Iowa has the lowest score of .37/1. This is primarily because Iowa does not have many laws/regulations for school climate as well as has practices of corporal punishment and a lack of limitations on suspensions and expulsion."),
+                                                                         p("For School Climate Policies, Iowa has the lowest score of .37/1. This is primarily because Iowa does not have many laws/regulations for school climate as well as has practices of corporal punishment and a lack of limitations on suspensions and expulsion."),
+                                                                         
+                                                                         p("For Early Childhood Education Policies,Virginia and Oregon scored the highest while Iowa scored slightly lower.  However, states vary in different subcategories from student-centric policies to ensuring teacher quality."),
 
-p("For Early Childhood Education Policies,Virginia and Oregon scored the highest while Iowa scored slightly lower.  However, states vary in different subcategories from student-centric policies to ensuring teacher quality."),
+                                                                         p("For Post-Secondary Affordability Policies, Oregon scored the highest with .89/1 while Iowa and Virginia scored in the 60th percentile. This difference is primarily caused by the differences if states have considered and enacted free college policies as well as merit and need based policies."),
 
-p("For Post-Secondary Affordability Policies, Oregon scored the highest with .89/1 while Iowa and Virginia scored in the 60th percentile. This difference is primarily caused by the differences if states have considered and enacted free college policies as well as merit and need based policies."),
+                                                                         p("For Workforce Development Policies, Oregon scored the lowest with a score of .47/1. This is primarily caused by not having a state statue define at least one financial aid program."),
 
-p("For Workforce Development Policies, Oregon scored the lowest with a score of .47/1. This is primarily caused by not having a state statue define at least one financial aid program."),
-
-p("Overall, under our scoring criteria, each state can improve in different subdomains as there is not a consistent state with the highest ranking. Iowa does have the lowest education capital score primarily because of school climate policies while Virginia has the highest score among these three states.")),
+                                                                         p("Overall, under our scoring criteria, each state can improve in different subdomains as there is not a consistent state with the highest ranking. Iowa does have the lowest education capital score primarily because of school climate policies while Virginia has the highest score among these three states.")),
                                                                   column(1)),
-fluidRow( mainPanel(img(height = 300, width = 400, align = "right", src = "educationtable.PNG"))
-)),
-tabPanel("Box Plot (Will take few seconds to load)",
-         fluidRow(
-           titlePanel("Box Plot of Education Policies"),
-           mainPanel(uiOutput("bp")
-           )
-         ))
-))),
-
-
-tabPanel("Voting",
-
-         fluidRow(
-           navlistPanel(tabPanel("Composites",
+                                                         fluidRow( mainPanel(img(height = 300, width = 400, align = "right", src = "educationtable.PNG"))
+                                                                   )),
+                                                tabPanel("Box Plot (Will take few seconds to load)",
+                                                         fluidRow(
+                                                           titlePanel("Box Plot of Education Policies"),
+                                                           mainPanel(uiOutput("bp")
+                                                                     )
+                                                           ))
+                                                ))),
+           tabPanel("Voting",
+                    fluidRow(
+                      navlistPanel(tabPanel("Composites",
                                  fluidRow(width =12,
                                           column(1),
                                           column(10, h3(strong("Voting")),
@@ -363,9 +368,7 @@ tabPanel("Voting",
                                           column(10, h3(strong("Heat map for individual policy question")),
                                                  hr(),
                                                  strong(""),
-                                                 p("
-The heatmap visualizes two subdomains and 9 voting policy questions.  A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy.
-A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility.
+                                                 p("The heatmap visualizes two subdomains and 9 voting policy questions.  A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy. A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility.
                                                                            Our results show the following:
                                                                            "),
                                                  p("In terms of_________ policies, Virginia performs the worst with a ____/1 while Oregon performs the best with a _____/1."),
@@ -399,7 +402,7 @@ tabPanel("Employment",
                                                                          choices = c("Domain level", "Worker Organizing Policies", "Worker Protections", "Wage Policies")
                                                              ) ,
                                                              mainPanel(uiOutput("imgemp"))))),
-                                                tabPanel("Polict Asset Map",                               
+                                                tabPanel("Policy Asset Map",                               
                                                          fluidRow(width =12,
                                                                   column(1),
                                                                   column(10, h3(strong("Heat map for individual policy question")),
@@ -432,21 +435,22 @@ A summary of the overall scores for each state is presented below, with a higher
                                           column(1),
                                           column(10, h3(strong( "")),
                                                  hr(),
-                                                 strong("All Data"),
-                                                 DT::dataTableOutput("all_data_table")
-                                                 ,
+                                                 h1(strong("All Data")),
+                                                 hr(),
+                                                 DT::dataTableOutput("all_data_table"),
                                           column(1)),
                                  fluidRow(width = 12, style = "margin: 20px",
-                                          plotOutput("", height = '700px'))),
+                                          plotOutput("", height = '700px')))
+                        ), #Close Summary tab
 
                         tabPanel("Law Enforcement",
 
                                  fluidRow(
                                    navlistPanel(
-                                   tabPanel( "Background",
-                                   width =12,
-                                          column(1),
-                                          column(10, h3(strong( " Law Enforcement")),
+                                     tabPanel( "Background",
+                                               width =12,
+                                               column(1),
+                                               column(10, h3(strong( " Law Enforcement")),
                                                  hr(),
                                                  strong("Background"),
                                                  p("Law enforcement policies play an essential role in economic
@@ -504,7 +508,9 @@ A summary of the overall scores for each state is presented below, with a higher
                                                      )))
                                             
                                    )
-                                   )),
+                                   )
+                                 ), # Close Law Enforcement tab
+                        
                         tabPanel("Education",
 
                                  fluidRow(width =12,
@@ -516,9 +522,9 @@ A summary of the overall scores for each state is presented below, with a higher
                                                  p("With guidance in our literature review from examples like these, our team identified four main subdomains within education: school climate, early childhood education, post-secondary affordability, and workforce development. Within these four main subdomains, we found 19 subcategories which are derived from 73 policy questions.  "),
                                                  p("a. As defined by the National School Climate Center, “School climate refers to the quality and character of school life. School climate is based on patterns of students', parents' and school personnel's experience of school life and reflects norms, goals, values, interpersonal relationships, teaching and learning practices, and organizational structures. A sustainable, positive school climate fosters youth development and learning necessary for a productive, contributing and satisfying life in a democratic society.” School climate policies groups them by disciplinary approaches addressing suspensions, specific infractions and conditions; prevention and non-punitive behavioral interventions; monitoring and accountability; school resources for safety and truant/attendance officers; and state education agency support."),
                                                  p("b. Early childhood education includes those school years from pre-kindergarten to the third grade. Early childhood education policies groups them by kindergarten requirements; teacher quality; school readiness and transitions; assessment intervention and retention; family engagement; and social-emotional learning."),
-                                                p("c. Post-secondary education is the educational level following the completion of secondary education (high school) Post-secondary education includes non-degree credentials such as certifications, licenses, and work experience programs, as well as college and professional degrees.  Post-secondary affordability policies grouped them by, need and merit based financial aid; financial aid; and free college."),
-                                                p("d.The Federal Workforce Innovation and Opportunity Act (WIOA) encourages state policymakers to seek ways to connect education, job seekers, and employers in their states by developing a one-stop delivery system that provides information on career and training services, access to employer programs and activities, and access to real-time labor market information. Workforce development policies grouped them by, statewide apprenticeships; connecting education to work; and post-secondary career and technical education.")
-                                                ),
+                                                 p("c. Post-secondary education is the educational level following the completion of secondary education (high school) Post-secondary education includes non-degree credentials such as certifications, licenses, and work experience programs, as well as college and professional degrees.  Post-secondary affordability policies grouped them by, need and merit based financial aid; financial aid; and free college."),
+                                                 p("d. The Federal Workforce Innovation and Opportunity Act (WIOA) encourages state policymakers to seek ways to connect education, job seekers, and employers in their states by developing a one-stop delivery system that provides information on career and training services, access to employer programs and activities, and access to real-time labor market information. Workforce development policies grouped them by, statewide apprenticeships; connecting education to work; and post-secondary career and technical education.")
+                                                 ),
                                           column(1)),
                                  fluidRow(width = 12, style = "margin: 20px",
                                           plotOutput("word_cloud", height = '700px'))),
@@ -584,7 +590,7 @@ A summary of the overall scores for each state is presented below, with a higher
                                           column(1)),
                                  fluidRow(width = 12, style = "margin: 20px",
                                           plotOutput("", height = '700px')))
-                        ),
+                        ), #Close NavbarMenu for Data & Methods
              
              
              
@@ -657,7 +663,7 @@ A summary of the overall scores for each state is presented below, with a higher
                                              tags$h6( tags$i("Intern")) 
                                            ), 
                                            div( 
-                                             "Riya Berry is a rising junior at UC Berkeley studying Data Science and Interdisciplinary Studies with an emphasis on Societal Inequalities "                                           ) 
+                                             "Riya Berry is a rising junior at UC Berkeley studying Data Science and Interdisciplinary Studies with an emphasis on Societal Inequalities ") 
                                        ) 
                                    ) 
                             ), 
@@ -676,7 +682,7 @@ A summary of the overall scores for each state is presented below, with a higher
                                              tags$h6( tags$i("Intern")) 
                                            ), 
                                            div( 
-                                             "Tasfia Chowdhury is a rising senior at Indiana University Bloomington studying political science and epidemiology."                                           ) 
+                                             "Tasfia Chowdhury is a rising senior at Indiana University Bloomington studying political science and epidemiology.") 
                                        ) 
                                    ) 
                             ), 
@@ -763,15 +769,15 @@ A summary of the overall scores for each state is presented below, with a higher
                           h2("Acknowledgements"), 
                           p("[Optional: You can also include external collaborators in this section or a separate section.]") 
                           ) 
-                      )),        
+                      )
+                      ),  #close "Project Team panel
              
              tabPanel(h4("Acknowledgements & Contacts"), 
                       fluidRow(width = 12, 
                                column(1, align = "center", h3(strong("Approach"))),
                                column(1)))
-             ))
-
-
+             )#close NavbarPage for overall tabs on top of page
+) # close UI fluid page
 
 
 
@@ -789,6 +795,8 @@ server <- shinyServer(function(input,output){
   output$bp <- renderUI({
     includeHTML("boxplot.html")
   })
+  
+  
 
   # Law Enforcement Plots Rendering
   output$imglaw <- renderUI({
@@ -820,9 +828,61 @@ server <- shinyServer(function(input,output){
     else if(input$graphlawheat == "Community Policing"){
       img(height = 300, width = 400, src = "")
     }
-      }) 
+    }) 
   
-  output$all_data_table = DT::renderDataTable({
+  
+  # Employment Plots Rendering
+  output$imgemp <- renderUI({
+    if(input$graphemp == "Domain level"){
+      img(height = 300, width = 400, src = "employment_domain_plot.png")
+    }
+    else if(input$graphemp == "Worker Organizing Policies"){
+      img(height = 300, width = 400, src = "employment_sub_org.png")
+    }
+    else if(input$graphemp == "Worker Protections"){
+      img(height = 300, width = 400, src = "employment_sub_protect.png")
+    }
+    else if(input$graphemp == "Wage Policies"){
+      img(height = 300, width = 400, src = "employment_sub_wage.png")
+    }
+  })
+  
+  
+  # Voting Plots Rendering
+  output$imgvote <- renderUI({
+    if(input$graphvote == "Domain level"){
+      img(height = 300, width = 400, src = "vote_domain_plot.png")
+    }
+    else if(input$graphvote == "Voting Accessibility"){
+      img(height = 300, width = 400, src = "vote_sub_access.png")
+    }
+    else if(input$graphvote == "Voting Registration"){
+      img(height = 300, width = 400, src = "vote_sub_reg.png")
+    }
+  })
+  
+  # Education Plots Rendering
+  output$imgedu <- renderUI({
+    if(input$graphedu == "Domain Level"){
+      img(height = 300, width = 400, src = "edu_composite.png")
+    }
+    else if(input$graphedu == "School Climate Policies"){
+      img(height = 300, width = 400, src = "edu_schoolclimate.png")
+    }
+    else if(input$graphedu == "Early Childhood Education Policies"){
+      img(height = 300, width = 400, src = "edu_earlychildhood.png")
+    }
+    else if(input$graphedu == "Post-Secondary Affordability Policies"){
+      img(height = 300, width = 400, src = "edu_postsecondaryafford.png")
+      
+    }
+    else if(input$graphedu == "Workforce Development Policies"){
+      img(height = 300, width = 400, src = "education_workforcedev.png")
+    }
+  })
+  
+  
+  output$all_data_table <- DT::renderDataTable({
     all_data
   })
   
