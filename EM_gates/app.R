@@ -48,7 +48,7 @@ house_dt_data<- all_data %>%
   filter(domain == 'Housing')
 
 law_dt_data<- all_data %>%
-  filter(domain == 'Policing')
+  filter(domain == 'Law Enforcement')
 
 tax_dt_data<- all_data %>%
   filter(domain == 'Taxation')
@@ -129,11 +129,11 @@ ui <- fluidPage(
                           housing/zoning with a focus on policies that have the potential to impact economic mobility.
                           By identifying those policies that can impede the economic mobility a community can better strategize for effective change."), 
                         h1("Approach and Ethical Considerations"),
-                        p("This project benefits 'public good' in identifying and assessin policies that can later be aggregated
-                          and used to determine public policy. While this project is essential to undertake, doing so comes with the ethical challenges and risks. First, 
-                          the way we defined 'political capital' and hand coded is determined by our own understanding of the economic mobility. Moreover, the process of creating a
-                          comspoite indicator, in the creation of binary scoring cards, reduces the policies to their bare minimum and can strip them of their nuance. Consulting domain and policy experts, 
-                          providing the raw dataset and including the source of each policy information allows us to minimise the impact of biases on our process.",
+                        p("This project benefits 'public good' in identifying and assessing policies that can later be aggregated
+                          and used to influence public policy. While this project is essential to undertake, doing so comes with ethical challenges and risks. First, 
+                          the way we defined 'political capital' and collected data is determined by our understanding of economic mobility. Moreover, the process of creating
+                          composite indicators, by constructing binary scoring cards, reduces the policies to their bare minimum and can strip them of nuance. Consulting domain and policy experts, 
+                          providing our raw dataset and including the source of each policy measure allows us to minimise the impact of biases on our process.",
                           br(),
                           br())
                         )), 
@@ -1507,10 +1507,10 @@ server <- shinyServer(function(input,output){
     if(input$graphvoteheat == "Domain level"){            
       img(height = 300, width = 400, src = "Voting HeatMap.png", align = "left")
     }                                        
-    else if(input$graphlawheat == "Voting Accessibility"){
+    else if(input$graphvoteheat == "Voting Accessibility"){
       img(height = 300, width = 400, src = "")
     }       
-    else if(input$graphlawheat == "Voting Registration"){
+    else if(input$graphvoteheat == "Voting Registration"){
       img(height = 300, width = 400, src = "")
     }
   }) 
@@ -1518,7 +1518,7 @@ server <- shinyServer(function(input,output){
   
   # Education Plots Rendering
   output$imgedu <- renderUI({
-    if(input$graphedu == "Domain Level"){
+    if(input$graphedu == "Domain level"){
       img(height = 300, width = 400, src = "edu_composite.png")
     }
     else if(input$graphedu == "School Climate Policies"){
