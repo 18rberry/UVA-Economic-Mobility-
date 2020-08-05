@@ -48,7 +48,7 @@ house_dt_data<- all_data %>%
   filter(domain == 'Housing')
 
 law_dt_data<- all_data %>%
-  filter(domain == 'Policing')
+  filter(domain == 'Law Enforcement')
 
 tax_dt_data<- all_data %>%
   filter(domain == 'Taxation')
@@ -56,6 +56,9 @@ tax_dt_data<- all_data %>%
 
 #----------------------------
 #Law Enforcement / Policing Data
+#data for download
+Lawenforce_data<- read_excel("~/git/dspg20uvaEM/EM_gates/data/Law_data.xlsx")
+#data for plots
 law_data <- em_data %>%
   slice(5:8)
 composite_law <- law_data %>%
@@ -194,7 +197,7 @@ ui <- fluidPage(
                                      tabPanel("Policy Asset Map",
                                               fluidRow(width =4,
                                                           column(1),
-                                                          column(12, h4(strong("Law Enforcement & Criminal Justice")),
+                                                          column(12, h4(strong("Law Enforcement")),
                                                                  column(1))),
                                               hr(),
                                               
@@ -210,9 +213,10 @@ ui <- fluidPage(
                                               fluidRow(
                                                 sidebarPanel( width = 4,
                                                               selectInput("graphlawheat", "Subdomain", 
-                                                                                   choices = c("Domain level", "Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
-                                                                       )) , 
-                                                                       mainPanel(uiOutput("imglawheat"), align = "center"))),
+                                                                                   choices = c( "Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
+                                                                       ))) , 
+                                                                      fluidRow(
+                                            mainPanel(uiOutput("imglawheat"), align = "center"))),
                                                  
                                                  
                                                  tabPanel("Analysis & Results",
@@ -740,20 +744,17 @@ representing an increased number of policies that promote economic mobility.
                                                width =12,
                                                column(1),
                                                column(10, 
-                                                      h3(strong("All Data")),
+                                                      h3(strong(
+                                                        "All Data")),
                                                       hr(),
                                                       DT::dataTableOutput("all_data_table"),
                                                       column(1))
+                                               
+                                               
                                      ) #close tab
                                      
                                    ) #close navlistPanel
                                  ) #close fluidrow
-                                 
-                                 
-                                 
-                              
-                                 
-                                 
                                  
                         ), #Close Summary tab
 
@@ -772,14 +773,14 @@ representing an increased number of policies that promote economic mobility.
                                                    is shown to make getting a job difficult and, with half of US
                                                    children having at least one parent with a criminal record,
                                                    economic progression becomes challenging for children of those
-                                                   convicted too. Moreover, the ramifications of a criminal record or an encounter with the law are felt most by male citizens of colour,
+                                                   convicted too. Moreover, the ramifications of a criminal record or an encounter with the law are felt most by male citizens of color,
                                                    particularly Hispanic or Black men, having a significant impact on the economic mobility of
                                                    entire communities. Therefore, law enforcement becomes an increasingly important aspect of
                                                    political capital that must be studied to understand economic mobility.  "),
-                                                 p("Our research on law enforcement practices and policies resulted in the identification of three main subdomains of interest: arrest and court proceedings, incarceration and community policing practices. The three subdomain comprise of 20 policy questions which assess the existence or non-existence of a practice in the binary 1/0 format detailed in the scoring outline. In addition to such binary data, the research also yielded qualitative data that provides greater nuance to the nature of a policy in a given state. The entire dataset, both binary and qualitative, can be found by clicking on the “download CSV” button below.  "),
-                                                 p("a. Arrest and Court Proceeding Policies- Arrest and Court Proceedings Policies focused on the process of arresting and trying individuals in court. In this subdomain we analysed stop and identify, bail, and civil asset forfeiture policies. Practices in these areas target distinct socio-economic groups differently and exploring them gives a sense of how individuals in the community are impacted by them. For example, paying cash bail or having your assets seized has an affect on and is affected by an individual’s financial standing. In addition to this set of binary data, we descriptively explored zero tolerance policies related to driving under the influence. "),
-                                                 p("b. Incarceration Practices- Incarceration Practices covers the practices and policies that impact individuals held in state facilities. We focus on inmates’ rights as well as the equitability and social justness of practices within the facility and upon return to their communities. We focus on the type of state facilities (eg public and private) as well as policies within the facility. Specifically, we assess the ability to acquire skills and certifications, as well as the ability to access necessary healthcare. Additionally, we consider youth adjudication and the death penalty. "),
-                                                 p("c. Community Policing Practices- Community Policing Practices explores the standards that officers must abide by in policing the community with a focus on the equality of the standards. For example, custodial sexual misconduct policies are analysed, both numerically and qualitatively, to assess how states hold officers accountable for allegations of misconduct against them by an individual in their custody. In addition, body camera usage, demographic information collection and domestic violence- related polices are considered in this subdomain. We also qualitatively assess the nature of officer training programmes in the states, particularly those pertaining to treating individuals with mental health issues.  ")),
+                                                 p("Our research on law enforcement practices and policies resulted in the identification of three main subdomains of interest: arrest and court proceedings, incarceration and community policing practices. The three subdomains are comprised of 20 policy questions which assess the existence or non-existence of a practice. In addition to such binary data, our research also yielded qualitative data that provides greater nuance to the nature of a policy in each state. The entire dataset, both binary and qualitative, can be found by clicking on the “download CSV” button in the All Data tab in the Summary section of Data, Methods and Measures"),
+                                                 p("a.", strong("Arrest and Court Proceeding Policies"), "- Arrest and Court Proceedings Policies focused on the process of arresting and trying individuals in court. In this subdomain we analyzed stop and identify, bail, and civil asset forfeiture policies. Practices in these areas target distinct socio-economic groups differently and exploring them gives a sense of how individuals in the community are impacted by them. For example, paying cash bail or having your assets seized has an effect on and is affected by an individual’s financial standing. In addition to this set of binary data, we descriptively explored zero tolerance policies related to driving under the influence. "),
+                                                 p("b.", strong("Incarceration Practices"), "- Incarceration Practices covers the policies that impact individuals held in state facilities. We focused on inmates’ rights as well as the equitability and social justness of practices within the facility and upon return to their communities. We focus on the type of state facilities (eg: public and private) as well as policies within the facility. Specifically, we assessed the ability to acquire skills and certifications, as well as the ability to access necessary healthcare. Additionally, we consider youth adjudication and the death penalty. "),
+                                                 p("c.", strong("Community Policing Practices"), "- Community Policing Practices explores the standards that officers must abide by in policing the community with a focus on the equality of standards. For example, custodial sexual misconduct policies are analyzed, both numerically and qualitatively, to assess how states hold officers accountable for allegations of misconduct made against them by an individual in their custody. In addition, body camera usage, demographic information collection and domestic violence related polices are considered in this subdomain. We also qualitatively assess the nature of officer training programs in the states, particularly those pertaining to treating individuals with mental health issues.")),
                                           column(1)
                                    ),
                                    
@@ -788,36 +789,37 @@ representing an increased number of policies that promote economic mobility.
                                             
                                             fluidRow(width =12,
                                                      column(1),
-                                                     column(10, h3(strong("Data Sources and References")),
-                                                            
+                                                     column(10, h3(strong("Data Sources and References")),  
+                                                            hr(), h3("Data Sources"),
+                                                              downloadButton("downloadData", "Download CSV"),
                                                             br(),
-                                                            h3("Data Sources"),
-                                                            tags$a(href="https://www.ecs.org/research-reports/key-issues/postsecondary-affordability/", "Education Commission of The States: Postsecondary Affordability"),
+                                                            p("Key Data Sources are listed below. The entire list can be found by downloading the entire domain-specific dataset using the button above."),
+                                                       
+                                                            tags$a(href="https://justiceforwardva.com/bail-reform#:~:text=As%20it%20stands%2C%20Virginia%20employs,whether%20pretrial%20release%20is%20appropriate.&text=If%20a%20person%20cannot%20make,to%20pay%20the%20money%20bail.", "Justice Forward Virginia: Bail"),
                                                             br(),
-                                                            tags$a(href="https://www.ecs.org/research-reports/key-issues/early-childhood-education/", "Education Commission of The States: Early Childhood Education"),
+                                                            tags$a(href="https://ij.org/activism/legislation/civil-forfeiture-legislative-highlights/", "Institute for Justice: Civil Forfeiture Reforms on the State Level"),
                                                             br(),
-                                                            tags$a(href="https://www.ecs.org/research-reports/key-issues/workforce-development/", "Education Commission of The States: Workforce Development"),
+                                                            tags$a(href="https://www.aclu.org/state-standards-pregnancy-related-health-care-and-abortion-women-prison-0#hd4", "ACLU: State Standards For Pregnancy-related Health Care and Abortion for Women in Prison"),
                                                             br(),
-                                                            tags$a(href="https://www.ecs.org/research-reports/key-issues/school-climate/", "Education Commission of The States: School Climate"),
+                                                            tags$a(href="https://static.prisonpolicy.org/scans/sprcsmstatelaw.pdf", "PrisonPolicy.Org: Custodial Sexual Misconduct Laws: A State-by-State Legislative Review"),
                                                             br(),
-                                                            tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Oregon%20School%20Discipline%20Laws%20and%20Regulations.pdf/", "Oregon Compilation of School Discipline Laws and Regulations"),
+                                                            tags$a(href="https://www.ncsl.org/research/civil-and-criminal-justice/state-trends-in-law-enforcement-legislation-2014-2017.aspx", "National Conference of State Legislature: State Trends in Law Enforcement"),
                                                             br(),
-                                                            tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Virginia%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Virginia Compilation of School Discipline Laws and Regulations"),
+                                                            tags$a(href="https://statusofwomendata.org/explore-the-data/state-data/oregon/#violence-safety", "Status of Women in the United States"),
                                                             br(),
-                                                            tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Iowa%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Iowa Compilation of School Discipline Laws and Regulations"),
+                                                            tags$a(href="https://www.sentencingproject.org/publications/private-prisons-united-states/#:~:text=In%20six%20states%20the%20private,%2C%20and%20Georgia%20(110%25).", "Sentencing Project: Private Prisons in the United States"),
                                                             br(),
+                                                            tags$a(href="https://www.courts.oregon.gov/programs/inclusion/Documents/juvrights.pdf", "Courts.Oregon.Org: YOUTH FACES THE LAW:A Juvenile Rights Handbook"),
+                                                            br(),
+                                                            tags$a(href="https://deathpenaltyinfo.org/state-and-federal-info/state-by-state", "Death Penalty Information Center: State by State"),
+                                                            br(),
+                                                          
                                                             h3("References"),
                                                             
-                                                            tags$a(href="https://www.brookings.edu/research/hitting-kids-american-parenting-and-physical-punishment/", "Brookings Corporal Punishment"),
+                                                            tags$a(href="https://www.theatlantic.com/politics/archive/2015/12/how-families-pay-the-never-ending-price-of-a-criminal-record/433641/", "The Atlantic: How Families Pay the Never-Ending Price of a Criminal Record"),
                                                             br(),
-                                                            tags$a(href="https://www.pnas.org/content/116/17/8255", "PNAS Corporal Punishment"),
-                                                            br(),
-                                                            tags$a(href="https://www.ecs.org/50-state-comparison-postsecondary-education-funding/", "ECS Early Childhood Programs as Economic Development Tool"),
-                                                            br(),
-                                                            tags$a(href="https://cew.georgetown.edu/cew-reports/recovery-job-growth-and-education-requirements-through-2020/", "Georgetown Job Growth and Education Requirements through 2020"),
-                                                            br(),
-                                                            tags$a(href="https://www.luminafoundation.org/news-and-views/does-higher-education-really-increase-economic-mobility/", "Lumina Foundation: Does higher education really increase economic mobility?")
-                                                     )
+                                                            tags$a(href="https://www.ncjrs.gov/pdffiles1/nij/grants/244756.pdf ", "NCJRS: Criminal Stigma, Race, Gender and Employment")
+                                                     ) 
                                                      ) #close fluid row
                                             ), # Data Sources & References panel
                                    
@@ -830,7 +832,8 @@ representing an increased number of policies that promote economic mobility.
                                                             DT::dataTableOutput("lawtable")
                                                             
                                                      )
-                                            )#close fluidrow
+                                            )#close fluidrow 
+                                            
                                    ) # close Data tab
                                             
                                    ) #close navlistPanel
@@ -1353,9 +1356,8 @@ server <- shinyServer(function(input,output){
   # Law Enforcement Plots Rendering
   output$imglaw <- renderUI({
     if(input$graphlaw == "Domain level"){            
-      img(height = 300, width = 400, src = "law_domain_plot.png", align = "left")
+      img(height = 300, width = 400, src = "law_domain_plot.png")
     }                                        
-
     else if(input$graphlaw == "Arrest and Court Proceedings"){
       img(height = 300, width = 400, src = "law_sub_arrest.png")
     }
@@ -1368,45 +1370,52 @@ server <- shinyServer(function(input,output){
   })
   
   output$imglawheat <- renderUI({
-    if(input$graphlawheat == "Domain level"){            
-      img(height = 300, width = 400, src = "arrest_heat.png", align = "left")
-    }                                        
-    else if(input$graphlawheat == "Arrest and Court Proceedings"){
-      img(height = 300, width = 400, src = "")
+                                           
+    if(input$graphlawheat == "Arrest and Court Proceedings"){
+      img(height = 500, width = 800, src = "arrest_heat_map.png")
     }       
     else if(input$graphlawheat == "Incarceration Practices"){
-      img(height = 300, width = 400, src = "")
+      img(height = 500, width = 800, src = "incarceration_heat__map.png")
     }
     else if(input$graphlawheat == "Community Policing"){
-      img(height = 300, width = 400, src = "")
+      img(height = 500, width = 800, src = "community_heat.png")
     }
     }) 
   
+  #Law Enforcement Data Download
   
+  output$downloadData <- downloadHandler( 
+    filename = function() {
+      paste("data-", ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv(Lawenforce_data, file)
+    }
+  ) 
   
   # Taxation Plots Rendering
   output$imgtax <- renderUI({
     if(input$graphlaw == "Domain level"){            
-      img(height = 300, width = 400, src = "law_domain_plot.png", align = "left")
+      img(height = 300, width = 400, src = "", align = "left")
     }                                        
     
     else if(input$graphtax == "Tax Credits"){
-      img(height = 300, width = 400, src = "law_sub_arrest.png")
+      img(height = 300, width = 400, src = "")
     }
     else if(input$graphtax == "Taxes on Wealth"){
-      img(height = 300, width = 400, src = "law_sub_incarceration.png")
+      img(height = 300, width = 400, src = "")
     }
     else if(input$graphtax == "Taxes Related to Business"){
-      img(height = 300, width = 400, src = "law_sub_community.png")
+      img(height = 300, width = 400, src = "")
     }
     else if(input$graphtax == "Gini Index"){
-      img(height = 300, width = 400, src = "law_sub_community.png")
+      img(height = 300, width = 400, src = "")
     }
   })
   
   output$imgtaxwheat <- renderUI({
     if(input$graphtaxheat == "Domain level"){            
-      img(height = 300, width = 400, src = "arrest_heat.png", align = "left")
+      img(height = 300, width = 400, src = "", align = "left")
     }                                        
     else if(input$graphtaxheat == "Arrest and Court Proceedings"){
       img(height = 300, width = 400, src = "")
