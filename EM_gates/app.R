@@ -347,10 +347,12 @@ ui <- fluidPage(
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(10,
-                                                              p("The policy asset map visualizes the four subdomains and the tax policies that influence them. A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy. A summary of the overall scores for each state is presented below, with a higher number
+                                                              p("The policy asset map visualizes the four subdomains and the tax policies that influence them.
+A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy.
+A summary of the overall scores for each state is presented below, with a higher number
 representing an increased number of policies that promote economic mobility.
                                                                            Our results show the following: "),
-                                                              p(img( src = "heat_table.jpg")),
+                                                              p(img( src = "tax_table_final.png")),
                                                               p(strong("Tax credits:"), " Oregon and Iowa perform the highest with a score of 0.75.
                                                                            On the other hand, Virginia holds a score of 0.25, highlighting a need for improvement."),
                                                               p(strong("Wealth-related taxes:"), "Oregon and Iowa perform the highest with a score of 0.67.
@@ -358,8 +360,9 @@ representing an increased number of policies that promote economic mobility.
                                                               p(strong("Taxes related to businesses and corporations:"), "Oregon demonstrates outstanding performance with a score of 1.00.
                                                                            In contrast, Virginia and Iowa had scores of 0.67 and 0.33 respectively, highlighting a need for improvement.  "),
                                                               p(strong("Gini index:"), "all states had a score of 0.50. All states could improve in this policy domain aspect"),
-                                                              p(strong("Overall:"), "______ had a score of 0.__. All states could improve taxation policies to encourage Economic Mobility")
-                                                       ),
+                                                              p(strong("Overall:"), "Both Iowa and Oregon had above 0.5, while Virgina's composite score was 0.438.
+                                                                All states could improve taxation policies to encourage Economic Mobility")
+                                                              ),
                                                        column(1))
                                      ) # close anaylsis & results
                                    ) #close NavlistPanel to select sub-domain for tax heatmap
@@ -922,41 +925,86 @@ representing an increased number of policies that promote economic mobility.
                                                    States play a significant role in supporting businesses by nullifying corporate tax avoidance strategies to equalize the playing field between multimillion-dollar corporations and small businesses, as well as creating a tax climate that fosters entrepreneurial efforts. "),
                                                       p(strong("d.  The Gini coefficient"), "is a measure of statistical dispersion intended to represent income or wealth inequality in a nation or area. Because the Gini coefficient measures inequality after the effects of taxes, by understanding how Gini indexes change as a result
                                                    of tax policies and financial redistribution, we can better understand how tax policy can support economic mobility.  ")
-                                               ),
-                                               column(1)),
+                                             ),
+                                             column(1)),
 
-                                     tabPanel("Data Sources & References",
+                                   tabPanel("Data Sources & References",
 
 
-                                              fluidRow(width =12,
-                                                       column(1),
-                                                       column(10, h3(strong("Data Sources and References")),
-                                                              br(),
+                                            fluidRow(width =12,
+                                                     column(1),
+                                                     column(10, h3(strong("Data Sources and References")),
+                                                            br(),
+                                                            h3("Data Sources"),
+                                                            tags$a(href = "https://www.americanadoptions.com/blog/your-state-adoption-tax-credit-and-how-you-can-protect-it/", "American Adoptions"),
+                                                            br(),
+                                                            tags$a(href = "https://www.cbpp.org/27-states-plus-dc-require-combined-reporting-for-the-state-corporate-income-tax",
+                                                                   "CBPP: 27 states plus DC Require Combined Reporting for the State Corporate Income Tax"),
+                                                            br(),
+                                                            tags$a(href="https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/states-and-local-governments-with-earned-income-tax-credit",
+                                                                   "IRS: States and Local Governments with Earned Income Tax Credit "),
+                                                            br(),
+                                                            tags$a(href = "https://itep.org/property-tax-circuit-breakers-2019/”,
+                                                                   “ITEP: Property Tax Circuit Breakers in 2019”"),
+                                                            br(),
+                                                            tags$a(href = "https://www.livestories.com/statistics/iowa/des-moines-county-gini-index-income-inequality",
+                                                                   "Live Stories: Des Moines County Gini Index of Income Inequality"),
+                                                            br(),
+                                                            tags$a(href = "https://opportunityindex.cfnova.org/indicator/chart?region=&demographic=&indicator=12&date_start=2005&date_end=2017",
+                                                                   "Opportunity Index of Northern Virginia: Gini Coefficient"),
+                                                            br(),
+                                                            tags$a(href = "https://www.realized1031.com/capital-gains-tax-rate", "Realized: Capital Gain Tax Rates by State"),
+                                                            br(),
+                                                            tags$a(href = "https://files.taxfoundation.org/20180925174436/2019-State-Business-Tax-Climate-Index.pdf",
+                                                                   "Tax Foundation: State Business Tax Climate Index"),
+                                                            br(),
+                                                            tags$a(href = "https://taxfoundation.org/state-corporate-income-tax-rates-brackets-2020/",
+                                                                   "Tax Foundation: State Corporate Income Tax Rate Brackets 2020"),
+                                                            br(),
+                                                            tags$a(href="http://www.taxcreditsforworkersandfamilies.org/state-tax-credits/",
+                                                                   "TCFW: State Tax Credits"),
+                                                            br(),
+                                                            tags$a(href = "https://www.thebalance.com/state-estate-tax-and-exemption-chart-3505462", "The Balance: State Estate Tax and Exemption Chart"),
+                                                            br(),
+                                                            tags$a(href = "https://www.thebalance.com/state-inheritance-tax-chart-3505460", "The Balance: State Inheritance Tax Charts"),
+                                                            br(),
+                                                            tags$a(href = "https://www.qualityinfo.org/-/wage-inequality-in-oregon-a-wide-gap", "Quality Info: Wage Inequality in Oregon"),
+                                                            br(),
+                                                            tags$a(href = "https://en.wikipedia.org/wiki/List_of_U.S._states_by_Gini_coefficient",
+                                                                   "Wikipedia: List of U.S. States by Gini Coefficient"),
+                                                            br(),
+                                                            tags$a(href = "https://data.worldbank.org/indicator/SI.POV.GINI", "World Bank: Gini Index"),
+                                                            br(),
 
-                                                              h3("Data Sources"),
-                                                              tags$a(href="https://www.ecs.org/research-reports/key-issues/postsecondary-affordability/", "Education Commission of The States: Postsecondary Affordability"),
-                                                              br(),
-                                                              tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Iowa%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Iowa Compilation of School Discipline Laws and Regulations"),
-                                                              br(),
+                                                            h3("References"),
+                                                            tags$a(href="https://www.cbpp.org/research/state-budget-and-tax/how-state-tax-policies-can-stop-increasing-inequality-and-start",
+                                                                   "CBPP: How State Tax Policies Can Stop Increasing Inequality and Start Reducing it"),
+                                                            br(),
+                                                            tags$a(href = "https://www.cbpp.org/research/state-budget-and-tax/state-taxes-on-inherited-wealth",
+                                                                   "CBPP: State Taxes on Inherited Wealth"),
+                                                            br(),
+                                                            tags$a(href = "https://hbr.org/2015/01/3-ways-businesses-are-addressing-inequality-in-emerging-markets",
+                                                                   "Harvard Business Review: 3 Ways Businesses are Addressing Inequality in Emerging Markets"),
+                                                            br(),
+                                                            tags$a(href="https://www.fool.com/taxes/2020/02/15/your-2020-guide-to-tax-credits.aspx",
+                                                                   "Motley Fool: Your 2020 Guide to Tax Credits"),
+                                                            br(),
 
-                                                              h3("References"),
-                                                              tags$a(href="https://www.brookings.edu/research/hitting-kids-american-parenting-and-physical-punishment/", "Brookings: Corporal Punishment"),
-                                                              br(),
-                                                              tags$a(href="https://www.luminafoundation.org/news-and-views/does-higher-education-really-increase-economic-mobility/", "Lumina Foundation: Does higher education really increase economic mobility?")
-                                                       )
-                                              ) #close fluid row
-                                     ), # Data Sources & References panel
+                                                     )
+                                            ) #close fluid row
+                                   ), # Data Sources & References panel
 
-                                     tabPanel("View the Data",
-                                              fluidRow(width =12,
-                                                       column(1),
-                                                       column(10, h3(strong("Taxation Data Set")),
-                                                              DT::dataTableOutput("taxtable")
+                                   tabPanel("View the Data",
+                                            fluidRow(width =12,
+                                                     column(1),
+                                                     column(10, h3(strong("Taxation Data Set")),
+                                                            DT::dataTableOutput("taxtable")
 
-                                                       )
-                                              )#close fluidrow
-                                     ) # close Data tab
+                                                     )
+                                            )#close fluidrow
+                                   ) # close Data tab
 
+             
                                    ) #close navlistPanel
                                  ) #close fluid row
                         ), # Close Taxation tabPanel
@@ -1599,7 +1647,6 @@ server <- shinyServer(function(input,output){
     if(input$graphtax == "Domain level"){
       img(height = 300, width = 400, src = "tax_domain_plot.png", align = "left")
     }
-
     else if(input$graphtax == "Tax Credits"){
       img(height = 300, width = 400, src = "tax_sub_credits.png")
     }
@@ -1610,7 +1657,7 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "tax_sub_business.png")
     }
     else if(input$graphtax == "Gini Index"){
-      img(height = 300, width = 400, src = "tax_sub_gini.png")
+      img(height = 300, width = 400, src = "tax_sub_gini_index.png")
     }
   })
 
