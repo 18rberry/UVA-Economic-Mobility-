@@ -41,7 +41,7 @@ all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final.xls
 mdata <- melt(em_data, id.vars = c("Domain", "Subdomain") , measure.vars = c("Virginia", "Iowa", "Oregon" ))
 mdata<- mdata %>% rename( state=variable, score = value)
 av_mdata <- mdata
-
+av_mdata$label = paste(av_mdata$Domain, ":", av_mdata$Subdomain)
 
 #---------------------------------
 #dataTable data
@@ -752,7 +752,7 @@ representing an increased number of policies that promote economic mobility.
                                                         column(10,
                                                                
                                                                h3("Composite index for all subdomains for the three states."),
-                                                               p("Takes a couple seconds to load.")),
+                                                               p("May take several seconds to load.")),
                                                         column(1)),
                                                column(2),
                                                column(10, h3(strong("")),
@@ -1879,7 +1879,7 @@ server <- shinyServer(function(input,output){
   # Interactive Plot summary 3 states by subdomain - ALL COMPOSITES
   output$cesarplot <- renderPlotly({
     qn <- ggplot(av_mdata, aes(x=1, y=score)) +
-      geom_point(aes(colour = factor(state)), position = position_jitter(width = 1),
+      geom_point(aes(text = label, colour = factor(state)), position = position_jitter(width = 1),
                  size = 2, show.legend = TRUE)+
       xlab("") + ylab("Composite index") +
       geom_boxplot(aes(y=score),  alpha = 0.2, width = .3, colour = "BLACK")+
