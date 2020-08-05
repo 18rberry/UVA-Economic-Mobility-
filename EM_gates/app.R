@@ -31,10 +31,10 @@ library(reshape2)
 
 
 # load data -----------------------------------------------------------------------------
-em_data <- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
+em_data <- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
 
 #full data, not composites
-all_data <- read_excel("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/em_master_data_final.xlsx")
+all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final.xlsx")
 
 
 # prep data for interactive composite plot
@@ -221,7 +221,7 @@ ui <- fluidPage(
                                               fluidRow(
                                                 sidebarPanel( width = 4,
                                                               selectInput("graphlawheat", "Subdomain",
-                                                                                   choices = c("Domain level", "Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
+                                                                                   choices = c("Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
                                                                        )) ,
                                                                        mainPanel(uiOutput("imglawheat"), align = "center"))),
 
@@ -305,7 +305,7 @@ ui <- fluidPage(
 
                                               fluidRow(sidebarPanel( width = 4,
                                                                      selectInput("graphtaxheat", "Subdomain",
-                                                                                 choices = c("Domain level", "Tax Credits", "Taxes on Wealth",
+                                                                                 choices = c("Tax Credits", "Taxes on Wealth",
                                                                                              "Taxes Related to Business", "Gini Index")
                                                                      )) ,
                                                        mainPanel(uiOutput("imgtaxheat"), align = "center"))
@@ -397,7 +397,7 @@ representing an increased number of policies that promote economic mobility.
 
                                                 fluidRow(sidebarPanel( width = 4,
                                                                        selectInput("graphhouseheat", "Subdomain",
-                                                                                   choices = c("Domain level", "Housing Assistance Policies", "Housing Development Policies", "Housing Financial Policies")
+                                                                                   choices = c("Housing Assistance Policies", "Housing Development Policies", "Housing Financial Policies")
                                                                        )) ,
                                                          mainPanel(uiOutput("imghouseheat"), align = "center"))
                                                 # Alternate way to show img that doesn't use the server?:
@@ -484,7 +484,7 @@ representing an increased number of policies that promote economic mobility.
 
                                         fluidRow(sidebarPanel( width = 4,
                                                                selectInput("grapheduheat", "Subdomain",
-                                                                           choices = c("Domain level","School Climate Policies", "Early Childhood Education Policies", "Post-Secondary Affordability Policies", "Workforce Development Policies")
+                                                                           choices = c("School Climate Policies", "Early Childhood Education Policies", "Post-Secondary Affordability Policies", "Workforce Development Policies")
                                                                )) ,
                                                  mainPanel(uiOutput("imgeduheat"), align = "center"))
                                         ,
@@ -583,7 +583,7 @@ representing an increased number of policies that promote economic mobility.
 
                                           fluidRow(sidebarPanel( width = 4,
                                                                  selectInput("graphvoteheat", "Subdomain",
-                                                                             choices = c("Domain level", "Voting Accessibility", "Voting Registration")
+                                                                             choices = c("Voting Accessibility", "Voting Registration")
                                                                  )) ,
                                                    mainPanel(uiOutput("imgvoteheat"), align = "center"))
                                           ,
@@ -675,7 +675,7 @@ representing an increased number of policies that promote economic mobility.
 
                                           fluidRow(sidebarPanel( width = 4,
                                                                  selectInput("graphempheat", "Subdomain",
-                                                                             choices = c("Domain level", "Worker Organizing Policies", "Worker Protections", "Wage Policies")
+                                                                             choices = c("Worker Organizing Policies", "Worker Protections", "Wage Policies")
                                                                  )) ,
                                                    mainPanel(uiOutput("imgempheat"), align = "center"))
                                           ,
@@ -1349,20 +1349,12 @@ representing an increased number of policies that promote economic mobility.
                                        )
                                    )
                             ),
-                            column(1)),
-
-                          h2("Project Sponsors"),
-                          p("[Photos, information, and/or links about your sponsor go about here. You may want to use materials that your sponsors have already shared with you about their institution or coordinate with your stakeholders to include pertinent information here.]"),
-                          h2("Acknowledgements"),
-                          p("[Optional: You can also include external collaborators in this section or a separate section.]")
+                            column(1))
                           )
                       )
-                      ),  #close "Project Team panel
+                      )#close "Project Team panel
 
-             tabPanel(h4("Acknowledgements & Contacts"),
-                      fluidRow(width = 12,
-                               column(1, align = "center", h3(strong("Approach"))),
-                               column(1)))
+
              )#close NavbarPage for overall tabs on top of page
 ) # close UI fluid page
 
@@ -1403,10 +1395,7 @@ server <- shinyServer(function(input,output){
   })
 
   output$imglawheat <- renderUI({
-    if(input$graphlawheat == "Domain level"){
-      img(height = 300, width = 400, src = "arrest_heat.png", align = "left")
-    }
-    else if(input$graphlawheat == "Arrest and Court Proceedings"){
+    if(input$graphlawheat == "Arrest and Court Proceedings"){
       img(height = 300, width = 400, src = "")
     }
     else if(input$graphlawheat == "Incarceration Practices"){
@@ -1421,54 +1410,36 @@ server <- shinyServer(function(input,output){
 
   # Taxation Plots Rendering
   output$imgtax <- renderUI({
-    if(input$graphlaw == "Domain level"){
-      img(height = 300, width = 400, src = "law_domain_plot.png", align = "left")
+    if(input$graphtax == "Domain level"){
+      img(height = 300, width = 400, src = "tax_domain_plot.png", align = "left")
     }
 
     else if(input$graphtax == "Tax Credits"){
-      img(height = 300, width = 400, src = "law_sub_arrest.png")
+      img(height = 300, width = 400, src = "tax_sub_credits.png")
     }
     else if(input$graphtax == "Taxes on Wealth"){
-      img(height = 300, width = 400, src = "law_sub_incarceration.png")
+      img(height = 300, width = 400, src = "tax_sub_wealth.png")
     }
     else if(input$graphtax == "Taxes Related to Business"){
-      img(height = 300, width = 400, src = "law_sub_community.png")
+      img(height = 300, width = 400, src = "tax_sub_business.png")
     }
     else if(input$graphtax == "Gini Index"){
-      img(height = 300, width = 400, src = "law_sub_community.png")
+      img(height = 300, width = 400, src = "tax_sub_gini.png")
     }
   })
 
   output$imgtaxheat <- renderUI({
-    if(input$graphtaxheat == "Domain level"){
-      img(height = 300, width = 400, src = "taxation_heatmap.png", align = "left")
+    if(input$graphtaxheat == "Taxes on Wealth"){
+      img(height = 300, width = 400, src = "tax_heat_wealth.png")
     }
-    else if(input$graphtaxheat == "Tax Credits"){
-      img(height = 300, width = 400, src = "tax_health_credits")
-    }
-    else if(input$graphtaxheat == "Taxes on Wealth"){
-      img(height = 300, width = 400, src = "tax_health_wealth.png")
+    else if(input$graphtax == "Tax Credits"){
+      img(height = 300, width = 400, src = "tax_heat_credits.png")
     }
     else if(input$graphtaxheat == "Taxes Related to Business"){
       img(height = 300, width = 400, src = "tax_heat_business.png")
     }
     else if(input$graphtaxheat == "Gini Index"){
       img(height = 300, width = 400, src = "tax_heat_gini.png")
-    }
-  })
-
-  output$imgtaxwheat <- renderUI({
-    if(input$graphtaxheat == "Domain level"){
-      img(height = 300, width = 400, src = "arrest_heat.png", align = "left")
-    }
-    else if(input$graphtaxheat == "Arrest and Court Proceedings"){
-      img(height = 300, width = 400, src = "")
-    }
-    else if(input$graphtaxheat == "Incarceration Practices"){
-      img(height = 300, width = 400, src = "")
-    }
-    else if(input$graphtaxheat == "Community Policing"){
-      img(height = 300, width = 400, src = "")
     }
   })
 
@@ -1493,10 +1464,7 @@ server <- shinyServer(function(input,output){
   })
 
   output$imghouseheat <- renderUI({
-    if(input$graphhouseheat == "Domain level"){
-      img(height = 300, width = 400, src = "arrest_heat.png", align = "left")
-    }
-    else if(input$graphhouseheat == "Housing Assistance Policies"){
+    if(input$graphhouseheat == "Housing Assistance Policies"){
       img(height = 300, width = 400, src = "")
     }       
     else if(input$graphhouseheat == "Housing Development Policies"){
@@ -1528,10 +1496,7 @@ server <- shinyServer(function(input,output){
   })
 
   output$imgempheat <- renderUI({
-    if(input$graphempheat == "Domain level"){
-      img(height = 300, width = 400, src = "heat_map_employment.png", align = "left")
-    }
-    else if(input$graphempheat == "Worker Organizing Policies"){
+    if(input$graphempheat == "Worker Organizing Policies"){
       img(height = 300, width = 400, src = "")
     }
     else if(input$graphempheat == "Worker Protections"){
@@ -1558,10 +1523,7 @@ server <- shinyServer(function(input,output){
   })
 
   output$imgvoteheat <- renderUI({
-    if(input$graphvoteheat == "Domain level"){
-      img(height = 300, width = 400, src = "Voting HeatMap.png", align = "left")
-    }                                        
-    else if(input$graphvoteheat == "Voting Accessibility"){
+    if(input$graphvoteheat == "Voting Accessibility"){
       img(height = 300, width = 400, src = "")
     }       
     else if(input$graphvoteheat == "Voting Registration"){
@@ -1582,7 +1544,7 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "edu_earlychildhood.png")
     }
     else if(input$graphedu == "Post-Secondary Affordability Policies"){
-      img(height = 300, width = 400, src = "edu_postsecondaryafford.png")
+      img(height = 300, width = 400, src = "edu_postsecondartafford.png")
 
     }
     else if(input$graphedu == "Workforce Development Policies"){
@@ -1591,10 +1553,7 @@ server <- shinyServer(function(input,output){
   })
 
   output$imgeduheat <- renderUI({
-    if(input$grapheduheat == "Domain level"){
-      img(height = 300, width = 400, src = "Education_heatmap.png", align = "left")
-    }
-    else if(input$grapheduheat == "School Climate Policies"){
+    if(input$grapheduheat == "School Climate Policies"){
       img(height = 300, width = 400, src = "")
     }
     else if(input$grapheduheat == "Early Childhood Education Policies"){
