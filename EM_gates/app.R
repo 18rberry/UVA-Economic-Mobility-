@@ -100,7 +100,7 @@ plot_data_4 <- incarceration %>%
 # Landing page --------------------------------------------------------------------------------------------------
 ui <- fluidPage(
   theme = shinytheme("flatly"),
-  
+
   tags$style(type = "text/css", ".recalculating {opacity: 1.0;}"),
   tags$style(
     ".leaflet .legend {width:200px; text-align: left;}",
@@ -108,19 +108,19 @@ ui <- fluidPage(
     ".leaflet .legend label{float:left; text-align: left;}"
   ),
   tags$head(tags$style(HTML(" .sidebar { font-size: 40%; } "))),
-  
+
   headerPanel(
     img(src = "MyImage.jpg",
         class = "topimage", width = "100%", style = "display: block; margin-left: auto; margin-right: auto;"
     )),
   hr(),
-  
+
   fluidRow(width = 12,style = "margin = 20px",  column(12, align = "center", h2(strong("Political Community Capital ")))),
-  
+
   hr(),
-  
+
   navbarPage("",
-             
+
              tabPanel(h4("Project Overview"),
                       boxPlus(
                         title = "",
@@ -152,10 +152,10 @@ ui <- fluidPage(
                           br(),
                           br())
                       )),
-             
-             navbarMenu(h4("Domains of analysis"),
+
+             navbarMenu(h4("Domains of Analysis"),
                         tabPanel("Summary",
-                                 
+
                                  fluidRow(width =12,
                                           column(1),
                                           column(10, h3(strong("Our Domains and Taxonomy")),
@@ -164,7 +164,7 @@ ui <- fluidPage(
                                                    "Political capital takes various forms of participation and representation of groups and individuals in the community.  This project seeks to summarize several aspects of political capital that largely affect economic mobility of communities.  The information focuses on six domains that include the following:",
                                                    br(),
                                                    br(),
-                                                   
+
                                                    "1. Law Enforcement and Criminal Justice", br(),
                                                    "2. Taxation", br(),
                                                    "3. Housing and Zoning", br(),
@@ -182,7 +182,7 @@ ui <- fluidPage(
                                           column(1))),
                         #-------------------------------------------------------------Law Enforcement
                         tabPanel("Law Enforcement",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                      tabPanel("Composite Indicators",
@@ -206,14 +206,14 @@ ui <- fluidPage(
                                                                           choices = c("Domain level", "Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
                                                               )),
                                                 mainPanel(  uiOutput("imglaw"), align = "center"))),
-                                     
+
                                      tabPanel("Policy Asset Map",
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h4(strong("Law Enforcement")),
                                                               column(1))),
                                               hr(),
-                                              
+
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h5(strong("Policy Asset Map")),
@@ -225,20 +225,20 @@ ui <- fluidPage(
                                                        column(1))),
                                               fluidRow(
                                                 sidebarPanel( width = 4,
-                                                              selectInput("graphlawheat", "Subdomain", 
+                                                              selectInput("graphlawheat", "Subdomain",
                                                                           choices = c( "Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
-                                                              ))) , 
+                                                              ))) ,
                                               fluidRow(
                                                 mainPanel(uiOutput("imglawheat"), align = "center"))),
-                                     
-                                     
+
+
                                      tabPanel("Analysis & Results",
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h4(strong("Law Enforcement & Criminal Justice")),
                                                               column(1))),
                                               hr(),
-                                              
+
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h5(strong("Analysis and Results")),
@@ -251,20 +251,20 @@ ui <- fluidPage(
                                                                             Our results show the following:"),
                                                               p(img( src = "heat_table.jpg")),
                                                               p(strong("Arrest and Court Proceedings:"), ", Virginia performs the worst with a 0.60/1 while Oregon performs the best with a 1.00/1."),
-                                                              
+
                                                               p(strong("Incarceration:"), ", all three states perform equally with a 0.60/1."),
-                                                              
+
                                                               p(strong("Community Policing:"), ", both Oregon and Virginia perform at a 0.40/1 while Iowa does better with a 0.60/1."),
-                                                              
+
                                                               p(strong("Overall:"), ", under our scoring criteria Oregon and Iowa do equally the best in terms of law enforcement policies with a 0.67/1 and Virginia does the worst with a 0.53/1.  ")),
                                                        column(1))
-                                              
+
                                      ) ))),
-                        
-                        
+
+
                         #----------------------------------------------------Tax
                         tabPanel("Taxation",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                      tabPanel("Composite Indicators",
@@ -281,7 +281,7 @@ ui <- fluidPage(
                                                        column(1),
                                                        column(12, h5("The plots below demonstrate numeric composites calculated using policy data for each subdomain, allowing for comparison between a given policy dimension in each state."),
                                                               column(1))),
-                                              
+
                                               fluidRow(
                                                 sidebarPanel( width = 4,
                                                               selectInput("graphtax", "Subdomain",
@@ -290,14 +290,14 @@ ui <- fluidPage(
                                                               )),
                                                 mainPanel(  uiOutput("imgtax"), align = "center"))
                                      ),
-                                     
+
                                      tabPanel("Policy Asset Map",
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h4(strong("Taxation")),
                                                               column(1))),
                                               hr(),
-                                              
+
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h5(strong("Policy Asset Map")),
@@ -306,9 +306,9 @@ ui <- fluidPage(
                                                        column(1),
                                                        column(12, h5("The plots below demonstrate the existence (yes) or non-existence (no) of policies in the states considered based on the policy questions that were asked."
                                                        ),
-                                                       
+
                                                        column(1))),
-                                              
+
                                               fluidRow(sidebarPanel( width = 4,
                                                                      selectInput("graphtaxheat", "Subdomain",
                                                                                  choices = c("Tax Credits", "Taxes on Wealth",
@@ -318,15 +318,15 @@ ui <- fluidPage(
                                               # Alternate way to show img that doesn't use the server?:
                                               #fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png")))
                                      ), # close Asset Map tabPanel
-                                     
-                                     
+
+
                                      tabPanel("Analysis & Results",
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h4(strong("Taxation")),
                                                               column(1))),
                                               hr(),
-                                              
+
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h5(strong("Analysis and Results")),
@@ -352,12 +352,12 @@ representing an increased number of policies that promote economic mobility.
                                    ) #close NavlistPanel to select sub-domain for tax heatmap
                                  ) #close fluid row
                         ), #close Tax panel
-                        
-                        
-                        
+
+
+
                         #--Housing and Zoning---------------------------------------
                         tabPanel("Housing and Zoning",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                      tabPanel("Composite Indicators",
@@ -374,7 +374,7 @@ representing an increased number of policies that promote economic mobility.
                                                        column(1),
                                                        column(12, h5("The plots below demonstrate numeric composites calculated using policy data for each subdomain, allowing for comparison between a given policy dimension in each state."),
                                                               column(1))),
-                                              
+
                                               fluidRow(
                                                 sidebarPanel( width = 4,
                                                               selectInput("graphhouse", "Subdomain",
@@ -382,14 +382,14 @@ representing an increased number of policies that promote economic mobility.
                                                               )),
                                                 mainPanel(  uiOutput("imghouse"), align = "center"))
                                      ),
-                                     
+
                                      tabPanel("Policy Asset Map",
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h4(strong("Housing and Zoning")),
                                                               column(1))),
                                               hr(),
-                                              
+
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h5(strong("Policy Asset Map")),
@@ -398,9 +398,9 @@ representing an increased number of policies that promote economic mobility.
                                                        column(1),
                                                        column(12, h5("The plots below demonstrate the existence (yes) or non-existence (no) of policies in the states considered based on the policy questions that were asked."
                                                        ),
-                                                       
+
                                                        column(1))),
-                                              
+
                                               fluidRow(sidebarPanel( width = 4,
                                                                      selectInput("graphhouseheat", "Subdomain",
                                                                                  choices = c("Housing Assistance Policies", "Housing Development Policies", "Housing Financial Policies")
@@ -409,15 +409,15 @@ representing an increased number of policies that promote economic mobility.
                                               # Alternate way to show img that doesn't use the server?:
                                               #fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png")))
                                      ), # close Asset Map tabPanel
-                                     
-                                     
+
+
                                      tabPanel("Analysis & Results",
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h4(strong("Housing and Zoning")),
                                                               column(1))),
                                               hr(),
-                                              
+
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h5(strong("Analysis and Results")),
@@ -427,8 +427,8 @@ representing an increased number of policies that promote economic mobility.
                                                        column(10,
                                                               p("The policy asset map visualizes the three subdomains and the housing policies that influence them. A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy. A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility. Our results show the following:"),
                                                               p(img( src = "heat_table.jpg")),
-                                                              
-                                                              
+
+
                                                               p(strong("Housing Assistance:"), "Virginia performs the worst with a score of 0.50/1, and Iowa performs the best with a score of 1/1. While Oregon performs well with a score of 0.88, it still demonstrates room for improvement."),
                                                               p(strong("Housing Development:"), "Oregon and Iowa perform the same with a score of 0.67/1, and Iowa falls behind with a score of 0.56/1. All three states demonstrate room for improvement.   "),
                                                               p(strong("Financial:"), "Virginia performs the worst with a score of 0.44/1, and Iowa performs the best with a score of 0.67/1. All three states demonstrate room for improvement.  "),
@@ -439,12 +439,12 @@ representing an increased number of policies that promote economic mobility.
                                    ) #close NavlistPanel to select sub-domain for Housing and Zoning heatmap
                                  ) #close fluid row
                         ), #close Housing and Zoning panel
-                        
-                        
-                        
+
+
+
                         #-- Education---------------------------------------------
                         tabPanel("Education",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                      tabPanel("Composite Indicators",
@@ -461,7 +461,7 @@ representing an increased number of policies that promote economic mobility.
                                                        column(1),
                                                        column(12, h5("The plots below demonstrate numeric composites calculated using policy data for each subdomain, allowing for comparison between a given policy dimension in each state."),
                                                               column(1))),
-                                              
+
                                               fluidRow(
                                                 sidebarPanel( width = 4,
                                                               selectInput("graphedu", "Subdomain",
@@ -469,14 +469,14 @@ representing an increased number of policies that promote economic mobility.
                                                               )),
                                                 mainPanel(  uiOutput("imgedu"), align = "center"))
                                      ),
-                                     
+
                                      tabPanel("Policy Asset Map",
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h4(strong("Education")),
                                                               column(1))),
                                               hr(),
-                                              
+
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h5(strong("Policy Asset Map")),
@@ -485,29 +485,29 @@ representing an increased number of policies that promote economic mobility.
                                                        column(1),
                                                        column(12, h5("The policy asset maps below show a composite of 19 subcategories of education (derived from 73 education policy questions). \"1\" means the policy advances economic mobility, while <1 means the policy hinders economic mobility."
                                                        ),
-                                                       
+
                                                        column(1))),
-                                              
+
                                               fluidRow(sidebarPanel( width = 4,
                                                                      selectInput("grapheduheat", "Subdomain",
                                                                                  choices = c("School Climate Policies", "Early Childhood Education Policies", "Post-Secondary Affordability Policies", "Workforce Development Policies")
                                                                      )) ,
                                                        mainPanel(uiOutput("imgeduheat"), align = "center"))
                                               ,
-                                              fluidRow( mainPanel(img(height = 300, width = 400, src = "Education_heatmap.png"))
-                                              )
+                                              #fluidRow( mainPanel(img(height = 300, width = 400, src = "Education_heatmap.png"))
+                                              #)
                                               # Alternate way to show img that doesn't use the server?:
                                               #fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png")))
                                      ), # close Asset Map tabPanel
-                                     
-                                     
+
+
                                      tabPanel("Analysis & Results",
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h4(strong("Education")),
                                                               column(1))),
                                               hr(),
-                                              
+
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h5(strong("Analysis and Results")),
@@ -517,8 +517,8 @@ representing an increased number of policies that promote economic mobility.
                                                        column(10,
                                                               p("The heatmap visualized the 19 subcategories within four domains and the education policies that influence them. Our results show the following:"),
                                                               p(img(height = 300, width = 600, align = "center", src = "educationtable.PNG")),
-                                                              
-                                                              
+
+
                                                               p(strong("School Climate:"), "Iowa has the lowest score of .37/1. This is primarily because Iowa does not have many laws/regulations for school climate as well as has practices of corporal punishment and a lack of limitations on suspensions and expulsion."),
                                                               p(strong("Early Childhood Education:"), "Virginia and Oregon scored the highest while Iowa scored slightly lower.  However, states vary in different subcategories from student-centric policies to ensuring teacher quality."),
                                                               p(strong("Post-Secondary Affordability:"), "Oregon scored the highest with .89/1 while Iowa and Virginia scored in the 60th percentile. This difference is primarily caused by the differences if states have considered and enacted free college policies as well as merit and need based policies. "),
@@ -527,7 +527,7 @@ representing an increased number of policies that promote economic mobility.
                                                        ),
                                                        column(1))
                                      ), # close anaylsis & results
-                                     
+
                                      tabPanel("Box Plot (Will take few seconds to load)",
                                               fluidRow(
                                                 titlePanel("Box Plot of Education Policies"),
@@ -537,13 +537,13 @@ representing an increased number of policies that promote economic mobility.
                                    ) #close NavlistPanel to select sub-domain for Education heatmap
                                  ) #close fluid row
                         ), #close Education panel
-                        
-                        
-                        
-                        
+
+
+
+
                         #-------Voting---------------------------------
                         tabPanel("Voting",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                      tabPanel("Composite Indicators",
@@ -560,7 +560,7 @@ representing an increased number of policies that promote economic mobility.
                                                        column(1),
                                                        column(12, h5("The plots below demonstrate numeric composites calculated using policy data for each subdomain, allowing for comparison between a given policy dimension in each state."),
                                                               column(1))),
-                                              
+
                                               fluidRow(
                                                 sidebarPanel( width = 4,
                                                               selectInput("graphvote", "Subdomain",
@@ -568,14 +568,14 @@ representing an increased number of policies that promote economic mobility.
                                                               )),
                                                 mainPanel(  uiOutput("imgvote"), align = "center"))
                                      ),
-                                     
+
                                      tabPanel("Policy Asset Map",
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h4(strong("Voting")),
                                                               column(1))),
                                               hr(),
-                                              
+
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h5(strong("Policy Asset Map")),
@@ -584,9 +584,9 @@ representing an increased number of policies that promote economic mobility.
                                                        column(1),
                                                        column(12, h5("The plots below demonstrate the existence (yes) or non-existence (no) of policies in the states considered based on the policy questions that were asked."
                                                        ),
-                                                       
+
                                                        column(1))),
-                                              
+
                                               fluidRow(sidebarPanel( width = 4,
                                                                      selectInput("graphvoteheat", "Subdomain",
                                                                                  choices = c("Voting Accessibility", "Voting Registration")
@@ -595,19 +595,19 @@ representing an increased number of policies that promote economic mobility.
                                               ,
                                               fluidRow( mainPanel(img(height = 300, width = 400, src = "heat_map_vote.png"))
                                               )
-                                              
+
                                               # Alternate way to show img that doesn't use the server?:
                                               #fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png")))
                                      ), # close Asset Map tabPanel
-                                     
-                                     
+
+
                                      tabPanel("Analysis & Results",
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h4(strong("Voting")),
                                                               column(1))),
                                               hr(),
-                                              
+
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h5(strong("Analysis and Results")),
@@ -626,16 +626,16 @@ representing an increased number of policies that promote economic mobility.
                                                               p(strong("Overall:"), "___ states had a score of 0.__. All states could improve in making Voting policies that encourage Economic Mobility")
                                                        ),
                                                        column(1))
-                                              
+
                                      ) # close anaylsis & results
                                    ) #close NavlistPanel to select sub-domain for Voting heatmap
                                  ) #close fluid row
                         ), #close Voting panel
-                        
-                        
+
+
                         #----Employment------------------------
                         tabPanel("Employment",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                      tabPanel("Composite Indicators",
@@ -652,7 +652,7 @@ representing an increased number of policies that promote economic mobility.
                                                        column(1),
                                                        column(12, h5("The plots below demonstrate numeric composites calculated using policy data for each subdomain, allowing for comparison between a given policy dimension in each state."),
                                                               column(1))),
-                                              
+
                                               fluidRow(
                                                 sidebarPanel( width = 4,
                                                               selectInput("graphemp", "Subdomain",
@@ -660,14 +660,14 @@ representing an increased number of policies that promote economic mobility.
                                                               )),
                                                 mainPanel(  uiOutput("imgemp"), align = "center"))
                                      ),
-                                     
+
                                      tabPanel("Policy Asset Map",
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h4(strong("Employment")),
                                                               column(1))),
                                               hr(),
-                                              
+
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h5(strong("Policy Asset Map")),
@@ -676,9 +676,9 @@ representing an increased number of policies that promote economic mobility.
                                                        column(1),
                                                        column(12, h5("The plots below demonstrate the existence (yes) or non-existence (no) of policies in the states considered based on the policy questions that were asked."
                                                        ),
-                                                       
+
                                                        column(1))),
-                                              
+
                                               fluidRow(sidebarPanel( width = 4,
                                                                      selectInput("graphempheat", "Subdomain",
                                                                                  choices = c("Worker Organizing Policies", "Worker Protections", "Wage Policies")
@@ -690,15 +690,15 @@ representing an increased number of policies that promote economic mobility.
                                               # Alternate way to show img that doesn't use the server?:
                                               #fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png")))
                                      ), # close Asset Map tabPanel
-                                     
-                                     
+
+
                                      tabPanel("Analysis & Results",
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h4(strong("Employment")),
                                                               column(1))),
                                               hr(),
-                                              
+
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(12, h5(strong("Analysis and Results")),
@@ -719,36 +719,36 @@ representing an increased number of policies that promote economic mobility.
                                                               p(strong("Overall:"), "___ states had a score of 0.__. All states could improve in making Voting policies that encourage Economic Mobility")
                                                        ),
                                                        column(1))
-                                              
+
                                      ) # close anaylsis & results
                                    ) #close NavlistPanel to select sub-domain for Employment heatmap
                                  ) #close fluid row
                         ) #close Employment panel
-                        
-                        
+
+
              ), #Close narbarMenu for Domain of Analysis
-             
-             
-             
+
+
+
              #-------- Data & Methods ---------------------------------------------------------------------------------------
-             
-             
+
+
              navbarMenu(h4("Data, Measures & Methods"),
                         tabPanel("Summary",
                                  fluidRow(
                                    navlistPanel(
-                                     
+
                                      tabPanel( "Composite Scores",
                                                fluidRow(width =12,
                                                         column(1),
                                                         column(10,
-                                                               
+
                                                                h3("Composite index for all subdomains for the three states."),
                                                                p("Takes a couple seconds to load.")),
                                                         column(1)),
                                                column(2),
                                                column(10, h3(strong("")),
-                                                      
+
                                                       strong(""),
                                                       p()),
                                                mainPanel(width=12, align = "center",
@@ -757,10 +757,10 @@ representing an increased number of policies that promote economic mobility.
                                                          )
                                                ),
                                                column(2)
-                                               
-                                               
+
+
                                      ), #close tab
-                                     
+
                                      tabPanel( "Scoring Methods",
                                                width =12,
                                                column(1),
@@ -776,27 +776,27 @@ representing an increased number of policies that promote economic mobility.
                                                column(10,
                                                       img(height = 132 , width = 750, src = "domain_table.PNG"))
                                      ), #close tab
-                                     
+
                                      tabPanel( "View the Data",
                                                width =12,
                                                column(1),
-                                               column(10, 
+                                               column(10,
                                                       h3(strong(
                                                         "All Data")),
                                                       hr(),
                                                       DT::dataTableOutput("all_data_table"),
                                                       column(1))
-                                               
-                                               
+
+
                                      ) #close tab
-                                     
+
                                    ) #close navlistPanel
                                  ) #close fluidrow
-                                 
+
                         ), #Close Summary tab
-                        
+
                         tabPanel("Law Enforcement",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                      tabPanel( "Background",
@@ -820,19 +820,19 @@ representing an increased number of policies that promote economic mobility.
                                                       p("c.", strong("Community Policing Practices"), "- Community Policing Practices explores the standards that officers must abide by in policing the community with a focus on the equality of standards. For example, custodial sexual misconduct policies are analyzed, both numerically and qualitatively, to assess how states hold officers accountable for allegations of misconduct made against them by an individual in their custody. In addition, body camera usage, demographic information collection and domestic violence related polices are considered in this subdomain. We also qualitatively assess the nature of officer training programs in the states, particularly those pertaining to treating individuals with mental health issues.")),
                                                column(1)
                                      ),
-                                     
+
                                      tabPanel("Data Sources & References",
-                                              
-                                              
+
+
                                               fluidRow(width =12,
                                                        column(1),
-                                                       column(10, h3(strong("Data Sources and References")),  
+                                                       column(10, h3(strong("Data Sources and References")),
                                                               hr(), h3("Data Sources"),
                                                               downloadButton("downloadData", "Download CSV"),
-                                                              
+
                                                               br(),
                                                               p("Key Data Sources are listed below. The entire list can be found by downloading the entire domain-specific dataset using the button above."),
-                                                              
+
                                                               tags$a(href="https://justiceforwardva.com/bail-reform#:~:text=As%20it%20stands%2C%20Virginia%20employs,whether%20pretrial%20release%20is%20appropriate.&text=If%20a%20person%20cannot%20make,to%20pay%20the%20money%20bail.", "Justice Forward Virginia: Bail"),
                                                               br(),
                                                               tags$a(href="https://ij.org/activism/legislation/civil-forfeiture-legislative-highlights/", "Institute for Justice: Civil Forfeiture Reforms on the State Level"),
@@ -846,44 +846,44 @@ representing an increased number of policies that promote economic mobility.
                                                               tags$a(href="https://statusofwomendata.org/explore-the-data/state-data/oregon/#violence-safety", "Status of Women in the United States"),
                                                               br(),
                                                               tags$a(href="https://www.sentencingproject.org/publications/private-prisons-united-states/#:~:text=In%20six%20states%20the%20private,%2C%20and%20Georgia%20(110%25).", "Sentencing Project: Private Prisons in the United States"),
-                                                              
+
                                                               br(),
                                                               tags$a(href="https://www.courts.oregon.gov/programs/inclusion/Documents/juvrights.pdf", "Courts.Oregon.Org: YOUTH FACES THE LAW:A Juvenile Rights Handbook"),
                                                               br(),
                                                               tags$a(href="https://deathpenaltyinfo.org/state-and-federal-info/state-by-state", "Death Penalty Information Center: State by State"),
                                                               br(),
-                                                              
+
                                                               h3("References"),
-                                                              
+
                                                               tags$a(href="https://www.theatlantic.com/politics/archive/2015/12/how-families-pay-the-never-ending-price-of-a-criminal-record/433641/", "The Atlantic: How Families Pay the Never-Ending Price of a Criminal Record"),
                                                               br(),
                                                               tags$a(href="https://www.ncjrs.gov/pdffiles1/nij/grants/244756.pdf ", "NCJRS: Criminal Stigma, Race, Gender and Employment")
-                                                       ) 
+                                                       )
                                               ) #close fluid row
                                      ), # Data Sources & References panel
-                                     
+
                                      tabPanel("View the Data",
-                                              
-                                              
+
+
                                               fluidRow(width =12,
                                                        column(1),
                                                        column(10, h3(strong("Law Enforcement Data Set")),
                                                               DT::dataTableOutput("lawtable")
-                                                              
+
                                                        )
-                                              )#close fluidrow 
-                                              
+                                              )#close fluidrow
+
                                      ) # close Data tab
-                                     
+
                                    ) #close navlistPanel
                                  ) #close fluid row
                         ), # Close Law Enforcement tabPanel
-                        
-                        
-                        
+
+
+
                         #----Tax ----------------
                         tabPanel("Taxation",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                      tabPanel( "Background",
@@ -910,21 +910,21 @@ representing an increased number of policies that promote economic mobility.
                                                    of tax policies and financial redistribution, we can better understand how tax policy can support economic mobility.  ")
                                                ),
                                                column(1)),
-                                     
+
                                      tabPanel("Data Sources & References",
-                                              
-                                              
+
+
                                               fluidRow(width =12,
                                                        column(1),
                                                        column(10, h3(strong("Data Sources and References")),
                                                               br(),
-                                                              
+
                                                               h3("Data Sources"),
                                                               tags$a(href="https://www.ecs.org/research-reports/key-issues/postsecondary-affordability/", "Education Commission of The States: Postsecondary Affordability"),
                                                               br(),
                                                               tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Iowa%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Iowa Compilation of School Discipline Laws and Regulations"),
                                                               br(),
-                                                              
+
                                                               h3("References"),
                                                               tags$a(href="https://www.brookings.edu/research/hitting-kids-american-parenting-and-physical-punishment/", "Brookings: Corporal Punishment"),
                                                               br(),
@@ -932,26 +932,26 @@ representing an increased number of policies that promote economic mobility.
                                                        )
                                               ) #close fluid row
                                      ), # Data Sources & References panel
-                                     
+
                                      tabPanel("View the Data",
                                               fluidRow(width =12,
                                                        column(1),
                                                        column(10, h3(strong("Taxation Data Set")),
                                                               DT::dataTableOutput("taxtable")
-                                                              
+
                                                        )
                                               )#close fluidrow
                                      ) # close Data tab
-                                     
+
                                    ) #close navlistPanel
                                  ) #close fluid row
                         ), # Close Taxation tabPanel
-                        
-                        
-                        
+
+
+
                         #---Housing------------------
                         tabPanel("Housing & Zoning",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                      tabPanel( "Background",
@@ -969,19 +969,19 @@ representing an increased number of policies that promote economic mobility.
                                                       p("Housing", strong("Financial"), " policy describes policies which aid in covering costs to help provide a fair financial environment when purchasing or renting homes. This includes loan assistance programs, home price discounts and tax exemptions. By understanding housing financial policies and their effects on communities, we can understand which policies cultivate the ideal environment for economic mobility."),
                                                       br(),
                                                       p(strong("Development"), " policies are land use and planning regulations that influence the cost and equity of housing. Restricting the development of multi-unit housing, for example, can drive up the cost of housing. ")
-                                                      
-                                                      
+
+
                                                ),
                                                column(1)),
-                                     
+
                                      tabPanel("Data Sources & References",
-                                              
-                                              
+
+
                                               fluidRow(width =12,
                                                        column(1),
                                                        column(10, h3(strong("Data Sources and References")),
                                                               br(),
-                                                              
+
                                                               h3("Data Sources"),
                                                               tags$a(href="https://www.fha.com/fha-grants?state=OR#:~:text=First%20Time%20Home%20Buyer%20Loan,within%20the%20City%20of%20Corvallis.", "Federal Housing Administration (FHA): \"States with First Time Home Buyer Programs\""),
                                                               br(),
@@ -1097,10 +1097,10 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                               tags$a(href="https://www.vhda.com/about/Planning-Policy/Pages/StrategicPlanningProcess.aspx", "Virginia Housing Development Authority (VHDA): \"VHDA's Strategic Planning Process\""),
                                                               br(),
                                                               tags$a(href="https://www.vhda.com/SiteCollectionDocuments/StrategicPlan.pdf", "Virginia Housing Development Authority (VHDA): \"VHDA Strategic Direction\""),
-                                                              
+
                                                               br(),
                                                               tags$a(href="https://oregonlawhelp.org/resource/reasonable-rules-in-mobile-home-parks-and-flo", "Law Help: \"Oregon Mobile Home Laws\""),
-                                                              
+
                                                               br(),
                                                               tags$a(href="https://www.oregon.gov/ohcs/development/pages/index.aspx", "Oregon Housing Development: \"Housing Development\""),
                                                               br(),
@@ -1111,8 +1111,8 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                               tags$a(href="https://www.portland.gov/bps/adap/gentrification-and-displacement-studies", "The City of Portland, Oregon: \"Gentrification and Displacement Studies\""),
                                                               br(),
                                                               tags$a(href="https://bpr.berkeley.edu/2018/06/01/how-portlands-right-to-return-is-indeed-right-to-return-housing-to-the-underrepresented/ ", "Berkeley Political Review: \"Portland's 'Right to Return'\""),
-                                                              
-                                                              
+
+
                                                               h3("References"),
                                                               tags$a(href="https://www.urban.org/sites/default/files/alfresco/publication-pdfs/2000428-Housing-Policy-Levers-to-Promote-Economic-Mobility.pdf", "Urban Institute: \"Housing Policy Levers to Promote Economic Mobility\""),
                                                               br(),
@@ -1121,33 +1121,33 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                               tags$a(href="https://www.dcpolicycenter.org/publications/economic-cost-land-use/", "DC Policy Center: \"The economic costs of land use regulations\""),
                                                               br(),
                                                               tags$a(href="https://www.urban.org/sites/default/files/publication/98758/lithc_how_it_works_and_who_it_serves_final_2.pdf", "Urban Institute: \"The Low-Income Housing Tax Credit\"")
-                                                              
+
                                                        )
                                               ) #close fluid row
                                      ), # Data Sources & References panel
-                                     
+
                                      tabPanel("View the Data",
                                               fluidRow(width =12,
                                                        column(1),
                                                        column(10, h3(strong("Housing & Zoning Data Set")),
                                                               DT::dataTableOutput("housetable")
-                                                              
+
                                                        )
                                               )#close fluidrow
                                      ) # close Data tab
-                                     
+
                                    ) #close navlistPanel
                                  ) #close fluid row
                         ), # Close Housing/ tabPanel
-                        
-                        
-                        
-                        
-                        
+
+
+
+
+
                         #---------Education---------------
-                        
+
                         tabPanel("Education",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                      tabPanel( "Background",
@@ -1167,14 +1167,14 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                fluidRow(width = 12, style = "margin: 20px",
                                                         plotOutput("word_cloud", height = '700px'))
                                      ),
-                                     
+
                                      tabPanel("Data Sources & References",
                                               fluidRow(width =12,
                                                        column(1),
                                                        column(10, h3(strong("Data Sources and References")),
-                                                              
-                                                              
-                                                              
+
+
+
                                                               br(),
                                                               h3("Data Sources"),
                                                               tags$a(href="https://www.ecs.org/research-reports/key-issues/postsecondary-affordability/", "Education Commission of The States: Postsecondary Affordability"),
@@ -1192,9 +1192,9 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                               tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Iowa%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Iowa Compilation of School Discipline Laws and Regulations"),
                                                               br(),
                                                               h3("References"),
-                                                              
-                                                              
-                                                              
+
+
+
                                                               tags$a(href="https://www.brookings.edu/research/hitting-kids-american-parenting-and-physical-punishment/", "Brookings Corporal Punishment"),
                                                               br(),
                                                               tags$a(href="https://www.pnas.org/content/116/17/8255", "PNAS Corporal Punishment"),
@@ -1204,31 +1204,31 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                               tags$a(href="https://cew.georgetown.edu/cew-reports/recovery-job-growth-and-education-requirements-through-2020/", "Georgetown Job Growth and Education Requirements through 2020"),
                                                               br(),
                                                               tags$a(href="https://www.luminafoundation.org/news-and-views/does-higher-education-really-increase-economic-mobility/", "Lumina Foundation: Does higher education really increase economic mobility?")
-                                                              
+
                                                        )
                                               ) #close fluid row
                                      ), # Data Sources & References panel
-                                     
+
                                      tabPanel("View the Data",
                                               fluidRow(width =12,
                                                        column(1),
                                                        column(10, h3(strong("Education Data Set")),
                                                               DT::dataTableOutput("edutable")
-                                                              
+
                                                        )
                                               )#close fluidrow
                                      ) # close Data tab
-                                     
+
                                    ) #close navlistPanel
                                  ) #close fluid row
                         ), # Close Education tabPanel
-                        
-                        
-                        
-                        
+
+
+
+
                         #-------Voting -----
                         tabPanel("Voting",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                      tabPanel( "Background",
@@ -1240,25 +1240,25 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                       p(""),
                                                       br(),
                                                       p("")
-                                                      
+
                                                ),
                                                column(1)
                                      ), # close Background Tab
-                                     
+
                                      tabPanel("Data Sources & References",
-                                              
-                                              
+
+
                                               fluidRow(width =12,
                                                        column(1),
                                                        column(10, h3(strong("Data Sources and References")),
                                                               br(),
-                                                              
+
                                                               h3("Data Sources"),
                                                               tags$a(href="[url]", "_________: \"_________\""),
                                                               br(),
                                                               tags$a(href="[url]", "_____________namw/article____"),
                                                               br(),
-                                                              
+
                                                               h3("References"),
                                                               tags$a(href="https://www.urban.org/sites/default/files/alfresco/publication-pdfs/2000428-Housing-Policy-Levers-to-Promote-Economic-Mobility.pdf", "Urban Institute: \"HousingPolicy Levers to Promote Economic Mobility\""),
                                                               br(),
@@ -1266,24 +1266,24 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                        )
                                               ) #close fluid row
                                      ), # Data Sources & References panel
-                                     
+
                                      tabPanel("View the Data",
                                               fluidRow(width =12,
                                                        column(1),
                                                        column(10, h3(strong("Voting Data Set")),
                                                               DT::dataTableOutput("votetable")
-                                                              
+
                                                        )
                                               )#close fluidrow
                                      ) # close Data tab
-                                     
+
                                    ) #close navlistPanel
                                  ) #close fluid row
                         ), # Close Voting tabPanel
-                        
+
                         #-----------Employment
                         tabPanel("Employment",
-                                 
+
                                  fluidRow(
                                    navlistPanel(
                                      tabPanel( "Background",
@@ -1295,24 +1295,24 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                       p(""),
                                                       br(),
                                                       p("")
-                                                      
+
                                                ),
                                                column(1)),
-                                     
+
                                      tabPanel("Data Sources & References",
-                                              
-                                              
+
+
                                               fluidRow(width =12,
                                                        column(1),
                                                        column(10, h3(strong("Data Sources and References")),
                                                               br(),
-                                                              
+
                                                               h3("Data Sources"),
                                                               tags$a(href="[url]", "_________: \"_________\""),
                                                               br(),
                                                               tags$a(href="[url]", "_____________namw/article____"),
                                                               br(),
-                                                              
+
                                                               h3("References"),
                                                               tags$a(href="https://www.urban.org/sites/default/files/alfresco/publication-pdfs/2000428-Housing-Policy-Levers-to-Promote-Economic-Mobility.pdf", "Urban Institute: \"HousingPolicy Levers to Promote Economic Mobility\""),
                                                               br(),
@@ -1320,27 +1320,27 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                        )
                                               ) #close fluid row
                                      ), # Data Sources & References panel
-                                     
+
                                      tabPanel("View the Data",
                                               fluidRow(width =12,
                                                        column(1),
                                                        column(10, h3(strong("Employment Set")),
                                                               DT::dataTableOutput("emptable")
-                                                              
+
                                                        )
                                               )#close fluidrow
                                      ) # close Data tab
-                                     
+
                                    ) #close navlistPanel
                                  ) #close fluid row
                         ) # Close Employment tabPanel
-                        
-                        
+
+
              ),#Close NavbarMenu for Data & Methods
-             
-             
+
+
              #----------Team page-------------------------
-             
+
              tabPanel(h4("Project Team"),
                       fluidRow(
                         boxPlus(
@@ -1353,7 +1353,7 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                           h2("DSPG Team Members"),
                           #Possible way to display info?
                           fluidRow(
-                            
+
                             style = "height:10px;"),
                           fluidRow(
                             # Lara
@@ -1411,8 +1411,8 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                        )
                                    )
                             ),
-                            
-                            
+
+
                             # Tasfia
                             column(2,
                                    div(class="panel panel-default",
@@ -1440,28 +1440,28 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                       width = "100px", height = "100px")),
                                            div(
                                              tags$h5("Vatsala Ramanan"),
-                                             tags$h6( tags$i("Intern")) 
+                                             tags$h6( tags$i("Intern"))
                                            ),
                                            div(
                                              "Vatsala is a rising junior at Smith College studying Quantitative Economics and Government." )                                          )
                                    )# close top div
-                                   
+
                             )
                           ),
                           column(1)),
-                        
-                        
-                        
-                        
+
+
+
+
                         #SDAD
                         h2("UVA SDAD Team Members"),
                         p("The Social and Decision Analytics Division (SDAD) is one of three research divisions within the Biocomplexity Institute and Initiative at the University of Virginia. SDAD combines expertise in statistics and social and behavioral sciences to develop evidence-based research and quantitative methods to inform policy decision-making and evaluation. The researchers at SDAD span many disciplines including statistics, economics, sociology, psychology, political science, policy, health IT, public health, program evaluation, and data science.
                             The SDAD office is located near our nation's capital in Arlington, VA. You can
                             learn more about us at", a(href = "https://biocomplexity.virginia.edu/social-decision-analytics", "https://biocomplexity.virginia.edu/social-decision-analytics"), "."),
                         fluidRow(
-                          
+
                           style = "height:50px;"),
-                        
+
                         fluidRow(
                           # Vicki
                           column(2,
@@ -1485,8 +1485,8 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                           ) #close column
                         ),  #close fluidrow
                         column(1),
-                        
-                        
+
+
                         # Cesar
                         column(2,
                                div(class="panel panel-default",
@@ -1508,13 +1508,13 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                    )
                                )
                         )  #close Cesar
-                        
+
                       )
-                      
-                      
+
+
              )#close "Project Team panel
-             
-             
+
+
   )#close NavbarPage for overall tabs on top of page
 )# close UI fluid page
 
@@ -1525,24 +1525,24 @@ The American Planning Association: \"Managing Growth and Development in Virginia
 
 
 server <- shinyServer(function(input,output){
-  
+
   #getPage<-function() {
   # return(includeHTML("boxplot.html"))
   #}
   #output$inc<-renderUI({getPage()})
-  
+
   output$bp <- renderUI({
     includeHTML("boxplot.html")
   })
-  
-  
-  
+
+
+
   # Law Enforcement Plots Rendering
   output$imglaw <- renderUI({
-    if(input$graphlaw == "Domain level"){            
+    if(input$graphlaw == "Domain level"){
       img(height = 300, width = 400, src = "law_domain_plot.png")
-    }                                        
-    
+    }
+
     else if(input$graphlaw == "Arrest and Court Proceedings"){
       img(height = 300, width = 400, src = "law_sub_arrest.png")
     }
@@ -1553,39 +1553,39 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "law_sub_community.png")
     }
   })
-  
+
   output$imglawheat <- renderUI({
     if(input$graphlawheat == "Arrest and Court Proceedings"){
       img(height = 500, width = 800, src = "arrest_heat_map.png")
-    }       
+    }
     else if(input$graphlawheat == "Incarceration Practices"){
       img(height = 500, width = 800, src = "incarceration_heat__map.png")
     }
     else if(input$graphlawheat == "Community Policing"){
       img(height = 500, width = 800, src = "community_heat.png")
     }
-  }) 
-  
+  })
+
   #Law Enforcement Data Download
-  
-  output$downloadData <- downloadHandler( 
+
+  output$downloadData <- downloadHandler(
     filename = function() {
       paste("data-", ".csv", sep = "")
     },
     content = function(file) {
       write.csv(Lawenforce_data, file)
     }
-  ) 
-  
-  
-  
-  
+  )
+
+
+
+
   # Taxation Plots Rendering
   output$imgtax <- renderUI({
     if(input$graphtax == "Domain level"){
       img(height = 300, width = 400, src = "tax_domain_plot.png", align = "left")
     }
-    
+
     else if(input$graphtax == "Tax Credits"){
       img(height = 300, width = 400, src = "tax_sub_credits.png")
     }
@@ -1599,7 +1599,7 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "tax_sub_gini.png")
     }
   })
-  
+
   output$imgtaxheat <- renderUI({
     if(input$graphtaxheat == "Taxes on Wealth"){
       img(height = 300, width = 400, src = "tax_heat_wealth.png")
@@ -1614,12 +1614,12 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "tax_heat_gini.png")
     }
   })
-  
-  
-  
-  
+
+
+
+
   # Housing & Zoning Plots Rendering
-  
+
   output$imghouse <- renderUI({
     if(input$graphhouse == "Domain level"){
       img(height = 300, width = 400, src = "composite_housing_lollipop.png", align = "left")
@@ -1634,7 +1634,7 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "financial_lollipop.png")
     }
   })
-  
+
   output$imghouseheat <- renderUI({
     if(input$graphhouseheat == "Housing Assistance Policies"){
       img(height = 300, width = 400, src = "housing_heat_assistance.png")
@@ -1646,11 +1646,11 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "housing_heat_financial.png")
     }
   })
-  
-  
-  
-  
-  
+
+
+
+
+
   # Employment Plots Rendering
   output$imgemp <- renderUI({
     if(input$graphemp == "Domain level"){
@@ -1666,7 +1666,7 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "employment_sub_wage.png")
     }
   })
-  
+
   output$imgempheat <- renderUI({
     if(input$graphempheat == "Worker Organizing Policies"){
       img(height = 300, width = 400, src = "")
@@ -1678,9 +1678,9 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "")
     }
   })
-  
-  
-  
+
+
+
   # Voting Plots Rendering
   output$imgvote <- renderUI({
     if(input$graphvote == "Domain level"){
@@ -1693,7 +1693,7 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "vote_sub_reg.png")
     }
   })
-  
+
   output$imgvoteheat <- renderUI({
     if(input$graphvoteheat == "Voting Accessibility"){
       img(height = 300, width = 400, src = "")
@@ -1702,8 +1702,8 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "")
     }
   })
-  
-  
+
+
   # Education Plots Rendering
   output$imgedu <- renderUI({
     if(input$graphedu == "Domain level"){
@@ -1717,57 +1717,57 @@ server <- shinyServer(function(input,output){
     }
     else if(input$graphedu == "Post-Secondary Affordability Policies"){
       img(height = 300, width = 400, src = "edu_postsecondartafford.png")
-      
+
     }
     else if(input$graphedu == "Workforce Development Policies"){
       img(height = 300, width = 400, src = "education_workforcedev.png")
     }
   })
-  
+
   output$imgeduheat <- renderUI({
     if(input$grapheduheat == "School Climate Policies"){
-      img(height = 300, width = 400, src = "")
+      img(height = 300, width = 400, src = "Education_School_Climate.png")
     }
     else if(input$grapheduheat == "Early Childhood Education Policies"){
-      img(height = 300, width = 400, src = "")
+      img(height = 300, width = 400, src = "edu_earlychildhoodeducation.png")
     }
     else if(input$grapheduheat == "Post-Secondary Affordability Policies"){
-      img(height = 300, width = 400, src = "")
+      img(height = 300, width = 400, src = "edu_afford.png")
     }
     else if(input$grapheduheat == "Workforce Development Policies"){
-      img(height = 300, width = 400, src = "edu_heatmap_workforcedev.png")
+      img(height = 300, width = 400, src = "edu_workforcedev.png")
     }
   })
-  
-  
+
+
   output$all_data_table <- DT::renderDataTable({
     all_data
   })
-  
+
   output$lawtable = DT::renderDataTable({
     law_dt_data
-    
+
   })
   output$taxtable = DT::renderDataTable({
     tax_dt_data
-    
+
   })
   output$housetable = DT::renderDataTable({
     house_dt_data
-    
+
   })
   output$edutable = DT::renderDataTable({
     edu_dt_data
-    
+
   })
   output$votetable = DT::renderDataTable({
     vote_dt_data
-    
+
   })
   output$emptable = DT::renderDataTable({
     emp_dt_data
   })
-  
+
   # Interactive Plot summary 3 states by subdomain - ALL COMPOSITES
   output$cesarplot <- renderPlotly({
     qn <- ggplot(av_mdata, aes(x=1, y=score)) +
@@ -1777,12 +1777,12 @@ server <- shinyServer(function(input,output){
       geom_boxplot(aes(y=score),  alpha = 0.2, width = .3, colour = "BLACK")+
       theme(legend.position="bottom", axis.text.y = element_blank(), axis.ticks.y = element_blank())+
       coord_flip()
-    
+
     ggplotly(qn) %>%
       layout(legend = list(orientation = "h", x = 0.25, y = -0.4))
   })
-  
-  
+
+
 }) # close the server
 
 
