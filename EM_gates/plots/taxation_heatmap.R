@@ -2,6 +2,8 @@ library(ggplot2)
 library(dplyr)
 library(readr)
 library(rlist)
+library(gridExtra)
+library(grid)
 
 setwd('~/git/TestDSPG/dspg20uvaEM/EM_gates/WWW')
 source("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/theme_SDAD.R")
@@ -48,15 +50,16 @@ heatmap.for.subdomain <-function(domain, subdomain, scores) {
           legend.position="none")
 }
 
-# png("tax_heat_credits.png", width = 600, height = 400)
-# credits <- heatmap.for.subdomain("Taxation", "Tax Credits", credit_scores)
-# credits
-# dev.off()
-#
-# png("tax_heat_wealth.png", width = 600, height = 400)
-# wealth <- heatmap.for.subdomain("Taxation", "Taxes on Wealth", wealth_scores)
-# wealth
-# dev.off()
+png("tax_heat_credits.png", width = 600, height = 400)
+credits <- heatmap.for.subdomain("Taxation", "Tax Credits", credit_scores)
+credits
+dev.off()
+
+
+png("tax_heat_wealth.png", width = 600, height = 400)
+wealth <- heatmap.for.subdomain("Taxation", "Taxes on Wealth", wealth_scores)
+wealth
+dev.off()
 
 png("tax_heat_business.png", width = 600, height = 400)
 business <- heatmap.for.subdomain("Taxation", "Taxes Related to Business and Corporations",
@@ -109,3 +112,13 @@ ggplot(VOTE, aes(y=Questions, x=States, fill=factor(Scores))) +
         axis.text.x=element_text(size=13, hjust=0.5, colour="#2a2a2b"),
         legend.position="none")
 
+
+
+composite_card <- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
+composite_card
+composite_card <- composite_card %>%
+  filter(Domain == "Taxation")
+myTable <- tableGrob(composite_card,
+                     rows = NULL,
+                     theme = ttheme_default(core = list(bg_params = list(fill = "grey99"))))
+grid.draw(myTable)
