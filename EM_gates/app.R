@@ -41,7 +41,20 @@ all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final.xls
 mdata <- melt(em_data, id.vars = c("Domain", "Subdomain") , measure.vars = c("Virginia", "Iowa", "Oregon" ))
 mdata<- mdata %>% rename( state=variable, score = value)
 av_mdata <- mdata
-av_mdata$label = paste(av_mdata$Domain, ":", av_mdata$Subdomain)
+
+#prep data for education boxplot
+edu_3states <- read_csv("~/git/dspg20uvaEM/EM_gates/data/edu_3states.csv")
+edu_3states
+
+#melt data base
+library(reshape2)
+edu <- melt(data = edu_3states, id.vars = c("domain", "dimension", "subcategory"), measure.vars = c("Oregon", "Virginia", "Iowa"))
+
+#averages by subcategory
+length(unique(edu$subcategory))
+
+#edu_av<- edu %>% group_by(subcategory) %>% summarize(mean=mean(value))
+edu_av2<-edu %>% group_by(variable,subcategory) %>% summarise(mean=mean(value))
 
 #---------------------------------
 #dataTable data
@@ -528,10 +541,11 @@ representing an increased number of policies that promote economic mobility.
                                                        column(1))
                                      ), # close anaylsis & results
 
-                                     tabPanel("Box Plot (Will take few seconds to load)",
-                                              fluidRow(
-                                                titlePanel("Box Plot of Education Policies"),
-                                                mainPanel(uiOutput("bp")
+                                     tabPanel("Box Plot",
+                                              mainPanel(width=12, align = "center",
+                                                        body <- dashboardBody(
+                                                          plotlyOutput("educationboxplot")
+
                                                 )
                                               ))
                                    ) #close NavlistPanel to select sub-domain for Education heatmap
@@ -744,7 +758,7 @@ representing an increased number of policies that promote economic mobility.
                                                         column(10,
 
                                                                h3("Composite index for all subdomains for the three states."),
-                                                               p("May take several seconds to load.")),
+                                                               p("Takes a couple seconds to load.")),
                                                         column(1)),
                                                column(2),
                                                column(10, h3(strong("")),
@@ -1771,7 +1785,7 @@ server <- shinyServer(function(input,output){
   # Interactive Plot summary 3 states by subdomain - ALL COMPOSITES
   output$cesarplot <- renderPlotly({
     qn <- ggplot(av_mdata, aes(x=1, y=score)) +
-      geom_point(aes(text = label, colour = factor(state)), position = position_jitter(width = 1),
+      geom_point(aes(colour = factor(state)), position = position_jitter(width = 1),
                  size = 2, show.legend = TRUE)+
       xlab("") + ylab("Composite index") +
       geom_boxplot(aes(y=score),  alpha = 0.2, width = .3, colour = "BLACK")+
@@ -1779,6 +1793,35 @@ server <- shinyServer(function(input,output){
       coord_flip()
 
     ggplotly(qn) %>%
+      layout(legend = list(orientation = "h", x = 0.25, y = -0.4))
+  })
+
+
+  # Interactive Plot summary 3 states by subdomain - ALL COMPOSITES
+
+  output$educationboxplot <- renderPlotly({
+    q<- ggplot(edu_av2, aes(x=variable, y= mean, fill=variable ) )+
+      #geom_flat_violin(position = position_nudge(x = .2, y = 0), adjust = 3)+
+      geom_point(aes(fill = factor(subcategory)), position = position_jitter(width = .15), size = .6)+
+      #geom_point(aes(colour = factor(cyl)))
+
+      geom_boxplot(aes(x = as.numeric(variable)+ 0.15, y = mean), outlier.shape = 1 , alpha = 0.1, width = .1, colour = "BLACK", show.legend = FALSE) +
+
+      #geom_boxplot(outlier.colour="black", outlier.shape=1, outlier.size=1, notch=FALSE, width = .1, colour = "BLACK", fill="transparent") +
+      ylab('Policy Score')+xlab('')+
+      coord_flip()+
+      theme_gray()+
+      guides(fill = FALSE)+
+      ggtitle('Education Policy Distribution Across States')+
+      theme(
+        panel.grid.major = element_line(size = 0.25, linetype = 'solid', colour = "gray"),
+        axis.line = element_line(colour = "transparent"), legend.position = "none"
+      )
+
+    myplot =ggplotly(q)
+
+
+    ggplotly(q) %>%
       layout(legend = list(orientation = "h", x = 0.25, y = -0.4))
   })
 
