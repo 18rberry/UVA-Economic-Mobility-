@@ -55,14 +55,14 @@ display.subdomain(1)
 # dev.off()
 
 #tax credit plot
-# png("tax_sub_credits.png", width = 600, height = 400)
+png("tax_sub_credits.png", width = 600, height = 400)
 display.subdomain(2)
-# dev.off()
+dev.off()
 
 #taxes on wealth plot
-# png("tax_sub_wealth.png", width = 600, height = 400)
+png("tax_sub_wealth.png", width = 600, height = 400)
 display.subdomain(3)
-# dev.off()
+dev.off()
 
 #taxes related to business plot
 # png("tax_sub_business.png", width = 600, height = 400)
