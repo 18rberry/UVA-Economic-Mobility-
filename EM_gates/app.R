@@ -40,7 +40,7 @@ all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final.xls
 # prep data for interactive composite plot
 mdata <- melt(em_data, id.vars = c("Domain", "Subdomain") , measure.vars = c("Virginia", "Iowa", "Oregon" ))
 mdata<- mdata %>% rename( state=variable, score = value)
-av_mdata <- mdata 
+av_mdata <- mdata
 
 
 #---------------------------------
@@ -140,9 +140,9 @@ ui <- fluidPage(
                           By identifying those policies that can impede the economic mobility a community can better strategize for effective change."),
                         h1("Approach and Ethical Considerations"),
                         p("This project benefits 'public good' in identifying and assessing policies that can later be aggregated
-                          and used to influence public policy. While this project is essential to undertake, doing so comes with ethical challenges and risks. First, 
+                          and used to influence public policy. While this project is essential to undertake, doing so comes with ethical challenges and risks. First,
                           the way we defined 'political capital' and collected data is determined by our understanding of economic mobility. Moreover, the process of creating
-                          composite indicators, by constructing binary scoring cards, reduces the policies to their bare minimum and can strip them of nuance. Consulting domain and policy experts, 
+                          composite indicators, by constructing binary scoring cards, reduces the policies to their bare minimum and can strip them of nuance. Consulting domain and policy experts,
                           providing our raw dataset and including the source of each policy measure allows us to minimise the impact of biases on our process.",
                           br(),
                           br())
@@ -161,7 +161,7 @@ ui <- fluidPage(
                                                    br(),
 
                                                    "1. Law Enforcement and Criminal Justice", br(),
-                                                   "2. Taxation", br(), 
+                                                   "2. Taxation", br(),
                                                    "3. Housing and Zoning", br(),
                                                    "4. Education", br(),
                                                    "5. Voting", br(),
@@ -169,7 +169,7 @@ ui <- fluidPage(
                                                    br(),
                                                    img(height = 450, width = 750, src = "taxonomy_graphic.png", align = "center"),
                                                    br(),
-                                                   "Estimating a quantitative measure of the existence of political capital is a challenging task. We propose the quantification of the identified policy domains into an index. 
+                                                   "Estimating a quantitative measure of the existence of political capital is a challenging task. We propose the quantification of the identified policy domains into an index.
                                                    This index consists of sub-domains (subject areas) which contain specific questions about existence of policies related to Economic Mobility. For instance, the Law Enforcement
                                                    and Criminal Justice domain is explained by the diagram above. "
                                                    )
@@ -245,11 +245,11 @@ ui <- fluidPage(
                                                                             Our results show the following:"),
                                                                           p(img( src = "heat_table.jpg")),
                                                                           p(strong("Arrest and Court Proceedings:"), ", Virginia performs the worst with a 0.60/1 while Oregon performs the best with a 1.00/1."),
-                                                                          
+
                                                                           p(strong("Incarceration:"), ", all three states perform equally with a 0.60/1."),
-                                                                          
+
                                                                           p(strong("Community Policing:"), ", both Oregon and Virginia perform at a 0.40/1 while Iowa does better with a 0.60/1."),
-                                                                          
+
                                                                           p(strong("Overall:"), ", under our scoring criteria Oregon and Iowa do equally the best in terms of law enforcement policies with a 0.67/1 and Virginia does the worst with a 0.53/1.  ")),
                                                                    column(1))
 
@@ -736,25 +736,25 @@ representing an increased number of policies that promote economic mobility.
                                                fluidRow(width =12,
                                                         column(1),
                                                         column(10,
-                                                               
+
                                                                h3("Composite index for all subdomains for the three states."),
                                                                p("Takes a couple seconds to load.")),
                                                         column(1)),
-                                               column(2), 
+                                               column(2),
                                                column(10, h3(strong("")),
-                                                      
+
                                                       strong(""),
                                                       p()),
-                                               mainPanel(width=12, align = "center", 
+                                               mainPanel(width=12, align = "center",
                                                          body <- dashboardBody(
                                                            plotlyOutput("cesarplot")
                                                          )
                                                ),
                                                column(2)
-                                               
+
 
                                      ), #close tab
-                                     
+
                                      tabPanel( "Scoring Methods",
                                                width =12,
                                                column(1),
@@ -774,7 +774,7 @@ representing an increased number of policies that promote economic mobility.
                                      tabPanel( "View the Data",
                                                width =12,
                                                column(1),
-                                               column(10, 
+                                               column(10,
                                                       h3(strong("All Data")),
                                                       hr(),
                                                       DT::dataTableOutput("all_data_table"),
@@ -967,41 +967,172 @@ representing an increased number of policies that promote economic mobility.
                                                                    ),
                                                                    column(1)),
 
-                                                         tabPanel("Data Sources & References",
+                                   tabPanel("Data Sources & References",
 
 
-                                                                  fluidRow(width =12,
-                                                                           column(1),
-                                                                           column(10, h3(strong("Data Sources and References")),
-                                                                                  br(),
+                                            fluidRow(width =12,
+                                                     column(1),
+                                                     column(10, h3(strong("Data Sources and References")),
+                                                            br(),
 
-                                                                                  h3("Data Sources"),
-                                                                                  tags$a(href="[url]", "_________: \"_________\""),
-                                                                                  br(),
-                                                                                  tags$a(href="[url]", "_____________namw/article____"),
-                                                                                  br(),
+                                                            h3("Data Sources"),
+                                                            tags$a(href="https://www.fha.com/fha-grants?state=OR#:~:text=First%20Time%20Home%20Buyer%20Loan,within%20the%20City%20of%20Corvallis.", "Federal Housing Administration (FHA): \"States with First Time Home Buyer Programs\""),
+                                                            br(),
+                                                            tags$a(href="https://smartasset.com/mortgage/first-time-home-buyer-programs-iowa", "Smart Asset: \"First Time Home Buyer Programs in Iowa (2019)\""),
+                                                            br(),
+                                                            tags$a(href="https://m.vhda.com/loancombo.aspx", "Virginia Housing Development Authority (VHDA): \"Virginia Housing Loan Combo\""),
+                                                            br(),
+                                                            tags$a(href="https://www.legis.iowa.gov/docs/code/16.54.pdf", "Iowa Finance Authority (IFA): \"Home Ownership Assistance Programs in Iowa\""),
+                                                            br(),
+                                                            tags$a(href="https://www.vhda.com/Programs/Pages/MilitaryVeteransPrograms.aspx", "Virginia Housing Development Authority (VHDA): \"Virginia Housing and the US military\""),
+                                                            br(),
+                                                            tags$a(href= "https://www.iowafinance.com/homeownership/mortgage-programs/military-homeownership-assistance-program/#:~:text=We'd%20like%20to%20help,and%20Homes%20for%20Iowans%20programs", "Iowa Finance Authority (IFA): \"Military Homeownership Assistance Program\""),
+                                                            br(),
+                                                            tags$a(href="https://www.oregon.gov/odva/Benefits/Pages/Home-Loans.aspx#:~:text=ODVA%20Home%20Loan%20Program,than%20334%2C000%20veterans%20since%201945", "Oregon Department of Veterans' Affairs (ODVA): \"Benefits and Programs\""),
+                                                            br(),
+                                                            tags$a(href="https://www.militarytimes.com/home-hq/2018/08/21/not-just-va-7-more-states-with-veteran-friendly-home-loan-programs/", "Military Times: \"States with Veteran-Friendly Home Loan Programs\""),
+                                                            br(),
+                                                            tags$a(href="https://www.vhda.com/Programs/Pages/GrantingFreedom.aspx", "Virginia Housing Development Authority (VHDA): \"Granting Freedom Program\""),
+                                                            br(),
+                                                            tags$a(href="https://www.dvs.virginia.gov/benefits/real-estate-tax-exemption", "Virginia Department of Veterans' Services: \"Real Estate Tax Exemption\""),
+                                                            br(),
+                                                            tags$a(href="https://www.vhda.com/Programs/Pages/Programs.aspx", "Virginia Housing Development Authority (VHDA): \"Virginia Housing Programs\""),
+                                                            br(),
+                                                            tags$a(href="https://www.self.inc/blog/the-complete-guide-to-home-loans-for-people-with-disabilities", "Self: \"The Complete Guide to Home Loans for People with Disabilities\""),
+                                                            br(),
+                                                            tags$a(href="https://www.disabled-world.com/disability/finance/american-home-loans.php", "Disabled World: \"Disability Housing and Home Loans for Disabled Americans\""),
+                                                            br(),
+                                                            tags$a(href="https://tax.iowa.gov/sites/default/files/2019-08/PTCandRRPForecast.pdf ", "Iowa Department of Revenue: \"Iowa’s Disabled and Senior Citizens Property Tax Credit and Rent Reimbursement Program Expenditure Projections Study\""),
+                                                            br(),
+                                                            tags$a(href="https://www.eldercaredirectory.org/state-resources.htm", "Eldercare Directory: \"State Resources\""),
+                                                            br(),
+                                                            tags$a(href="https://www.hud.gov/states/virginia/homeownership/seniors", "The United States Department of Housing and Urban Development (HUD): \"Housing Resources for Seniors: Virginia\""),
+                                                            br(),
+                                                            tags$a(href="https://vda.virginia.gov/", "VDA: \"Office of Aging Services\""),
+                                                            br(),
+                                                            tags$a(href="https://www.seniorresource.com/virginia.htm", "Senior Resource: \"Virginia Senior Resources\""),
+                                                            br(),
+                                                            tags$a(href="https://www.hud.gov/states/virginia/renting", "The United States Department of Housing and Urban Development (HUD): \"Virginia Rental Help\""),
+                                                            br(),
+                                                            tags$a(href="https://www.portland.gov/phb/nplte#:~:text=In%201985%2C%20Oregon%20legislature%20authorized,held%20by%20charitable%2C%20nonprofit%20organizations.&text=program%20to%202027.-,The%20tax%20exemption%20is%20intended%20to%20benefit%20low%2Dincome%20renters,that%20provide%20this%20housing%20opportunity", "City of Portland, Oregon: \"Non-Profit Low Income Housing Limited Tax Exemption (NPLTE)\""),
+                                                            br(),
+                                                            tags$a(href="https://www.vhda.com/BusinessPartners/MFDevelopers/LIHTCProgram/Pages/LIHTCProgram.aspx", "Virginia Housing Development Authority (VHDA): \"Low-Income Housing Tax Credit Program\""),
+                                                            br(),
+                                                            tags$a(href="https://tax.iowa.gov/tax-credits-and-exemptions#:~:text=Iowa%20Low%2DRent%20Housing%20Exemption&text=Eligibility%3A%20Property%20owned%20and%20operated,no%20later%20than%20February%201", "Iowa Department of Revenue: \"Tax Credits and Exemptions\""),
+                                                            br(),
+                                                            tags$a(href="https://www.veteransunited.com/futurehomeowners/veteran-property-tax-exemptions-by-state/#:~:text=A%20veteran%20in%20Iowa%20may,of%2018%20months%20during%20peacetime.&text=More%20exemptions%20exist%20for%20veterans,Read%20more", "Veterans United: \"Veteran Property Tax Exemption by State\""),
+                                                            br(),
+                                                            tags$a(href="https://www.dvs.virginia.gov/benefits/real-estate-tax-exemption", "Virginia Department of Veterans Services (DVS): \"Real Estate Tax Exemption\""),
+                                                            br(),
+                                                            tags$a(href="https://www.oregon.gov/dor/programs/property/Pages/exemptions.aspx", "Oregon Department of Revenue: \"Property tax exemptions\""),
+                                                            br(),
+                                                            tags$a(href="https://law.lis.virginia.gov/vacode/title58.1/chapter32/section58.1-3219.5/", "Virginia Law Library: \"Exemption from taxes on property for disabled veterans\""),
+                                                            br(),
+                                                            tags$a(href="https://ballotpedia.org/Virginia_Property_Tax_Exemption_for_Elderly_and_Disabled,_Question_1_(2010)", "Ballotpedia: \"irginia Property Tax Exemption for Elderly and Disabled\""),
+                                                            br(),
+                                                            tags$a(href="https://www.nerdwallet.com/article/mortgages/oregon-first-time-home-buyer-programs#:~:text=Oregon%20RateAdvantage%20Home%20Loan%20for,put%20towards%20your%20home%20purchase", "Nerd Wallet: \"Oregon First-Time Home Buyer Programs of 2020\""),
+                                                            br(),
+                                                            tags$a(href="https://olis.leg.state.or.us/liz/2019R1/Measures/Overview/HB2006", "Oregon State Legislature: \"HB2006\""),
+                                                            br(),
+                                                            tags$a(href="https://www.lamberthomeinspections.com/tax-breaks-for-virginia-homeowners/", "Lambert Home Inspections: \"Tax Breaks for Virginia Homeowners\""),
+                                                            br(),
+                                                            tags$a(href="https://support.taxslayer.com/hc/en-us/articles/360015707812-What-type-of-credits-are-available-on-my-Oregon-return-", "Oregon TaxSlayer: \"What type of credits are available on my Oregon return?\""),
+                                                            br(),
+                                                            tags$a(href="https://www.oregon.gov/dor/programs/individuals/pages/credits.aspx", "Oregon Department of Revenue: \"Oregon credits\""),
+                                                            br(),
+                                                            tags$a(href="https://www.tax.virginia.gov/tax-credits", "Virginia Tax: \"Virginia Tax Credits\""),
+                                                            br(),
+                                                            tags$a(href="https://wallethub.com/edu/states-with-the-highest-and-lowest-property-taxes/11585/", "WalletHub: \"Property Taxes by State\""),
+                                                            br(),
+                                                            tags$a(href="https://www.vhda.com/Homebuyers/Pages/homebuyers.aspx", "Virginia Housing Development Authority (VHDA): \"Virginia Homebuyers\""),
+                                                            br(),
+                                                            tags$a(href="https://www.teachernextdoor.us/Virginia", "Teacher Next Door: \"Virginia\""),
+                                                            br(),
+                                                            tags$a(href="https://www.oregonlive.com/business/2019/09/down-payment-program-for-teachers-trying-to-buy-a-house-comes-to-expensive-portland.html", "The Oregonian: \"Down-payment program for teachers trying to buy a house comes to expensive Portland\""),
+                                                            br(),
+                                                            tags$a(href="https://www.dhcd.virginia.gov/cdbg-planning-grants", "Virginia Department of Housing and Community Development (DHCD): \"CDBG Planning Grants\""),
+                                                            br(),
+                                                            tags$a(href="https://www.hud.gov/states/oregon/community/cdbg", "The United States Department of Housing and Urban Development (HUD): \"Oregon CDBG\""),
+                                                            br(),
+                                                            tags$a(href="https://www.hudexchange.info/programs/cdbg-state/", "The United States Department of Housing and Urban Development (HUD): \"State Community Development Block Grant Program\""),
+                                                            br(),
+                                                            tags$a(href="https://www.hud.gov/sites/documents/19565_CDBG.PDF", "The United States Department of Housing and Urban Development (HUD): \"State Community Development Block Grant\""),
+                                                            br(),
+                                                            tags$a(href="https://www.iowagrants.gov/insideLinkOpps.jsp?documentPk=1314908543321#:~:text=Approximately%20%241.5%20million%20in%20federal,of%20Iowa's%20Community%20Facilities%20Fund.&text=Communities%20with%20populations%20greater%20than%2015%2C000%20can%20receive%20up%20to%20%24800%2C000", "Iowa Grants: \"Opportunities\""),
+                                                            br(),
+                                                            tags$a(href="https://www.iowaeconomicdevelopment.com/CDBGHousing", "Iowa Economic Development: \"CDBG Housing Fund\""),
+                                                            br(),
+                                                            tags$a(href="https://www.dss.virginia.gov/geninfo/reports/agency_wide/block_grants.cgi", "Virginia Department of Social Services: \"VDSS Block Grants\""),
+                                                            br(),
+                                                            tags$a(href="https://en.wikipedia.org/wiki/Housing_trust_fund#/media/File:United_States_Housing_Trust_Support_by_State.svg", "United States Housing Trust): \"United States Housing Support by State\""),
+                                                            br(),
+                                                            tags$a(href="https://www.tld-inc.com/news/2019/01/iowa-itemized-deductions-2018-tax-year#:~:text=Qualified%20home%20mortgage%20interest%20deduction,%24100%2C000%20of%20home%20equity%20loans", "Terry Lockridge & Dunn: \"Iowa Itemized Deductions for 2018 Tax Year\""),
+                                                            br(),
+                                                            tags$a(href="https://www.tax.virginia.gov/deductions", "Virginia Tax: \"Deductions\""),
+                                                            br(),
+                                                            tags$a(href="https://www.ocpp.org/2019/03/11/hb-3349-reform-oregons-mortgage-interest-deduction/#:~:text=Oregon's%20mortgage%20interest%20deduction%20is,for%20mortgages%20prior%20to%202018", "Oregon Center for Public Policy: \"HB 3349: Reform Oregon's Mortgage Interest Deduction\""),
+                                                            br(),
+                                                            tags$a(href="https://www.portlandoregon.gov/citycode/28465", "The City of Portland, Oregon: \"Chapter 3.102 Property Tax Exemption for New Construction of Single-Unit Housing in Homebuyer Opportunity Areas\""),
+                                                            br(),
+                                                            tags$a(href="https://www.oregon.gov/lcd/op/pages/goals.aspx", "Oregon Planning): \"Oregon's Statewide Land Use Planning Goals\""),
+                                                            br(),
+                                                            tags$a(href="https://www.iowaeconomicdevelopment.com/LandUsePlanning", "Iowa Economic Development): \"Land Use Planning\""),
+                                                            br(),
+                                                            tags$a(href="file:///Users/tasfiachowdhury/Downloads/APA-VA-Chapter-Toolbox-2016.pdf", "The Virginia Chapter of
+The American Planning Association: \"Managing Growth and Development in Virginia\""),
+                                                            br(),
+                                                            tags$a(href="http://www.virginiaplaces.org/landuseplan/", "Virginia Places: \"Land Use Planning in Virginia\""),
+                                                            br(),
+                                                            tags$a(href="https://projects.arlingtonva.us/plans-studies/general-land-use-plan/", "The City of Arlington, Virginia: \"General Land Use Plan (GLUP)\""),
+                                                            br(),
+                                                            tags$a(href="https://www.rd.usda.gov/or", "United States Department of Agriculture (USDA): \"Key Programs in Oregon\""),
+                                                            br(),
+                                                            tags$a(href="https://www.vhda.com/about/Planning-Policy/Pages/StrategicPlanningProcess.aspx", "Virginia Housing Development Authority (VHDA): \"VHDA's Strategic Planning Process\""),
+                                                            br(),
+                                                            tags$a(href="https://www.vhda.com/SiteCollectionDocuments/StrategicPlan.pdf", "Virginia Housing Development Authority (VHDA): \"VHDA Strategic Direction\""),
 
-                                                                                  h3("References"),
-                                                                                  tags$a(href="https://www.urban.org/sites/default/files/alfresco/publication-pdfs/2000428-Housing-Policy-Levers-to-Promote-Economic-Mobility.pdf", "Urban Institute: \"HousingPolicy Levers to Promote Economic Mobility\""),
-                                                                                  br(),
-                                                                                  tags$a(href="[url]", "_____ Foundation: ________?")
-                                                                           )
-                                                                  ) #close fluid row
-                                                         ), # Data Sources & References panel
+                                                            br(),
+                                                            tags$a(href="https://oregonlawhelp.org/resource/reasonable-rules-in-mobile-home-parks-and-flo", "Law Help: \"Oregon Mobile Home Laws\""),
 
-                                                         tabPanel("View the Data",
-                                                                  fluidRow(width =12,
-                                                                           column(1),
-                                                                           column(10, h3(strong("Housing & Zoning Data Set")),
-                                                                                  DT::dataTableOutput("housetable")
+                                                            br(),
+                                                            tags$a(href="https://www.oregon.gov/ohcs/development/pages/index.aspx", "Oregon Housing Development: \"Housing Development\""),
+                                                            br(),
+                                                            tags$a(href="https://www.vacommunitycapital.org/news/2019/08/19/more-affordable-housing-in-more-virginia-places/", "Virginia Community Capital: \"More Affordable Housing in Virginia\""),
+                                                            br(),
+                                                            tags$a(href="https://www.vhda.com/Programs/Pages/Low-IncomeHousingTaxCreditProgram.aspx", "Virginia Housing Development Authority (VHDA): \"Low-Income Housing Tax Credit Program\""),
+                                                            br(),
+                                                            tags$a(href="https://www.portland.gov/bps/adap/gentrification-and-displacement-studies", "The City of Portland, Oregon: \"Gentrification and Displacement Studies\""),
+                                                            br(),
+                                                            tags$a(href="https://bpr.berkeley.edu/2018/06/01/how-portlands-right-to-return-is-indeed-right-to-return-housing-to-the-underrepresented/ ", "Berkeley Political Review: \"Portland's 'Right to Return'\""),
 
-                                                                           )
-                                                                  )#close fluidrow
-                                                         ) # close Data tab
 
-                                                         ) #close navlistPanel
-                                                       ) #close fluid row
-                                                     ), # Close Housing/ tabPanel
+                                                            h3("References"),
+                                                            tags$a(href="https://www.urban.org/sites/default/files/alfresco/publication-pdfs/2000428-Housing-Policy-Levers-to-Promote-Economic-Mobility.pdf", "Urban Institute: \"Housing Policy Levers to Promote Economic Mobility\""),
+                                                            br(),
+                                                            tags$a(href="https://www.cato.org/publications/policy-analysis/zoning-land-use-planning-housing-affordability", "The Cato Institute: \"Zoning, Land‐Use Planning, and Housing Affordability\""),
+                                                            br(),
+                                                            tags$a(href="https://www.dcpolicycenter.org/publications/economic-cost-land-use/", "DC Policy Center: \"The economic costs of land use regulations\""),
+                                                            br(),
+                                                            tags$a(href="https://www.urban.org/sites/default/files/publication/98758/lithc_how_it_works_and_who_it_serves_final_2.pdf", "Urban Institute: \"The Low-Income Housing Tax Credit\"")
+
+                                                     )
+                                            ) #close fluid row
+                                   ), # Data Sources & References panel
+
+                                   tabPanel("View the Data",
+                                            fluidRow(width =12,
+                                                     column(1),
+                                                     column(10, h3(strong("Housing & Zoning Data Set")),
+                                                            DT::dataTableOutput("housetable")
+
+                                                     )
+                                            )#close fluidrow
+                                   ) # close Data tab
+
+                                 ) #close navlistPanel
+                               ) #close fluid row
+                      ), # Close Housing/ tabPanel
+
 
 
 
@@ -1034,18 +1165,50 @@ representing an increased number of policies that promote economic mobility.
                                 fluidRow(width =12,
                                          column(1),
                                          column(10, h3(strong("Data Sources and References")),
-                                                br(),
 
+
+
+                                                br(),
                                                 h3("Data Sources"),
-                                                tags$a(href="[url]", "_________: \"_________\""),
+                                                tags$a(href="https://www.ecs.org/research-reports/key-issues/postsecondary-affordability/", "Education Commission of The States: Postsecondary Affordability"),
                                                 br(),
-                                                tags$a(href="[url]", "_____________namw/article____"),
+                                                tags$a(href="https://www.ecs.org/research-reports/key-issues/early-childhood-education/", "Education Commission of The States: Early Childhood Education"),
                                                 br(),
-
+                                                tags$a(href="https://www.ecs.org/research-reports/key-issues/workforce-development/", "Education Commission of The States: Workforce Development"),
+                                                br(),
+                                                tags$a(href="https://www.ecs.org/research-reports/key-issues/school-climate/", "Education Commission of The States: School Climate"),
+                                                br(),
+                                                tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Oregon%20School%20Discipline%20Laws%20and%20Regulations.pdf/", "Oregon Compilation of School Discipline Laws and Regulations"),
+                                                br(),
+                                                tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Virginia%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Virginia Compilation of School Discipline Laws and Regulations"),
+                                                br(),
+                                                tags$a(href="https://safesupportivelearning.ed.gov/sites/default/files/discipline-compendium/Iowa%20School%20Discipline%20Laws%20and%20Regulations.pdf", "Iowa Compilation of School Discipline Laws and Regulations"),
+                                                br(),
                                                 h3("References"),
-                                                tags$a(href="https://www.urban.org/sites/default/files/alfresco/publication-pdfs/2000428-Housing-Policy-Levers-to-Promote-Economic-Mobility.pdf", "Urban Institute: \"HousingPolicy Levers to Promote Economic Mobility\""),
+
+
+
+                                                tags$a(href="https://www.brookings.edu/research/hitting-kids-american-parenting-and-physical-punishment/", "Brookings Corporal Punishment"),
                                                 br(),
-                                                tags$a(href="[url]", "_____ Foundation: ________?")
+                                                tags$a(href="https://www.pnas.org/content/116/17/8255", "PNAS Corporal Punishment"),
+                                                br(),
+                                                tags$a(href="https://www.ecs.org/50-state-comparison-postsecondary-education-funding/", "ECS Early Childhood Programs as Economic Development Tool"),
+                                                br(),
+                                                tags$a(href="https://cew.georgetown.edu/cew-reports/recovery-job-growth-and-education-requirements-through-2020/", "Georgetown Job Growth and Education Requirements through 2020"),
+                                                br(),
+                                                tags$a(href="https://www.luminafoundation.org/news-and-views/does-higher-education-really-increase-economic-mobility/", "Lumina Foundation: Does higher education really increase economic mobility?")
+
+
+
+
+                                         ),
+                                         column(1)),
+                                fluidRow(width = 12, style = "margin: 20px",
+                                         plotOutput("word_cloud", height = '700px')))
+
+
+
+
                                          )
                                 ) #close fluid row
                        ), # Data Sources & References panel
@@ -1062,7 +1225,7 @@ representing an increased number of policies that promote economic mobility.
 
                      ) #close navlistPanel
                    ) #close fluid row
-          ), # Close Education tabPanel
+          ) # Close Education tabPanel
 
 
 
@@ -1119,7 +1282,7 @@ representing an increased number of policies that promote economic mobility.
 
                            ) #close navlistPanel
                          ) #close fluid row
-), # Close Housing/ tabPanel
+) # Close Housing/ tabPanel
 
 #-----------Employment
                 tabPanel("Employment",
@@ -1176,7 +1339,7 @@ representing an increased number of policies that promote economic mobility.
                 ) # Close Employment tabPanel
 
 
-), #Close NavbarMenu for Data & Methods
+ #Close NavbarMenu for Data & Methods
 
 
 
@@ -1350,13 +1513,13 @@ representing an increased number of policies that promote economic mobility.
                                    )
                             ),
                             column(1))
-                          )
-                      )
+
+
                       )#close "Project Team panel
 
 
              )#close NavbarPage for overall tabs on top of page
-) # close UI fluid page
+ )# close UI fluid page
 
 
 
@@ -1449,9 +1612,9 @@ server <- shinyServer(function(input,output){
   # Housing & Zoning Plots Rendering
 
   output$imghouse <- renderUI({
-    if(input$graphhouse == "Domain level"){            
+    if(input$graphhouse == "Domain level"){
       img(height = 300, width = 400, src = "composite_housing_lollipop.png", align = "left")
-    }                                        
+    }
     else if(input$graphhouse == "Housing Assistance Policies"){
       img(height = 300, width = 400, src = "assistance_lollipop.png")
     }
@@ -1465,13 +1628,13 @@ server <- shinyServer(function(input,output){
 
   output$imghouseheat <- renderUI({
     if(input$graphhouseheat == "Housing Assistance Policies"){
-      img(height = 300, width = 400, src = "")
-    }       
+      img(height = 300, width = 400, src = "housing_heat_assistance.png")
+    }
     else if(input$graphhouseheat == "Housing Development Policies"){
-      img(height = 300, width = 400, src = "")
+      img(height = 300, width = 400, src = "housing_heat_development.png")
     }
     else if(input$graphhouseheat == "Housing Financial Policies"){
-      img(height = 300, width = 400, src = "")
+      img(height = 300, width = 400, src = "housing_heat_financial.png")
     }
   })
 
@@ -1525,7 +1688,7 @@ server <- shinyServer(function(input,output){
   output$imgvoteheat <- renderUI({
     if(input$graphvoteheat == "Voting Accessibility"){
       img(height = 300, width = 400, src = "")
-    }       
+    }
     else if(input$graphvoteheat == "Voting Registration"){
       img(height = 300, width = 400, src = "")
     }
@@ -1595,23 +1758,23 @@ server <- shinyServer(function(input,output){
   output$emptable = DT::renderDataTable({
     emp_dt_data
   })
-  
+
   # Interactive Plot summary 3 states by subdomain - ALL COMPOSITES
   output$cesarplot <- renderPlotly({
     qn <- ggplot(av_mdata, aes(x=1, y=score)) +
-      geom_point(aes(colour = factor(state)), position = position_jitter(width = 1), 
+      geom_point(aes(colour = factor(state)), position = position_jitter(width = 1),
                  size = 2, show.legend = TRUE)+
       xlab("") + ylab("Composite index") +
       geom_boxplot(aes(y=score),  alpha = 0.2, width = .3, colour = "BLACK")+
       theme(legend.position="bottom", axis.text.y = element_blank(), axis.ticks.y = element_blank())+
       coord_flip()
-    
+
     ggplotly(qn) %>%
       layout(legend = list(orientation = "h", x = 0.25, y = -0.4))
       })
-  
-   
-}) # close the server 
+
+
+}) # close the server
 
 
 # Run the application
