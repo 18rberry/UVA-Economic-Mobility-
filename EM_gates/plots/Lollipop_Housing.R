@@ -3,58 +3,45 @@ library(readr)
 library(dplyr)
 library(ggplot2)
 
+setwd('~/git/dspg20uvaEM/EM_gates/WWW')
+
 #import data
 em_data <- read.csv("git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
-head(em_data)
+#head(em_data)
 
 #slice the data to just your domain
 # for example, for law encforcement i'm slicing from 1:20
-
-
-
 housing <- em_data %>%
   slice(1:4)
-
-housing
-
 
 
 #from your domain-specific data, slice for just the composite row (don't filter because that may be wierd)
 composite_housing <- housing %>%
   slice(4)
-composite_housing
-
 
 #gather the data to compress the diff scores into one state and score variable
-
-
-
 plot_data_1 <- composite_housing %>%
   gather("state", "score", c(3:5))
 
 
-
-
-housing_domain_plot <- plot_data_1 %>%
-  ggplot(aes(x=score, y= state)) +
+png("composite_housing_lollipop.png", width = 600, height = 400)
+  ggplot(aes(x=score, y= state), data = plot_data_1) +
   geom_point(aes(colour = state)) +
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +ggtitle("Composite Housing and Zoning Scores")
+  geom_segment( aes(x= 0, xend= score, yend= state, colour = state)) +
+  theme(legend.position = "none", axis.title.y  = element_blank())
+dev.off()
 
-housing_domain_plot
 
 #Segment each domain
 
 #Housing Assistance
 housing_assistance <- housing %>% slice(1)
-housing_assistance
 
 #Housing Development
 housing_development <- housing %>% slice(2)
-housing_development
 
 #Housing Financial
 housing_financial <- housing %>% slice(3)
-housing_financial
 
 
 
@@ -62,34 +49,36 @@ housing_financial
 plot_data_2 <- housing_assistance %>%
   gather("state", "score", c(3:5))
 
-housing_assistance_plot <- plot_data_2 %>%
-  ggplot(aes(x=score, y= state)) +
+png("assistance_lollipop.png", width = 600, height = 400)
+  ggplot(aes(x=score, y= state), data = plot_data_2) +
   geom_point(aes(colour = state)) +
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state))+ggtitle("Housing and Zoning Assistance Policy Scores")
+  geom_segment( aes(x= 0, xend= score, yend= state, colour = state)) +
+  theme(legend.position = "none", axis.title.y  = element_blank())
+dev.off()
 
-housing_assistance_plot
 
-#Get plot for secondary affordability
+#Get plot for Development
 plot_data_3 <- housing_development %>%
   gather("state", "score", c(3:5))
 
-housing_development_plot <- plot_data_3 %>%
-  ggplot(aes(x=score, y= state)) +
+
+png("development_lollipop.png", width = 600, height = 400)
+  ggplot(aes(x=score, y= state), data = plot_data_3) +
   geom_point(aes(colour = state)) +
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state))+ggtitle("Housing and Zoning Development Policy Scores")
+  geom_segment( aes(x= 0, xend= score, yend= state, colour = state)) +
+  theme(legend.position = "none", axis.title.y  = element_blank())
+dev.off()
 
-housing_development_plot
 
-#Get plot for School Climate
+#Get plot for Financial
 plot_data_4 <- housing_financial %>%
   gather("state", "score", c(3:5))
 
-housing_financial_plot <- plot_data_4 %>%
-  ggplot(aes(x=score, y= state)) +
+
+png("financial_lollipop.png", width = 600, height = 400)
+  ggplot(aes(x=score, y= state), data = plot_data_4) +
   geom_point(aes(colour = state)) +
-  geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state))+ggtitle("Housing and Zoning Financial Policy Scores")
-
-housing_financial_plot
-
-
+  geom_segment( aes(x= 0, xend= score, yend= state, colour = state)) +
+  theme(legend.position = "none", axis.title.y  = element_blank())
+dev.off()
 
