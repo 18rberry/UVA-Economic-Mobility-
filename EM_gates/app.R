@@ -41,6 +41,7 @@ all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final.xls
 mdata <- melt(em_data, id.vars = c("Domain", "Subdomain") , measure.vars = c("Virginia", "Iowa", "Oregon" ))
 mdata<- mdata %>% rename( state=variable, score = value)
 av_mdata <- mdata
+av_mdata$label = paste(av_mdata$Domain, ":", av_mdata$Subdomain)
 
 #prep data for education boxplot
 edu_3states <- read_csv("~/git/dspg20uvaEM/EM_gates/data/edu_3states.csv")
@@ -1836,7 +1837,7 @@ server <- shinyServer(function(input,output){
   # Interactive Plot summary 3 states by subdomain - ALL COMPOSITES
   output$cesarplot <- renderPlotly({
     qn <- ggplot(av_mdata, aes(x=1, y=score)) +
-      geom_point(aes(colour = factor(state)), position = position_jitter(width = 1),
+      geom_point(aes(text = label, colour = factor(state)), position = position_jitter(width = 1),
                  size = 2, show.legend = TRUE)+
       xlab("") + ylab("Composite index") +
       geom_boxplot(aes(y=score),  alpha = 0.2, width = .3, colour = "BLACK")+
@@ -1848,7 +1849,7 @@ server <- shinyServer(function(input,output){
   })
 
 
-  # Interactive Plot summary 3 states by subdomain - ALL COMPOSITES
+  # Interactive Plot - Education Boxplot
 
   output$educationboxplot <- renderPlotly({
     q<- ggplot(edu_av2, aes(x=variable, y= mean, fill=variable ) )+
