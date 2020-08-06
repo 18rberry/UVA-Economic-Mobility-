@@ -23,14 +23,14 @@ composite_tax <- data %>%
 #gather the data to compress the diff scores into one state and score variable
 plot_data_1 <- composite_tax %>%
   gather("state", "score", c(3:5))
-plot_data_1
 
-plot_data_1 <- ggplot(aes(x=score, y= state, text = paste("Score: ", score)), data = plot_data_1) +
+png("tax_lolli_domain_plot.png", width = 600, height = 400)
+ggplot(aes(x=score, y= state), data = plot_data_1) +
   geom_point(aes(colour = state)) +
   geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
-  ggtitle("Taxation Policies")
-
-ggplotly(plot_data_1, tooltip = "text")
+  theme(legend.position = "none", axis.title.y  = element_blank())
+dev.off()
+# ggplotly(plot_data_1, tooltip = "text")
 
 #generate subdomain wise plot by plugging in desired index
 display.subdomain <- function(index) {
@@ -42,31 +42,31 @@ display.subdomain <- function(index) {
   plot_data_2 <- org %>%
     gather("state", "score", c(3:5))
   # org_plot <- plot_data_2 %>%
-  plot_data_2 <- ggplot(aes(x=score, y= state, text = paste("Score:", score)), data = plot_data_2) +
+  ggplot(aes(x=score, y= state), data = plot_data_2) +
     geom_point(aes(colour = state)) +
     geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state)) +
-    ggtitle(paste("Tax Policy Dimension:", title))
-  ggplotly(plot_data_2, tooltip = "text")
+    theme(legend.position = "none", axis.title.y  = element_blank())
+  #ggplotly(plot_data_2, tooltip = "text")
 }
 
 #gini index plot
-# png("tax_sub_gini_index.png", width = 600, height = 400)
+# png("tax_lolli_gini_index.png", width = 600, height = 400)
 display.subdomain(1)
 # dev.off()
 
 #tax credit plot
-png("tax_sub_credits.png", width = 600, height = 400)
+# png("tax_lolli_credits.png", width = 600, height = 400)
 display.subdomain(2)
-dev.off()
+# dev.off()
 
 #taxes on wealth plot
-png("tax_sub_wealth.png", width = 600, height = 400)
+# png("tax_lolli_wealth.png", width = 600, height = 400)
 display.subdomain(3)
-dev.off()
+# dev.off()
 
 #taxes related to business plot
-# png("tax_sub_business.png", width = 600, height = 400)
+png("tax_lolli_business.png", width = 600, height = 400)
 display.subdomain(4)
-# dev.off()
+dev.off()
 
 
