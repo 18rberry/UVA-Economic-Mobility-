@@ -1,0 +1,26 @@
+Domain ,Subdomain,Oregon Score,Iowa Score,Virginia Score 
+Housing,Asistance,0.875,1,0.5
+Housing,Development,0.667,0.556,0.667
+Housing,Financial,0.556,0.667,0.444
+Housing,Composite,0.699,0.741,0.537
+Taxation,Gini Index,0.5,0.5,0.5
+Taxation,Tax Credits,0.75,0.75,0.25
+Taxation,Taxes on Wealth,0.667,0.667,0.333
+Taxation,Taxes Related to Business and Corporations,1,0.333,0.667
+Taxation,Composite,0.729,0.562,0.438
+Policing,Arrest and Court Proceedings Policies,1,0.8,0.6
+Policing,Community Policing Practices,0.6,0.6,0.6
+Policing,Incarceration Practices,0.4,0.6,0.4
+Policing,Composite,0.666666667,0.666666667,0.533333333
+Employment,Organizing,1,0.333,0
+Employment,Protections,0.917,0.333,0.25
+Employment,Wage,0,0,0
+Employment,Composite,0.639,0.222,0.0833
+Education,Early Childhood Education,0.658,0.575,0.658
+Education,Post-Secondary Affordability Policy,0.889,0.656,0.667
+Education,School Climate,0.839,0.372,0.849
+Education,Workforce Development Policy,0.472,0.639,0.833
+Education,Composite,0.659,0.619,0.81
+Voting,Accessibility,1,0.25,0.25
+Voting,Registration,0.6,0.6,0.6
+Voting,Composite,0.8,0.425,0.425
