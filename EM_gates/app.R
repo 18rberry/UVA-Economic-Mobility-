@@ -953,8 +953,7 @@ representing an increased number of policies that promote economic mobility.
                                                             tags$a(href="https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/states-and-local-governments-with-earned-income-tax-credit",
                                                                    "IRS: States and Local Governments with Earned Income Tax Credit "),
                                                             br(),
-                                                            tags$a(href = "https://itep.org/property-tax-circuit-breakers-2019/”,
-                                                                   “ITEP: Property Tax Circuit Breakers in 2019”"),
+                                                            tags$a(href = "https://itep.org/property-tax-circuit-breakers-2019/", "ITEP: Property Tax Circuit Breakers in 2019"),
                                                             br(),
                                                             tags$a(href = "https://www.livestories.com/statistics/iowa/des-moines-county-gini-index-income-inequality",
                                                                    "Live Stories: Des Moines County Gini Index of Income Inequality"),
@@ -1670,19 +1669,19 @@ server <- shinyServer(function(input,output){
   # Taxation Plots Rendering
   output$imgtax <- renderUI({
     if(input$graphtax == "Domain level"){
-      img(height = 300, width = 400, src = "tax_domain_plot.png", align = "left")
+      img(height = 300, width = 400, src = "tax_lolli_domain_plot.png", align = "left")
     }
     else if(input$graphtax == "Tax Credits"){
-      img(height = 300, width = 400, src = "tax_sub_credits.png")
+      img(height = 300, width = 400, src = "tax_lolli_credits.png")
     }
     else if(input$graphtax == "Taxes on Wealth"){
-      img(height = 300, width = 400, src = "tax_sub_wealth.png")
+      img(height = 300, width = 400, src = "tax_lolli_wealth.png")
     }
     else if(input$graphtax == "Taxes Related to Business"){
-      img(height = 300, width = 400, src = "tax_sub_business.png")
+      img(height = 300, width = 400, src = "tax_lolli_business.png")
     }
     else if(input$graphtax == "Gini Index"){
-      img(height = 300, width = 400, src = "tax_sub_gini.png")
+      img(height = 300, width = 400, src = "tax_lolli_gini_index.png")
     }
   })
 
