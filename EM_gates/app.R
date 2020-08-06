@@ -77,6 +77,10 @@ law_dt_data<- all_data %>%
 tax_dt_data<- all_data %>%
   filter(domain == 'Taxation')
 
+#Education question
+question_edu_dt_data<- edu_3states
+
+
 
 #----------------------------
 #Law Enforcement / Policing Data
@@ -1009,7 +1013,7 @@ representing an increased number of policies that promote economic mobility.
                                             )#close fluidrow
                                    ) # close Data tab
 
-             
+
                                    ) #close navlistPanel
                                  ) #close fluid row
                         ), # Close Taxation tabPanel
@@ -1276,15 +1280,31 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                               ) #close fluid row
                                      ), # Data Sources & References panel
 
-                                     tabPanel("View the Data",
+                                     tabPanel("View the Subcategory Data",
                                               fluidRow(width =12,
-                                                       column(1),
+                                                       column(2),
                                                        column(10, h3(strong("Education Data Set")),
-                                                              DT::dataTableOutput("edutable")
+                                                              p("These are the subcategories used in all graphs. These subcategories are derived from more detailed questions."),
+                                                              DT::dataTableOutput("edutable"),
+
+
+                                                       )
+                                              )#close fluidrow
+                                     ), # close Data tab
+
+                                     tabPanel("View the Full Question Data Set",
+                                              fluidRow(width =12,
+                                                       column(2),
+                                                       column(10, h3(strong("Question Education Data Set")),
+                                                              p("This table provides a more detailed view. There are 73 questions that compose the 19 subcategories shown in the other graphs."),
+                                                              DT::dataTableOutput("qedutable"),
+
 
                                                        )
                                               )#close fluidrow
                                      ) # close Data tab
+
+
 
                                    ) #close navlistPanel
                                  ) #close fluid row
@@ -1832,6 +1852,9 @@ server <- shinyServer(function(input,output){
   })
   output$emptable = DT::renderDataTable({
     emp_dt_data
+  })
+  output$qedutable = DT::renderDataTable({
+    question_edu_dt_data
   })
 
   # Interactive Plot summary 3 states by subdomain - ALL COMPOSITES
