@@ -31,10 +31,10 @@ library(reshape2)
 
 
 # load data -----------------------------------------------------------------------------
-em_data <- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
+em_data <- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
 
 #full data, not composites
-all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final.xlsx")
+all_data <- read_excel("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/em_master_data_final.xlsx")
 
 
 # prep data for interactive composite plot
@@ -43,7 +43,7 @@ mdata<- mdata %>% rename( state=variable, score = value)
 av_mdata <- mdata
 
 #prep data for education boxplot
-edu_3states <- read_csv("~/git/dspg20uvaEM/EM_gates/data/edu_3states.csv")
+edu_3states <- read_csv("~/git/TestDSPG/dspg20uvaEM/EM_gates/data/edu_3states.csv")
 edu_3states
 
 #melt data base
@@ -1004,7 +1004,7 @@ representing an increased number of policies that promote economic mobility.
                                             )#close fluidrow
                                    ) # close Data tab
 
-             
+
                                    ) #close navlistPanel
                                  ) #close fluid row
                         ), # Close Taxation tabPanel
@@ -1657,22 +1657,22 @@ server <- shinyServer(function(input,output){
       img(height = 300, width = 400, src = "tax_sub_business.png")
     }
     else if(input$graphtax == "Gini Index"){
-      img(height = 300, width = 400, src = "tax_sub_gini_index.png")
+      img(height = 300, width = 400, src = "tax_sub_gini.png")
     }
   })
 
   output$imgtaxheat <- renderUI({
-    if(input$graphtaxheat == "Taxes on Wealth"){
-      img(height = 300, width = 400, src = "tax_heat_wealth.png")
+    if(input$graphtaxheat == "Tax Credits"){
+      img(height = 300, width = 400, src = "tax_heatmap_credits.png")
     }
-    else if(input$graphtax == "Tax Credits"){
-      img(height = 300, width = 400, src = "tax_heat_credits.png")
+    else if(input$graphtaxheat == "Taxes on Wealth"){
+      img(height = 300, width = 400, src = "tax_heatmap_wealth.png")
     }
     else if(input$graphtaxheat == "Taxes Related to Business"){
-      img(height = 300, width = 400, src = "tax_heat_business.png")
+      img(height = 300, width = 400, src = "tax_heatmap_business.png")
     }
     else if(input$graphtaxheat == "Gini Index"){
-      img(height = 300, width = 400, src = "tax_heat_gini.png")
+      img(height = 300, width = 400, src = "tax_heatmap_gini.png")
     }
   })
 
