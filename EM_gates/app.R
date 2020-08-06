@@ -31,10 +31,10 @@ library(reshape2)
 
 
 # load data -----------------------------------------------------------------------------
-em_data <- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
+em_data <- read_csv('data/Composite Scorecard - Sheet2.csv')
 
 #full data, not composites
-all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final_final.xlsx")
+all_data <- read_excel('data/em_master_data_final_final.xlsx')
 
 
 
@@ -45,7 +45,7 @@ av_mdata <- mdata
 av_mdata$label = paste(av_mdata$Domain, ":", av_mdata$Subdomain)
 
 #prep data for education boxplot
-edu_3states <- read_csv("~/git/dspg20uvaEM/EM_gates/data/edu_3states.csv")
+edu_3states <- read_csv('data/edu_3states.csv')
 edu_3states
 
 #melt data base
@@ -87,7 +87,7 @@ question_edu_dt_data<- edu_3states
 #Law Enforcement / Policing Data
 
 #data for download
-Lawenforce_data<- read_excel("~/git/dspg20uvaEM/EM_gates/data/Law_data.xlsx")
+Lawenforce_data<- read_excel('data/Law_data.xlsx')
 
 #data for plots
 law_data <- em_data %>%

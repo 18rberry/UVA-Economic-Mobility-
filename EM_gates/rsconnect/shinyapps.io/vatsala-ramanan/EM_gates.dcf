@@ -5,9 +5,8 @@ account: vatsala-ramanan
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2618077
-bundleId: 3475510
+bundleId: 3483688
 url: https://vatsala-ramanan.shinyapps.io/EM_gates/
-when: 1596579954.15491
+when: 1596739763.17331
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: boxplot.html|em_master_data.xlsx|lollipop-code.html|policing_profiling.Rmd|plots
