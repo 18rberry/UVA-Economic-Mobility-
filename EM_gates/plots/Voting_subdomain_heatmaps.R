@@ -15,9 +15,15 @@ score_card <- read_csv("~/git/dspg20uvaEM/EM_gates/data/Final Scorecard - Sheet1
 access_scores<-  c(1,1,1,
                    0,0,1,
                    0,0,1,
+                   0,0,1
+                   )
+
+registration_scores<- c(0,0,1, 1,0,1, 0,0,0, 1,1,1, 0,1,0)
+
                    1,1,1
                    )
-registration_scores<- c(0,0,1, 1,0,1, 0,0,0,1,1,1,0,1,0)
+
+
 
 
 heatmap.for.subdomain <-function(domain, subdomain, scores) {
