@@ -41,6 +41,7 @@ all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final.xls
 mdata <- melt(em_data, id.vars = c("Domain", "Subdomain") , measure.vars = c("Virginia", "Iowa", "Oregon" ))
 mdata<- mdata %>% rename( state=variable, score = value)
 av_mdata <- mdata
+av_mdata$label = paste(av_mdata$Domain, ":", av_mdata$Subdomain)
 
 #prep data for education boxplot
 edu_3states <- read_csv("~/git/dspg20uvaEM/EM_gates/data/edu_3states.csv")
@@ -75,6 +76,10 @@ law_dt_data<- all_data %>%
 
 tax_dt_data<- all_data %>%
   filter(domain == 'Taxation')
+
+#Education question
+question_edu_dt_data<- edu_3states
+
 
 
 #----------------------------
@@ -144,6 +149,7 @@ ui <- fluidPage(
                         solidHeader = TRUE,
                         collapsible = FALSE,
                         h1("Project Overview"),
+                        br(),
                         img(height = 390, width = 890, src = "landing_pg_dual_graphic.png", align = "center"),
                         h4("Political Capital definition:"),
                         p("“… a group’s ability to influence the distribution of resources
@@ -156,6 +162,7 @@ ui <- fluidPage(
                           In keeping with the Community Capitals Framework of asset mapping, we have created a policy asset map for the domains of education, taxation, employment, voting, law enforcement, and
                           housing/zoning with a focus on policies that have the potential to impact economic mobility.
                           By identifying those policies that can impede the economic mobility a community can better strategize for effective change."),
+
                         h1("Approach and Ethical Considerations"),
                         p("This project benefits 'public good' in identifying and assessing policies that can later be aggregated
                           and used to influence public policy. While this project is essential to undertake, doing so comes with ethical challenges and risks. First,
@@ -178,7 +185,7 @@ ui <- fluidPage(
                                                    br(),
                                                    br(),
 
-                                                   "1. Law Enforcement and Criminal Justice", br(),
+                                                   "1. Law Enforcement ", br(),
                                                    "2. Taxation", br(),
                                                    "3. Housing and Zoning", br(),
                                                    "4. Education", br(),
@@ -262,7 +269,8 @@ ui <- fluidPage(
                                                               p("The polisy asset map visualizes the three subdomains and the 20 law enforcement policy questions.  A “Yes” or 1 identifies the presence of the policy in the state while a “No” or 0 represents a lack of the policy.
                                                                             A summary of the overall scores for each state is presented below, with a higher number representing an increased number of policies that promote economic mobility.
                                                                             Our results show the following:"),
-                                                              p(img( src = "heat_table.jpg")),
+                                                              p(img( src = "table_composite.jpg")),
+
                                                               p(strong("Arrest and Court Proceedings:"), ", Virginia performs the worst with a 0.60/1 while Oregon performs the best with a 1.00/1."),
 
                                                               p(strong("Incarceration:"), ", all three states perform equally with a 0.60/1."),
@@ -509,7 +517,7 @@ representing an increased number of policies that promote economic mobility.
                                                                                  choices = c("School Climate Policies", "Early Childhood Education Policies", "Post-Secondary Affordability Policies", "Workforce Development Policies")
                                                                      )) ,
                                                        mainPanel(uiOutput("imgeduheat"), align = "center"))
-                                              ,
+
                                               #fluidRow( mainPanel(img(height = 300, width = 400, src = "Education_heatmap.png"))
                                               #)
                                               # Alternate way to show img that doesn't use the server?:
@@ -831,6 +839,7 @@ representing an increased number of policies that promote economic mobility.
                                                    particularly Hispanic or Black men, having a significant impact on the economic mobility of
                                                    entire communities. Therefore, law enforcement becomes an increasingly important aspect of
                                                    political capital that must be studied to understand economic mobility.  "),
+
                                                       p("Our research on law enforcement practices and policies resulted in the identification of three main subdomains of interest: arrest and court proceedings, incarceration and community policing practices. The three subdomains are comprised of 20 policy questions which assess the existence or non-existence of a practice. In addition to such binary data, our research also yielded qualitative data that provides greater nuance to the nature of a policy in each state. The entire dataset, both binary and qualitative, can be found by clicking on the “download CSV” button in the All Data tab in the Summary section of Data, Methods and Measures"),
                                                       p("a.", strong("Arrest and Court Proceeding Policies"), "- Arrest and Court Proceedings Policies focused on the process of arresting and trying individuals in court. In this subdomain we analyzed stop and identify, bail, and civil asset forfeiture policies. Practices in these areas target distinct socio-economic groups differently and exploring them gives a sense of how individuals in the community are impacted by them. For example, paying cash bail or having your assets seized has an effect on and is affected by an individual’s financial standing. In addition to this set of binary data, we descriptively explored zero tolerance policies related to driving under the influence. "),
                                                       p("b.", strong("Incarceration Practices"), "- Incarceration Practices covers the policies that impact individuals held in state facilities. We focused on inmates’ rights as well as the equitability and social justness of practices within the facility and upon return to their communities. We focus on the type of state facilities (eg: public and private) as well as policies within the facility. Specifically, we assessed the ability to acquire skills and certifications, as well as the ability to access necessary healthcare. Additionally, we consider youth adjudication and the death penalty. "),
@@ -988,7 +997,7 @@ representing an increased number of policies that promote economic mobility.
                                                             br(),
                                                             tags$a(href="https://www.fool.com/taxes/2020/02/15/your-2020-guide-to-tax-credits.aspx",
                                                                    "Motley Fool: Your 2020 Guide to Tax Credits"),
-                                                            br(),
+                                                            br()
 
                                                      )
                                             ) #close fluid row
@@ -1004,7 +1013,7 @@ representing an increased number of policies that promote economic mobility.
                                             )#close fluidrow
                                    ) # close Data tab
 
-             
+
                                    ) #close navlistPanel
                                  ) #close fluid row
                         ), # Close Taxation tabPanel
@@ -1271,15 +1280,31 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                               ) #close fluid row
                                      ), # Data Sources & References panel
 
-                                     tabPanel("View the Data",
+                                     tabPanel("View the Subcategory Data",
                                               fluidRow(width =12,
-                                                       column(1),
+                                                       column(2),
                                                        column(10, h3(strong("Education Data Set")),
-                                                              DT::dataTableOutput("edutable")
+                                                              p("These are the subcategories used in all graphs. These subcategories are derived from more detailed questions."),
+                                                              DT::dataTableOutput("edutable"),
+
+
+                                                       )
+                                              )#close fluidrow
+                                     ), # close Data tab
+
+                                     tabPanel("View the Full Question Data Set",
+                                              fluidRow(width =12,
+                                                       column(2),
+                                                       column(10, h3(strong("Question Education Data Set")),
+                                                              p("This table provides a more detailed view. There are 73 questions that compose the 19 subcategories shown in the other graphs."),
+                                                              DT::dataTableOutput("qedutable"),
+
 
                                                        )
                                               )#close fluidrow
                                      ) # close Data tab
+
+
 
                                    ) #close navlistPanel
                                  ) #close fluid row
@@ -1828,11 +1853,14 @@ server <- shinyServer(function(input,output){
   output$emptable = DT::renderDataTable({
     emp_dt_data
   })
+  output$qedutable = DT::renderDataTable({
+    question_edu_dt_data
+  })
 
   # Interactive Plot summary 3 states by subdomain - ALL COMPOSITES
   output$cesarplot <- renderPlotly({
     qn <- ggplot(av_mdata, aes(x=1, y=score)) +
-      geom_point(aes(colour = factor(state)), position = position_jitter(width = 1),
+      geom_point(aes(text = label, colour = factor(state)), position = position_jitter(width = 1),
                  size = 2, show.legend = TRUE)+
       xlab("") + ylab("Composite index") +
       geom_boxplot(aes(y=score),  alpha = 0.2, width = .3, colour = "BLACK")+
@@ -1844,7 +1872,7 @@ server <- shinyServer(function(input,output){
   })
 
 
-  # Interactive Plot summary 3 states by subdomain - ALL COMPOSITES
+  # Interactive Plot - Education Boxplot
 
   output$educationboxplot <- renderPlotly({
     q<- ggplot(edu_av2, aes(x=variable, y= mean, fill=variable ) )+
