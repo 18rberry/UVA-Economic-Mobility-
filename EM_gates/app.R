@@ -617,12 +617,7 @@ representing an increased number of policies that promote economic mobility.
                                                                                  choices = c("Voting Accessibility", "Voting Registration")
                                                                      )) ,
                                                        mainPanel(uiOutput("imgvoteheat"), align = "center"))
-                                              ,
-                                              fluidRow( mainPanel(img(height = 300, width = 400, src = "heat_map_vote.png"))
-                                              )
-
-                                              # Alternate way to show img that doesn't use the server?:
-                                              #fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png")))
+                                            
                                      ), # close Asset Map tabPanel
 
 
@@ -709,11 +704,7 @@ representing an increased number of policies that promote economic mobility.
                                                                                  choices = c("Worker Organizing Policies", "Worker Protections", "Wage Policies")
                                                                      )) ,
                                                        mainPanel(uiOutput("imgempheat"), align = "center"))
-                                              ,
-                                              fluidRow( mainPanel(img(height = 300, width = 400, src = "heat_map_employment.png"))
-                                              )
-                                              # Alternate way to show img that doesn't use the server?:
-                                              #fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png")))
+                                              
                                      ), # close Asset Map tabPanel
 
 
@@ -1754,13 +1745,13 @@ server <- shinyServer(function(input,output){
 
   output$imgempheat <- renderUI({
     if(input$graphempheat == "Worker Organizing Policies"){
-      img(height = 300, width = 400, src = "")
+      img(height = 300, width = 400, src = "emp_heat_org.png")
     }
     else if(input$graphempheat == "Worker Protections"){
-      img(height = 300, width = 400, src = "")
+      img(height = 300, width = 500, src = "emp_heat_protect.png")
     }
     else if(input$graphempheat == "Wage Policies"){
-      img(height = 300, width = 400, src = "")
+      img(height = 300, width = 550, src = "emp_heat_wage.png")
     }
   })
 
@@ -1781,10 +1772,10 @@ server <- shinyServer(function(input,output){
 
   output$imgvoteheat <- renderUI({
     if(input$graphvoteheat == "Voting Accessibility"){
-      img(height = 300, width = 400, src = "")
+      img(height = 300, width = 400, src = "vote_heat_access.png")
     }
     else if(input$graphvoteheat == "Voting Registration"){
-      img(height = 300, width = 400, src = "")
+      img(height = 300, width = 400, src = "vote_heat_registration.png")
     }
   })
 

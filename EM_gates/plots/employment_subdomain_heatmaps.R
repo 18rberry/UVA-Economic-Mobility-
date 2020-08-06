@@ -63,7 +63,7 @@ heatmap.for.subdomain <-function(domain, subdomain, scores) {
           legend.position="none")
 }
 
-png("emp_heat_wage.png", width = 600, height = 400)
+png("emp_heat_wage.png", width = 900, height = 400)
 credits <- heatmap.for.subdomain("Employment", "Wage", wage_scores)
 credits
 dev.off()
@@ -74,7 +74,7 @@ wealth <- heatmap.for.subdomain("Employment", "Organizing", org_scores)
 wealth
 dev.off()
 
-png("emp_heat_protect.png", width = 600, height = 400)
+png("emp_heat_protect.png", width = 700, height = 400)
 business <- heatmap.for.subdomain("Employment", "Protections",
                                   protect_scores)
 business
