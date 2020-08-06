@@ -149,9 +149,7 @@ ui <- fluidPage(
                         status = "warning",
                         solidHeader = TRUE,
                         collapsible = FALSE,
-                        h1("Project Overview"),
-                        br(),
-                        h3("Political Capital definition:"),
+                        h1("Political Capital definition"),
                         p("“… a group’s ability to influence the distribution of resources
                           within a social unit, including helping set the agenda of what resources are available. … Political capital consists of organization, connections, voice, and power as citizens turn shared norms and values into standards that are codified into rules, regulations, and resources distributions that are enforced,”",
                           br(),
@@ -162,9 +160,9 @@ ui <- fluidPage(
                           In keeping with the Community Capitals Framework of asset mapping, we have created a policy asset map for the domains of education, taxation, employment, voting, law enforcement, and
                           housing/zoning with a focus on policies that have the potential to impact economic mobility.
                           By identifying those policies that can impede the economic mobility a community can better strategize for effective change."),
-                        img(height = 390, width = 890, src = "landing_pg_dual_graphic.png", align = "center"),
+                        img(height = 390, width = 890, src = "landing_pg_graphic.png", align = "center"),
                       
-                        h3("Approach and Ethical Considerations"),
+                        h1("Approach and Ethical Considerations"),
                         p("This project benefits 'public good' in identifying and assessing policies that can later be aggregated
                           and used to influence public policy. While this project is essential to undertake, doing so comes with ethical challenges and risks. First,
                           the way we defined 'political capital' and collected data is determined by our understanding of economic mobility. Moreover, the process of creating
