@@ -1,0 +1,256 @@
+---
+title: "policing_profile_rmd"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readxl)
+library("tm")
+library("SnowballC")
+library("wordcloud")
+library("RColorBrewer")
+library(dplyr)
+library(ggplot2)
+library(DataExplorer)
+library(tidyr)
+```
+
+
+```{r}
+Policing_data <- read_excel("~/policing_data.xlsx", 
+    sheet = "overall", col_types = c("text", 
+        "text", "text", "text", "text", "text", "text"), col_names = c("score_criteria", "sub_domain", "state", "details", "score", "type", "link"))
+
+policing_2 <- read_excel("~/policing_data.xlsx", 
+ sheet = "Composite", col_types = c("text", 
+     "text", "numeric", "numeric", "numeric", 
+      "numeric", "numeric", "numeric", 
+      "numeric", "numeric", "numeric", 
+      "numeric", "numeric", "numeric", 
+     "numeric", "numeric", "numeric", 
+     "numeric", "numeric"), col_names = c("state", "domain", "stop_iden", "bail_cash", "bail_bond", "CAF_convic", "CAF_burden", "ban_box", "health_care", "pre_natal", "abortion", "learning", "body_cams", "dem", "custodial_sexual_mis", "private_prisons", "death_penalty", "juv_age", "composite" ))
+
+policing_2 <-policing_2[-c(1), ]
+View(policing_2)     
+
+score_data <- Policing_data %>%
+  filter(type == "descriptive") %>%
+  select(score)
+criteria_data <- Policing_data %>%
+  filter(type == "descriptive") %>%
+  select(score_criteria)
+Oregon_data <- Policing_data %>%
+  filter(type == "descriptive") %>%
+  filter(state == "Oregon") %>%
+  select(score)
+Iowa_data <- Policing_data %>%
+  filter(type == "descriptive") %>%
+  filter(state == "Iowa") %>%
+  select(score)
+Virginia_data <- Policing_data %>%
+  filter(type == "descriptive") %>%
+  filter(state == "Virginia") %>%
+  select(score)
+```
+
+word cloud for descriptive scores in the data set
+```{r}
+docs <- Corpus(VectorSource(score_data))
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+docs <- tm_map(docs, toSpace, "/")
+docs <- tm_map(docs, toSpace, "@")
+docs <- tm_map(docs, toSpace, "\\|")
+# Convert the text to lower case
+docs <- tm_map(docs, content_transformer(tolower))
+# Remove numbers
+docs <- tm_map(docs, removeNumbers)
+# Remove english common stopwords
+docs <- tm_map(docs, removeWords, stopwords("english"))
+# Remove your own stop word
+# specify your stopwords as a character vector
+docs <- tm_map(docs, removeWords, c("blabla1", "blabla2")) 
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d <- data.frame(word = names(v),freq=v)
+head(d, 10)
+# Text stemming
+# docs <- tm_map(docs, stemDocument)
+set.seed(1234)
+wordcloud(words = d$word, freq = d$freq, min.freq = 2,
+          max.words=200, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, "Dark2"))
+```
+
+word cloud for scoring criteria in the data set
+```{r}
+docs <- Corpus(VectorSource(criteria_data))
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+docs <- tm_map(docs, toSpace, "/")
+docs <- tm_map(docs, toSpace, "@")
+docs <- tm_map(docs, toSpace, "\\|")
+# Convert the text to lower case
+docs <- tm_map(docs, content_transformer(tolower))
+# Remove numbers
+docs <- tm_map(docs, removeNumbers)
+# Remove english common stopwords
+docs <- tm_map(docs, removeWords, stopwords("english"))
+# Remove your own stop word
+# specify your stopwords as a character vector
+docs <- tm_map(docs, removeWords, c("blabla1", "blabla2")) 
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d <- data.frame(word = names(v),freq=v)
+head(d, 10)
+# Text stemming
+# docs <- tm_map(docs, stemDocument)
+set.seed(1234)
+wordcloud(words = d$word, freq = d$freq, min.freq = 1,
+          max.words=200, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, "Dark2"))
+```
+
+```{r}
+docs <- Corpus(VectorSource(Oregon_data))
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+docs <- tm_map(docs, toSpace, "/")
+docs <- tm_map(docs, toSpace, "@")
+docs <- tm_map(docs, toSpace, "\\|")
+# Convert the text to lower case
+docs <- tm_map(docs, content_transformer(tolower))
+# Remove numbers
+docs <- tm_map(docs, removeNumbers)
+# Remove english common stopwords
+docs <- tm_map(docs, removeWords, stopwords("english"))
+# Remove your own stop word
+# specify your stopwords as a character vector
+docs <- tm_map(docs, removeWords, c("blabla1", "blabla2")) 
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d <- data.frame(word = names(v),freq=v)
+head(d, 10)
+# Text stemming
+# docs <- tm_map(docs, stemDocument)
+set.seed(1234)
+wordcloud(words = d$word, freq = d$freq, min.freq = 2,
+          max.words=200, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, "Dark2"))
+```
+
+```{r}
+docs <- Corpus(VectorSource(Iowa_data))
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+docs <- tm_map(docs, toSpace, "/")
+docs <- tm_map(docs, toSpace, "@")
+docs <- tm_map(docs, toSpace, "\\|")
+# Convert the text to lower case
+docs <- tm_map(docs, content_transformer(tolower))
+# Remove numbers
+docs <- tm_map(docs, removeNumbers)
+# Remove english common stopwords
+docs <- tm_map(docs, removeWords, stopwords("english"))
+# Remove your own stop word
+# specify your stopwords as a character vector
+docs <- tm_map(docs, removeWords, c("blabla1", "blabla2")) 
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d <- data.frame(word = names(v),freq=v)
+head(d, 10)
+# Text stemming
+# docs <- tm_map(docs, stemDocument)
+set.seed(1234)
+wordcloud(words = d$word, freq = d$freq, min.freq = 2,
+          max.words=200, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, "Dark2"))
+```
+
+```{r}
+docs <- Corpus(VectorSource(Virginia_data))
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+docs <- tm_map(docs, toSpace, "/")
+docs <- tm_map(docs, toSpace, "@")
+docs <- tm_map(docs, toSpace, "\\|")
+# Convert the text to lower case
+docs <- tm_map(docs, content_transformer(tolower))
+# Remove numbers
+docs <- tm_map(docs, removeNumbers)
+# Remove english common stopwords
+docs <- tm_map(docs, removeWords, stopwords("english"))
+# Remove your own stop word
+# specify your stopwords as a character vector
+docs <- tm_map(docs, removeWords, c("blabla1", "blabla2")) 
+# Remove punctuations
+docs <- tm_map(docs, removePunctuation)
+# Eliminate extra white spaces
+docs <- tm_map(docs, stripWhitespace)
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+v <- sort(rowSums(m),decreasing=TRUE)
+d <- data.frame(word = names(v),freq=v)
+head(d, 10)
+# Text stemming
+# docs <- tm_map(docs, stemDocument)
+set.seed(1234)
+wordcloud(words = d$word, freq = d$freq, min.freq = 2,
+          max.words=200, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, "Dark2"))
+```
+
+
+```{r}
+arrest_policies <- policing_2 %>%
+  select(state, domain, stop_iden, bail_cash, bail_bond, CAF_convic, CAF_burden, composite)
+
+policing_2 %>%
+  ggplot(aes(x=composite, y= domain)) + geom_point(aes(colour=state, size = composite)) 
+#lollipop plot, composite number in the circle 
+```
+
+
+```{r}
+data <- read_excel("~/git/dspg20uvaEM/EM_gates/em_master_data.xlsx")
+```
+```{r}
+data_2 <- gather(data, "state", 'score', c(5:7))
+
+scorecard <- ifelse(data_2$state==1,"Yes", "No")
+
+a <- ggplot(data_2, aes(x= scorecard, y= state)) + geom_dotplot()
+
+scorecard_function <- function(score) {
+                                if data_2$state==1 
+                                return("Yes"),
+                                if data_2$state==0 
+                                return("Yes")
+  
+   
+}  
+ # ifelse(data_2$state==1,"Yes", "No")
+  )
+```
+
+

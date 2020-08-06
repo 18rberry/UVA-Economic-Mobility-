@@ -34,7 +34,7 @@ library(reshape2)
 em_data <- read_csv("~/git/dspg20uvaEM/EM_gates/data/Composite Scorecard - Sheet2.csv")
 
 #full data, not composites
-all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final.xlsx")
+all_data <- read_excel("~/git/dspg20uvaEM/EM_gates/data/em_master_data_final_final.xlsx")
 
 
 # prep data for interactive composite plot
@@ -86,7 +86,7 @@ question_edu_dt_data<- edu_3states
 #Law Enforcement / Policing Data
 
 #data for download
-#Lawenforce_data<- read_excel("~/git/dspg20uvaEM/EM_gates/data/Law_data.xlsx")
+Lawenforce_data<- read_excel("~/git/dspg20uvaEM/EM_gates/data/Law_data.xlsx")
 
 #data for plots
 law_data <- em_data %>%
@@ -150,8 +150,7 @@ ui <- fluidPage(
                         collapsible = FALSE,
                         h1("Project Overview"),
                         br(),
-                        img(height = 390, width = 890, src = "landing_pg_dual_graphic.png", align = "center"),
-                        h4("Political Capital definition:"),
+                        h3("Political Capital definition:"),
                         p("“… a group’s ability to influence the distribution of resources
                           within a social unit, including helping set the agenda of what resources are available. … Political capital consists of organization, connections, voice, and power as citizens turn shared norms and values into standards that are codified into rules, regulations, and resources distributions that are enforced,”",
                           br(),
@@ -162,8 +161,9 @@ ui <- fluidPage(
                           In keeping with the Community Capitals Framework of asset mapping, we have created a policy asset map for the domains of education, taxation, employment, voting, law enforcement, and
                           housing/zoning with a focus on policies that have the potential to impact economic mobility.
                           By identifying those policies that can impede the economic mobility a community can better strategize for effective change."),
-
-                        h1("Approach and Ethical Considerations"),
+                        img(height = 390, width = 890, src = "landing_pg_dual_graphic.png", align = "center"),
+                      
+                        h3("Approach and Ethical Considerations"),
                         p("This project benefits 'public good' in identifying and assessing policies that can later be aggregated
                           and used to influence public policy. While this project is essential to undertake, doing so comes with ethical challenges and risks. First,
                           the way we defined 'political capital' and collected data is determined by our understanding of economic mobility. Moreover, the process of creating
@@ -224,8 +224,9 @@ ui <- fluidPage(
                                                 sidebarPanel( width = 4,
                                                               selectInput("graphlaw", "Subdomain",
                                                                           choices = c("Domain level", "Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
-                                                              )),
-                                                mainPanel(  uiOutput("imglaw"), align = "center"))),
+                                                              ))
+                                                ), #close fluidrow
+                                               fluidRow( mainPanel(  uiOutput("imglaw"), align = "center"))),
 
                                      tabPanel("Policy Asset Map",
                                               fluidRow(width =4,
@@ -255,7 +256,7 @@ ui <- fluidPage(
                                      tabPanel("Analysis & Results",
                                               fluidRow(width =4,
                                                        column(1),
-                                                       column(12, h4(strong("Law Enforcement & Criminal Justice")),
+                                                       column(12, h4(strong("Law Enforcement")),
                                                               column(1))),
                                               hr(),
 
@@ -271,13 +272,13 @@ ui <- fluidPage(
                                                                             Our results show the following:"),
                                                               p(img( src = "table_composite.jpg")),
 
-                                                              p(strong("Arrest and Court Proceedings:"), ", Virginia performs the worst with a 0.60/1 while Oregon performs the best with a 1.00/1."),
+                                                              p(strong("Arrest and Court Proceedings:"), ", Virginia performs the worst with a 0.40/1 while Oregon performs the best with a 0.80/1."),
 
                                                               p(strong("Incarceration:"), ", all three states perform equally with a 0.60/1."),
 
                                                               p(strong("Community Policing:"), ", both Oregon and Virginia perform at a 0.40/1 while Iowa does better with a 0.60/1."),
 
-                                                              p(strong("Overall:"), ", under our scoring criteria Oregon and Iowa do equally the best in terms of law enforcement policies with a 0.67/1 and Virginia does the worst with a 0.53/1.  ")),
+                                                              p(strong("Overall:"), ", under our scoring criteria Oregon and Iowa do equally the best in terms of law enforcement policies with a 0.60/1 and Virginia does the worst with a 0.467/1.  ")),
                                                        column(1))
 
                                      ) ))),
@@ -763,28 +764,7 @@ representing an increased number of policies that promote economic mobility.
                                  fluidRow(
                                    navlistPanel(
 
-                                     tabPanel( "Composite Scores",
-                                               fluidRow(width =12,
-                                                        column(1),
-                                                        column(10,
-
-                                                               h3("Composite index for all subdomains for the three states."),
-                                                               p("Takes a couple seconds to load.")),
-                                                        column(1)),
-                                               column(2),
-                                               column(10, h3(strong("")),
-
-                                                      strong(""),
-                                                      p()),
-                                               mainPanel(width=12, align = "center",
-                                                         body <- dashboardBody(
-                                                           plotlyOutput("cesarplot")
-                                                         )
-                                               ),
-                                               column(2)
-
-
-                                     ), #close tab
+                                     
 
                                      tabPanel( "Scoring Methods",
                                                width =12,
@@ -813,8 +793,30 @@ representing an increased number of policies that promote economic mobility.
                                                       column(1))
 
 
-                                     ) #close tab
+                                     ), #close tab
 
+                                     tabPanel( "Composite Scores",
+                                               fluidRow(width =12,
+                                                        column(1),
+                                                        column(10,
+                                                               
+                                                               h3("Composite index for all subdomains for the three states."),
+                                                               p("Takes a couple seconds to load.")),
+                                                        column(1)),
+                                               column(2),
+                                               column(10, h3(strong("")),
+                                                      
+                                                      strong(""),
+                                                      p()),
+                                               mainPanel(width=12, align = "center",
+                                                         body <- dashboardBody(
+                                                           plotlyOutput("cesarplot")
+                                                         )
+                                               ),
+                                               column(2)
+                                               
+                                               
+                                     ) #close tab
                                    ) #close navlistPanel
                                  ) #close fluidrow
 
@@ -1569,8 +1571,8 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                          )
                                      )
                                  ) #close top div
-                          ) #close column
-                        ),  #close fluidrow
+                          ), #close column
+                        
                         column(1),
 
 
@@ -1588,13 +1590,12 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                          tags$h6( tags$i("Postdoctoral Research Associate"))
                                        ),
                                        div(
-                                         "Cesar Montalvo is a Postdoctoral Research Associate in the Social and Decision Analytics Division at the Biocomplexity Institute and Initiative from the UVA.  Master’s degree in economics from Iowa State University, Ph.D. in Applied Mathematics
-                                             for Life and Social Sciences from Arizona State University.
-                                             He works at the interface of economics, statistics, mathematical models and public policy."
+                                         "Cesar Montalvo is a Postdoctoral Research Associate in the Social and Decision Analytics Division at the Biocomplexity Institute and Initiative from the UVA. "
                                        )
                                    )
                                )
                         )  #close Cesar
+                        )  #close fluidrow
 
                       )
 
