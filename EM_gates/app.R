@@ -191,7 +191,7 @@ ui <- fluidPage(
                                                    "5. Voting", br(),
                                                    "6. Employment", br(),
                                                    br(),
-                                                   img(height = 450, width = 750, src = "taxonomy_graphic.png", align = "center"),
+                                                   img(height = 450, width = 750, src = "taxonomy_final.png", align = "center"),
                                                    br(),
                                                    "Estimating a quantitative measure of the existence of political capital is a challenging task. We propose the quantification of the identified policy domains into an index.
                                                    This index consists of sub-domains (subject areas) which contain specific questions about existence of policies related to Economic Mobility. For instance, the Law Enforcement
