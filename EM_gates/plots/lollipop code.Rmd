@@ -32,12 +32,12 @@ composite_law <- law_data %>%
 plot_data_1 <- composite_law %>%
   gather("state", "score", c(3:5))
 
-law_domain_plot <- plot_data_1 %>%
-ggplot(aes(x=score, y= state)) +
+png("law_domain_plot.png", width = 600, height = 400)
+ggplot(aes(x=score, y= state), data = plot_data_1) +
       geom_point(aes(colour = state)) +  
       geom_segment( aes(x= 0, xend= score, y= state, yend= state, colour = state, size = 0.2)) +
   theme(legend.position = "none", axis.title.y  = element_blank())
-
+dev.off()
 
 #to get a subdomain-wise plot slice the data for your domain for just the row that pertains to the specific subdomain 
 arrest <- law_data %>%

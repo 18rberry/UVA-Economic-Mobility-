@@ -196,9 +196,12 @@ ui <- fluidPage(
                                                    "Estimating a quantitative measure of the existence of political capital is a challenging task. We propose the quantification of the identified policy domains into an index.
                                                    This index consists of sub-domains (subject areas) which contain specific questions about existence of policies related to Economic Mobility. For instance, the Law Enforcement
                                                    and Criminal Justice domain is explained by the diagram above. "
-                                                 )
+                                                 ),
+                                                 br(),
+                                                 br()
                                           ),
-                                          column(1))),
+                                          column(1))
+                                 ), #close summmary
                         #-------------------------------------------------------------Law Enforcement
                         tabPanel("Law Enforcement",
 
@@ -225,7 +228,10 @@ ui <- fluidPage(
                                                                           choices = c("Domain level", "Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
                                                               ))
                                                 ), #close fluidrow
-                                               fluidRow( mainPanel(  uiOutput("imglaw"), align = "center"))),
+                                               fluidRow( mainPanel(  uiOutput("imglaw"), align = "center")),
+                                              br(),
+                                              br()
+                                              ), # close Indicators tab
 
                                      tabPanel("Policy Asset Map",
                                               fluidRow(width =4,
@@ -249,7 +255,8 @@ ui <- fluidPage(
                                                                           choices = c( "Arrest and Court Proceedings", "Incarceration Practices", "Community Policing")
                                                               ))) ,
                                               fluidRow(
-                                                mainPanel(uiOutput("imglawheat"), align = "center"))),
+                                                mainPanel(uiOutput("imglawheat"), align = "center"))
+                                              ), #close asset map
 
 
                                      tabPanel("Analysis & Results",
@@ -278,9 +285,14 @@ ui <- fluidPage(
                                                               p(strong("Community Policing:"), ", both Oregon and Virginia perform at a 0.40/1 while Iowa does better with a 0.60/1."),
 
                                                               p(strong("Overall:"), ", under our scoring criteria Oregon and Iowa do equally the best in terms of law enforcement policies with a 0.60/1 and Virginia does the worst with a 0.467/1.  ")),
-                                                       column(1))
+                                                       column(1)),
+                                              br(),
+                                              br()
 
-                                     ) ))),
+                                     ) #close analysis panel
+                                     )#close navlist
+                                   ) #close fluid row
+                                 ), #close LE panel
 
 
                         #----------------------------------------------------Tax
@@ -334,8 +346,8 @@ ui <- fluidPage(
                                                                      selectInput("graphtaxheat", "Subdomain",
                                                                                  choices = c("Tax Credits", "Taxes on Wealth",
                                                                                              "Taxes Related to Business", "Gini Index")
-                                                                     )) ,
-                                                       mainPanel(uiOutput("imgtaxheat"), align = "center"))
+                                                                     )) ),
+                                              fluidRow(mainPanel(uiOutput("imgtaxheat"), align = "center"))
                                               # Alternate way to show img that doesn't use the server?:
                                               #fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png")))
                                      ), # close Asset Map tabPanel
@@ -371,7 +383,9 @@ representing an increased number of policies that promote economic mobility.
                                                               p(strong("Overall:"), "Both Iowa and Oregon had above 0.5, while Virgina's composite score was 0.438.
                                                                 All states could improve taxation policies to encourage Economic Mobility")
                                                               ),
-                                                       column(1))
+                                                       column(1)),
+                                              br(),
+                                              br()
                                      ) # close anaylsis & results
                                    ) #close NavlistPanel to select sub-domain for tax heatmap
                                  ) #close fluid row
@@ -428,8 +442,9 @@ representing an increased number of policies that promote economic mobility.
                                               fluidRow(sidebarPanel( width = 4,
                                                                      selectInput("graphhouseheat", "Subdomain",
                                                                                  choices = c("Housing Assistance Policies", "Housing Development Policies", "Housing Financial Policies")
-                                                                     )) ,
-                                                       mainPanel(uiOutput("imghouseheat"), align = "center"))
+                                                                     ))
+                                                       ),
+                                              fluidRow(mainPanel(uiOutput("imghouseheat"), align = "center"))
                                               # Alternate way to show img that doesn't use the server?:
                                               #fluidRow( mainPanel(img(height = 300, width = 400, src = "taxation_heatmap.png")))
                                      ), # close Asset Map tabPanel
@@ -458,7 +473,10 @@ representing an increased number of policies that promote economic mobility.
                                                               p(strong("Financial:"), "Virginia performs the worst with a score of 0.44/1, and Iowa performs the best with a score of 0.67/1. All three states demonstrate room for improvement.  "),
                                                               p(strong("Overall:"), "under our scoring criteria, Iowa has the greatest number of policies that advance economic mobility while Virginia has the least, indicating that Virginia is the state with the most room for improvement. Oregon’s score falls in the middle of the two but is closer to Iowa than Virginia.")
                                                        ),
-                                                       column(1))
+                                                       column(1)),
+                                              br(),
+                                              br()
+                                              
                                      ) # close anaylsis & results
                                    ) #close NavlistPanel to select sub-domain for Housing and Zoning heatmap
                                  ) #close fluid row
@@ -515,8 +533,9 @@ representing an increased number of policies that promote economic mobility.
                                               fluidRow(sidebarPanel( width = 4,
                                                                      selectInput("grapheduheat", "Subdomain",
                                                                                  choices = c("School Climate Policies", "Early Childhood Education Policies", "Post-Secondary Affordability Policies", "Workforce Development Policies")
-                                                                     )) ,
-                                                       mainPanel(uiOutput("imgeduheat"), align = "center"))
+                                                                     ))
+                                                       ),
+                                              fluidRow(mainPanel(uiOutput("imgeduheat"), align = "center"))
 
                                               #fluidRow( mainPanel(img(height = 300, width = 400, src = "Education_heatmap.png"))
                                               #)
@@ -549,7 +568,9 @@ representing an increased number of policies that promote economic mobility.
                                                               p(strong("Workforce Development:"), "Oregon scored the lowest with a score of .47/1. This is primarily caused by not having a state statue define at least one financial aid program.  "),
                                                               p(strong("Overall:"), "under our scoring criteria, each state can improve in different subdomains as there is not a consistent state with the highest ranking. Iowa does have the lowest education capital score primarily because of school climate policies while Virginia has the highest score among these three states.")
                                                        ),
-                                                       column(1))
+                                                       column(1)),
+                                              br(),
+                                              br()
                                      ), # close anaylsis & results
 
                                      tabPanel("Box Plot",
@@ -615,8 +636,9 @@ representing an increased number of policies that promote economic mobility.
                                               fluidRow(sidebarPanel( width = 4,
                                                                      selectInput("graphvoteheat", "Subdomain",
                                                                                  choices = c("Voting Accessibility", "Voting Registration")
-                                                                     )) ,
-                                                       mainPanel(uiOutput("imgvoteheat"), align = "center"))
+                                                                     )) 
+                                                       ),
+                                              fluidRow(mainPanel(uiOutput("imgvoteheat"), align = "center"))
                                             
                                      ), # close Asset Map tabPanel
 
@@ -635,17 +657,15 @@ representing an increased number of policies that promote economic mobility.
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(10,
-                                                              p("The policy asset map visualizes the four subdomains and the tax policies that influence them. A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy. A summary of the overall scores for each state is presented below, with a higher number
-                    representing an increased number of policies that promote economic mobility.
-                                                                                               Our results show the following: "),
-                                                              p(img( src = "heat_table.jpg")),
-                                                              p(strong("Voting Accessibility:"), " Oregon and Iowa perform the _________ with a score of 0.__.
-                                                                                               On the other hand, Virginia holds a _______ score of 0.__, highlighting a need for improvement."),
-                                                              p(strong("Voting Registration"), "Oregon and Iowa perform the highest with a score of 0.__.
-                                                                                               In contrast, Virginia holds the lowest score of 0.33, highlighting a need for improvement.  "),
-                                                              p(strong("Overall:"), "___ states had a score of 0.__. All states could improve in making Voting policies that encourage Economic Mobility")
+                                                              p("The policy asset displays the results of our search for the state policies that govern voter registration and voting accessibility. A “Yes” to the policy question indicates a policy that is less burdensome and encourages voter participation. A summary of the policy questions by the two dimensions, Voter Registration and Voting Accessibility, is provided in the table. Our search shows that:   "),
+                                                              p(img( src = "vote_table.PNG")),
+                                                              p(strong("Voting Accessibility:"), " Among the three states, Oregon is the only one that allows a resident to ", strong("vote without documentation"), ". Virginia has a strict ", strong("photo ID requirement"), ", voters without photo identification are required to vote a provisional ballot and to go to their local Election Board before noon on the Friday after the election  to deliver a copy of their photo identification. In Iowa, a voter without a valid form of ID may have their identity attested to by another registered voter in the precinct or may prove identity and residence using Election Day Registration documents."),
+                                                              p(strong("Voting Registration"), "All three states have", strong("online voter registration")," and ", strong("pre-registration"), " for citizens <18 years of age. Pre-registration allows individuals younger than 18 years of age to register to vote anywhere between 2-years (Oregon) to 2-months before they turn 18 in order to be eligible to cast a ballot when they reach 18. In Iowa you can register 6-months in advance of your 18th birthday and in Virginia 1-year. No state has", strong("automatic voter registration"), " at the DMV and social service agencies. ")
                                                        ),
-                                                       column(1))
+                                                       
+                                                       column(1)),
+                                              br(),
+                                              br()
 
                                      ) # close anaylsis & results
                                    ) #close NavlistPanel to select sub-domain for Voting heatmap
@@ -702,8 +722,9 @@ representing an increased number of policies that promote economic mobility.
                                               fluidRow(sidebarPanel( width = 4,
                                                                      selectInput("graphempheat", "Subdomain",
                                                                                  choices = c("Worker Organizing Policies", "Worker Protections", "Wage Policies")
-                                                                     )) ,
-                                                       mainPanel(uiOutput("imgempheat"), align = "center"))
+                                                                     )) 
+                                                       ),
+                                              fluidPage(mainPanel(uiOutput("imgempheat"), align = "center"))
                                               
                                      ), # close Asset Map tabPanel
 
@@ -722,19 +743,15 @@ representing an increased number of policies that promote economic mobility.
                                               fluidRow(width =4,
                                                        column(1),
                                                        column(10,
-                                                              p("The policy asset map visualizes the three subdomains and  17 employment policy questions. A “Yes” identifies the presence of the policy in the state while a “No” represents a lack of the policy. A summary of the overall scores for each state is presented below, with a higher number
-                              representing an increased number of policies that promote economic mobility.
-                                                                                                         Our results show the following: "),
-                                                              p(img( src = "heat_table.jpg")),
-                                                              p(strong("Worker Organizing:"), " Oregon and Iowa perform the _________ with a score of 0.__.
-                                                                                                         On the other hand, Virginia holds a _______ score of 0.__, highlighting a need for improvement."),
-                                                              p(strong("Worker Protections:"), "Oregon and Iowa perform the highest with a score of 0.__.
-                                                                                                         In contrast, Virginia holds the lowest score of 0.33, highlighting a need for improvement.  "),
-                                                              p(strong("Wage:"), "Oregon and Iowa perform the highest with a score of 0.__.
-                                                                                                         In contrast, Virginia holds the lowest score of 0.33, highlighting a need for improvement.  "),
-                                                              p(strong("Overall:"), "___ states had a score of 0.__. All states could improve in making Voting policies that encourage Economic Mobility")
-                                                       ),
-                                                       column(1))
+                                                              p("The policy asset map presents a summary of the search of policy presence in different subdomain affecting employment.  A note of “YES” corresponds to policy environment that supports employment through participation, wage and protection for the workers.  Finally, the table displays the composite index representing the three areas that influence employment for mobility."),   
+
+                                                              p(img(height = 100, width = 500,  src = "employment_table.PNG")),
+                                                              p(strong("Wage:"), "Employment is one of the most neglected areas of policy within the three states. Particularly, wage policy has the lowest attention across the studied states which, deserves immediate attention.  "),
+                                                              p(strong("Worker Protections:"), "Among the three states, Oregon seems to differentiate considerably from Iowa and Virginia with respect to the protection of workers. Virginia maintains the lowest ranks for every employment subdomain.   "),
+                                                              p(strong("Worker Organizing:"), "Virginia may be the state with the amplest policy space for improvement with respect to policies that favor union participation.  ")                                                       ),
+                                                       column(1)),
+                                              br(),
+                                              br()
 
                                      ) # close anaylsis & results
                                    ) #close NavlistPanel to select sub-domain for Employment heatmap
@@ -837,6 +854,9 @@ representing an increased number of policies that promote economic mobility.
                                                       p("b.", strong("Incarceration Practices"), "- Incarceration Practices covers the policies that impact individuals held in state facilities. We focused on inmates’ rights as well as the equitability and social justness of practices within the facility and upon return to their communities. We focus on the type of state facilities (eg: public and private) as well as policies within the facility. Specifically, we assessed the ability to acquire skills and certifications, as well as the ability to access necessary healthcare. Additionally, we consider youth adjudication and the death penalty. "),
                                                       p("c.", strong("Community Policing Practices"), "- Community Policing Practices explores the standards that officers must abide by in policing the community with a focus on the equality of standards. For example, custodial sexual misconduct policies are analyzed, both numerically and qualitatively, to assess how states hold officers accountable for allegations of misconduct made against them by an individual in their custody. In addition, body camera usage, demographic information collection and domestic violence related polices are considered in this subdomain. We also qualitatively assess the nature of officer training programs in the states, particularly those pertaining to treating individuals with mental health issues.")),
                                                column(1)
+                                               ,
+                                               br(),
+                                               br()
                                      ),
 
                                      tabPanel("Data Sources & References",
@@ -878,6 +898,9 @@ representing an increased number of policies that promote economic mobility.
                                                               tags$a(href="https://www.ncjrs.gov/pdffiles1/nij/grants/244756.pdf ", "NCJRS: Criminal Stigma, Race, Gender and Employment")
                                                        )
                                               ) #close fluid row
+                                              ,
+                                              br(),
+                                              br()
                                      ), # Data Sources & References panel
 
                                      tabPanel("View the Data",
@@ -927,7 +950,10 @@ representing an increased number of policies that promote economic mobility.
                                                       p(strong("d.  The Gini coefficient"), "is a measure of statistical dispersion intended to represent income or wealth inequality in a nation or area. Because the Gini coefficient measures inequality after the effects of taxes, by understanding how Gini indexes change as a result
                                                    of tax policies and financial redistribution, we can better understand how tax policy can support economic mobility.  ")
                                              ),
-                                             column(1)),
+                                             column(1),
+                                             br(),
+                                             br()
+                                             ),
 
                                    tabPanel("Data Sources & References",
 
@@ -1034,7 +1060,10 @@ representing an increased number of policies that promote economic mobility.
 
 
                                                ),
-                                               column(1)),
+                                               column(1),
+                                               br(),
+                                               br()
+                                               ),
 
                                      tabPanel("Data Sources & References",
 
@@ -1147,8 +1176,7 @@ representing an increased number of policies that promote economic mobility.
                                                               br(),
                                                               tags$a(href="https://www.iowaeconomicdevelopment.com/LandUsePlanning", "Iowa Economic Development): \"Land Use Planning\""),
                                                               br(),
-                                                              tags$a(href="file:///Users/tasfiachowdhury/Downloads/APA-VA-Chapter-Toolbox-2016.pdf", "The Virginia Chapter of
-The American Planning Association: \"Managing Growth and Development in Virginia\""),
+                                                              tags$a(href="file:///Users/tasfiachowdhury/Downloads/APA-VA-Chapter-Toolbox-2016.pdf", "The Virginia Chapter of The American Planning Association: \"Managing Growth and Development in Virginia\""),
                                                               br(),
                                                               tags$a(href="http://www.virginiaplaces.org/landuseplan/", "Virginia Places: \"Land Use Planning in Virginia\""),
                                                               br(),
@@ -1186,6 +1214,9 @@ The American Planning Association: \"Managing Growth and Development in Virginia
 
                                                        )
                                               ) #close fluid row
+                                              ,
+                                              br(),
+                                              br()
                                      ), # Data Sources & References panel
 
                                      tabPanel("View the Data",
@@ -1227,7 +1258,9 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                ),
                                                column(1),
                                                fluidRow(width = 12, style = "margin: 20px",
-                                                        plotOutput("word_cloud", height = '700px'))
+                                                        plotOutput("word_cloud", height = '700px')),
+                                               br(),
+                                               br()
                                      ),
 
                                      tabPanel("Data Sources & References",
@@ -1269,6 +1302,9 @@ The American Planning Association: \"Managing Growth and Development in Virginia
 
                                                        )
                                               ) #close fluid row
+                                              ,
+                                              br(),
+                                              br()
                                      ), # Data Sources & References panel
 
                                      tabPanel("View the Subcategory Data",
@@ -1276,24 +1312,24 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                        column(2),
                                                        column(10, h3(strong("Education Data Set")),
                                                               p("These are the subcategories used in all graphs. These subcategories are derived from more detailed questions."),
-                                                              DT::dataTableOutput("edutable"),
+                                                              DT::dataTableOutput("edutable")
 
 
                                                        )
                                               )#close fluidrow
-                                     ), # close Data tab
+                                     ), # close subcat Data tab
 
                                      tabPanel("View the Full Question Data Set",
                                               fluidRow(width =12,
                                                        column(2),
                                                        column(10, h3(strong("Question Education Data Set")),
                                                               p("This table provides a more detailed view. There are 73 questions that compose the 19 subcategories shown in the other graphs."),
-                                                              DT::dataTableOutput("qedutable"),
+                                                              DT::dataTableOutput("qedutable")
 
 
                                                        )
                                               )#close fluidrow
-                                     ) # close Data tab
+                                     ) # close full Data tab
 
 
 
@@ -1315,12 +1351,13 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                column(10, h3(strong( "Voting")),
                                                       hr(),
                                                       strong("Background"),
-                                                      p(""),
+                                                      p("Chetty et al. (2014) established a positive correlation between social capital and upward mobility. Social capital is a group level phenomena that reflects the cohesiveness of a community, the connections between people and organizations. Quantifying social capital relies on surrogate measurements like the number of non-profits, response rate to the Census, voter turnout, the number of civic and social associations (Rupasingha et al., 2006)."),
                                                       br(),
-                                                      p("")
-
+                                                      p("Here we focus on policies that have potential to impact voter turnout such as automatic voter registration, online registration, and voter photo ID requirements. Innovations in automatic voter registration have streamlined the way Americans register to vote, by providing automatic registration at DMV offices and social service agencies. These policies can dramatically increase the number of registered voters. For example, since Oregon became the first state in the nation to implement automatic voter registration in 2016, registration rates quadruple at DMV offices. In the first six months after automatic voter registration was implemented in Vermont on January 1, 2017, registration rates jumped 62 percent when compared to the first half of 2016. In contrast, strict photo ID policies block 11 percent of eligible voters that do not have government issued photo IDs and that percentage is even higher among seniors, minorities, people with disabilities, low-income voters, and students.")
                                                ),
-                                               column(1)
+                                               column(1),
+                                               br(),
+                                               br()
                                      ), # close Background Tab
 
                                      tabPanel("Data Sources & References",
@@ -1332,17 +1369,56 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                               br(),
 
                                                               h3("Data Sources"),
-                                                              tags$a(href="[url]", "_________: \"_________\""),
+                                                              tags$a(href="https://www.ncsl.org/research/elections-and-campaigns/voter-id.aspx", "National Conference on State Legislatures: \" Voter Identification Requirements | Voter ID Laws\" "),
                                                               br(),
-                                                              tags$a(href="[url]", "_____________namw/article____"),
+                                                              tags$a(href="https://www.ncsl.org/research/elections-and-campaigns/early-voting-in-state-elections.aspx", "National Conference on State Legislatures: \"State Laws Governing Early Voting \" "),
                                                               br(),
+                                                              tags$a(href="https://evic.reed.edu/", "EVIC: Early Voting Information Center"),
+                                                              br(),
+                                                              tags$a(href="https://www.vote.org/early-voting-calendar/", "Vote.org: \"Early Voting by State \" "),
+                                                              br(),
+                                                              tags$a(href="https://www.elections.virginia.gov/casting-a-ballot/absentee-voting/index.html", "Virgnia Department of Elections: \" Absentee and Early Voting\""),
+                                                              br(),
+                                                              tags$a(href="https://ballotpedia.org/Absentee/mail-in_voting", "Ballotopedia: Absentee/mail-in voting"),
+                                                              br(),
+                                                              tags$a(href="https://www.ncsl.org/research/elections-and-campaigns/absentee-and-early-voting.aspx", "National Conference on State Legislatures: \" Voting Outside the Polling Place- Absentee, All-Mail and other Voting at Home Options \" "),
+                                                              br(),
+                                                              tags$a(href="https://www.ncsl.org/research/elections-and-campaigns/felon-voting-rights.aspx", "National Conference on State Legislatures: \"Felon Voting Rights \""),
+                                                              br(),
+                                                              tags$a(href="https://www.ncsl.org/research/elections-and-campaigns/voter-registration.aspx", "National Conference on State Legislatures: \"Voter Registration \""),
+                                                              br(),
+                                                              tags$a(href="https://www.ncsl.org/research/elections-and-campaigns/automatic-voter-registration.aspx", "National Conference on State Legislatures: \"Automatic Voter Registration \""),
+                                                              br(),
+                                                              tags$a(href="https://www.brennancenter.org/our-work/research-reports/history-avr-implementation-dates", "Brennan Center for Justice: \"History of AVR & Implementation Dates \" "),
+                                                              br(),
+                                                              tags$a(href="https://www.fhwa.dot.gov/policyinformation/quickfinddata/qfdrivers.cfm", "Office of Highway Policy Information: \"Drivers and Driver Licensing\" "),
+                                                              br(),
+                                                              tags$a(href="https://www.ncsl.org/research/elections-and-campaigns/electronic-or-online-voter-registration.aspx", "National Conference on State Legislatures: \"Online Voter Registration \""),
+                                                              br(),
+                                                              tags$a(href="https://www.ncsl.org/research/elections-and-campaigns/voter-registration-deadlines.aspx", "National Conference on State Legislatures: \"Voter Registration Deadlines \""),
+                                                              br(),
+                                                              tags$a(href="https://www.vote.org/voter-registration-deadlines/", "Vote.org: \"Voter Registration Deadlines\" "),
+                                                              br(),
+                                                              tags$a(href="-https://www.ncsl.org/research/elections-and-campaigns/preregistration-for-young-voters.aspx", "National Conference on State Legislatures: \"Preregistration for Young \" "),
+                                                              br(),
+                                                              tags$a(href="https://www.elections.virginia.gov/registration/how-to-register/", "Virgnia Department of Elections: \"How to Register\" "),
+                                                              br(),
+                                                              
 
                                                               h3("References"),
-                                                              tags$a(href="https://www.urban.org/sites/default/files/alfresco/publication-pdfs/2000428-Housing-Policy-Levers-to-Promote-Economic-Mobility.pdf", "Urban Institute: \"HousingPolicy Levers to Promote Economic Mobility\""),
+                                                              tags$a(href="https://www.brennancenter.org/our-work/research-reports/automatic-voter-registration-summary", "Brennan Center for Justice: Automatic Voter Registration a Summary"),
                                                               br(),
-                                                              tags$a(href="[url]", "_____ Foundation: ________?")
-                                                       )
-                                              ) #close fluid row
+                                                              tags$a(href="https://www.brennancenter.org/issues/ensure-every-american-can-vote/vote-suppression/voter-id", "Brennan Center for Justice: Voter ID"),
+                                                              br(),
+                                                              tags$a(href="https://www.nber.org/papers/w19843 ", "Chetty, R., Hendren, N., Kline, P., & Saez, E.: Where is the Land of Opportunity? The Geography of Intergenerational Mobility in the United States."),
+                                                              br(),
+                                                              tags$a(href="https://www.researchgate.net/publication/222822589_The_Production_of_Social_Capital_in_US_Counties", "Rupasingha, A., Goetz, S. J., & Freshwater, D.: The production of social capital in US counties. Journal of Socio-Economics")
+                                                             
+                                                       ) # close column
+                                                              ) #close fluid row
+                                              ,
+                                              br(),
+                                              br()
                                      ), # Data Sources & References panel
 
                                      tabPanel("View the Data",
@@ -1370,12 +1446,15 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                column(10, h3(strong( "Employment")),
                                                       hr(),
                                                       strong("Background"),
-                                                      p(""),
+                                                      p("The large bulk of research on economic mobility focuses on income, particularly, labor income.  Policies regarding employment become of interest to connect the ability to generate income of individuals with the probability to improve their social and economic stages.  Environments with adequate policies that enhance employment show significant improvements to overcome barriers that commonly maintain low levels of mobility.  Employment is the fastest and probably the most direct mechanism to access services of a strong and “healthy” middle class, such as, housing, childcare, high-performing schools, safe neighborhoods, college education, etc.  Even though, the research arena does not have a clear consensus between employment policies, and mobility, Zimmerman (2008) suggests that there is evidence to support that increasing minimum wage legislation potentially benefits a considerable proportion of the population and legislation favoring unions increases mobility since union members typically earn higher wages than non-members (Card, 1996. Shea, 1997)."),  
                                                       br(),
-                                                      p("")
-
+                                                      p("This section refers to three aspects that serve as a theoretical umbrella to understand the impact of employment related policies on social mobility: wage legislation, organizing capacity and considerations for protections."),
+                                                      p(strong("Wage"), "legislation seeks to highlight the existence of local policies regarding minimum wages.", strong("Organizing"), "refers to the presence of union-friendly orientation with respect to policy activity.  Finally,", strong("Protection"), " covers a wide range of details concerning different aspect of employment protection that go beyond monetary aspects that include paid sick leave, equal pay mandates, pregnancy benefits, family care, etc.  These categories are suggested by the Report on the Work index by Oxfam (Oxfam, 2018).  For instance, Oregon seems to have a high rank of work index since it has the fourth highest minimum wage, part of the top states allowing organization of workers in 2018, etc. On the other hand, Virginia seems to have one of the lowest minimum wages along with other 21 states, and Iowa occupies a middle position among all the states according to the Oxfam ranking.  ")
+                                                                                                    ),
+                                               column(1),
+                                               br(),
+                                               br()
                                                ),
-                                               column(1)),
 
                                      tabPanel("Data Sources & References",
 
@@ -1386,17 +1465,30 @@ The American Planning Association: \"Managing Growth and Development in Virginia
                                                               br(),
 
                                                               h3("Data Sources"),
-                                                              tags$a(href="[url]", "_________: \"_________\""),
+                                                              tags$a(href="https://policy-practice.oxfamamerica.org/work/poverty-in-the-us/best-states-to-work/",
+                                                                     "OXFAM: \"The Best and Worst States to work in America\""),
                                                               br(),
-                                                              tags$a(href="[url]", "_____________namw/article____"),
+                                                              tags$a(href="https://statusofwomendata.org/state-data/",
+                                                                     "Status of Women: State Data"),
+                                                              br(),
+                                                              tags$a(href="https://www.osha.gov/stateplans ",
+                                                                     "OSHA: State Plans"),
                                                               br(),
 
                                                               h3("References"),
-                                                              tags$a(href="https://www.urban.org/sites/default/files/alfresco/publication-pdfs/2000428-Housing-Policy-Levers-to-Promote-Economic-Mobility.pdf", "Urban Institute: \"HousingPolicy Levers to Promote Economic Mobility\""),
+                                                              tags$a(href="https://www.urban.org/sites/default/files/publication/31191/1001163-labor-market-institutions-and-economic-mobility.pdf", "Zimmerman, S.: \"Labor market institutions and economic mobility\""),
                                                               br(),
-                                                              tags$a(href="[url]", "_____ Foundation: ________?")
+                                                              tags$a(href="https://davidcard.berkeley.edu/papers/union-struct-wage.pdf", "Card, David.: The Effect of Unions on the Structure of Wages: A Longitudinal Analysis."),
+                                                              br(),
+                                                              tags$a(href="https://s3.amazonaws.com/oxfam-us/www/static/media/files/Best_States_to_Work_Index.pdf", "OMFAM: \"The Best States To Work Index. A Guide To Labor Policy in US States\" "),
+                                                              br(),
+                                                              tags$a(href="http://papers.nber.org/papers/w6026 ", "Shea, John: \"Does Parents’ Money Matter?\" ")
+                                                              
                                                        )
                                               ) #close fluid row
+                                              ,
+                                              br(),
+                                              br()
                                      ), # Data Sources & References panel
 
                                      tabPanel("View the Data",
@@ -1713,13 +1805,13 @@ server <- shinyServer(function(input,output){
 
   output$imghouseheat <- renderUI({
     if(input$graphhouseheat == "Housing Assistance Policies"){
-      img(height = 300, width = 400, src = "housing_heat_assistance.png")
+      img(height = 400, width = 800, src = "housing_heat_assist.png")
     }
     else if(input$graphhouseheat == "Housing Development Policies"){
-      img(height = 300, width = 400, src = "housing_heat_development.png")
+      img(height = 400, width = 600, src = "housing_heat_dev.png")
     }
     else if(input$graphhouseheat == "Housing Financial Policies"){
-      img(height = 300, width = 400, src = "housing_heat_financial.png")
+      img(height = 400, width = 733, src = "housing_heat_fin.png")
     }
   })
 
@@ -1745,13 +1837,13 @@ server <- shinyServer(function(input,output){
 
   output$imgempheat <- renderUI({
     if(input$graphempheat == "Worker Organizing Policies"){
-      img(height = 300, width = 400, src = "emp_heat_org.png")
+      img(height = 400, width = 533, src = "emp_heat_org.png")
     }
     else if(input$graphempheat == "Worker Protections"){
-      img(height = 300, width = 500, src = "emp_heat_protect.png")
+      img(height = 500, width = 833, src = "emp_heat_protect.png")
     }
     else if(input$graphempheat == "Wage Policies"){
-      img(height = 300, width = 550, src = "emp_heat_wage.png")
+      img(height = 400, width = 733, src = "emp_heat_wage.png")
     }
   })
 
@@ -1772,10 +1864,10 @@ server <- shinyServer(function(input,output){
 
   output$imgvoteheat <- renderUI({
     if(input$graphvoteheat == "Voting Accessibility"){
-      img(height = 300, width = 400, src = "vote_heat_access.png")
+      img(height = 400, width = 600, src = "vote_heat_access.png")
     }
     else if(input$graphvoteheat == "Voting Registration"){
-      img(height = 300, width = 400, src = "vote_heat_registration.png")
+      img(height = 300, width = 700, src = "vote_heat_registration.png")
     }
   })
 
@@ -1802,16 +1894,16 @@ server <- shinyServer(function(input,output){
 
   output$imgeduheat <- renderUI({
     if(input$grapheduheat == "School Climate Policies"){
-      img(height = 300, width = 400, src = "Education_School_Climate.png")
+      img(height = 400, width = 533, src = "Education_School_Climate.png")
     }
     else if(input$grapheduheat == "Early Childhood Education Policies"){
-      img(height = 300, width = 400, src = "edu_earlychildhoodeducation.png")
+      img(height = 400, width = 533, src = "edu_earlychildhoodeducation.png")
     }
     else if(input$grapheduheat == "Post-Secondary Affordability Policies"){
-      img(height = 300, width = 400, src = "edu_afford.png")
+      img(height = 400, width = 533, src = "edu_afford.png")
     }
     else if(input$grapheduheat == "Workforce Development Policies"){
-      img(height = 300, width = 400, src = "edu_workforcedev.png")
+      img(height = 400, width = 533, src = "edu_workforcedev.png")
     }
   })
 
