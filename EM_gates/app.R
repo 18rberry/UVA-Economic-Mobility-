@@ -28,6 +28,8 @@ library(tidyr)
 library(readr)
 library(DT)
 library(reshape2)
+library(shinyjs)
+library(rlist)
 
 
 # load data -----------------------------------------------------------------------------
@@ -110,7 +112,20 @@ plot_data_4 <- incarceration %>%
   gather("state", "score", c(3:5))
 
 
-
+# CODE TO DETECT ORIGIN OF LINK AND CHANGE LOGO ACCORDINGLY
+jscode <- "var referer = document.referrer;
+           var n = referer.includes('economic');
+           var x = document.getElementsByClassName('logo');
+           if (n != true) {
+             x[0].innerHTML = '<div style=\"margin-top:-14px\"><a href=\"https://datascienceforthepublicgood.org/events/symposium2020/poster-sessions\">' +
+                              '<img src=\"DSPG_black-01.png\", alt=\"DSPG 2020 Symposium Proceedings\", style=\"height:72px;\">' +
+                              '</a></div>';
+           } else {
+             x[0].innerHTML = '<div style=\"margin-top:-14px\"><a href=\"https://datascienceforthepublicgood.org/economic-mobility/community-insights\">' +
+                              '<img src=\"AEMLogoGatesColorsBlack-11.png\", alt=\"Gates Economic Mobility Case Studies\", style=\"height:72px;\">' +
+                              '</a></div>';
+           }
+           "
 
 
 #plots page ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -119,6 +134,7 @@ plot_data_4 <- incarceration %>%
 # Landing page --------------------------------------------------------------------------------------------------
 ui <- fluidPage(
   theme = shinytheme("flatly"),
+  useShinyjs(),
 
   tags$style(type = "text/css", ".recalculating {opacity: 1.0;}"),
   tags$style(
@@ -129,10 +145,13 @@ ui <- fluidPage(
   tags$head(tags$style(HTML(" .sidebar { font-size: 40%; } "))),
 
   headerPanel(
-    img(src = "MyImage.jpg",
-        class = "topimage", width = "100%", style = "display: block; margin-left: auto; margin-right: auto;"
-    )),
-  hr(),
+    div(class="logo",
+        style = "text-align: center;")
+    # img(src = "MyImage.jpg",
+    #     class = "topimage", width = "100%", style = "display: block; margin-left: auto; margin-right: auto;"
+    # )
+    ),
+  # hr(),
 
   fluidRow(width = 12,style = "margin = 20px",  column(12, align = "center", h2(strong("Political Community Capital ")))),
 
@@ -1694,6 +1713,8 @@ representing an increased number of policies that promote economic mobility.
 
 
 server <- shinyServer(function(input,output){
+  # Run JavaScript Code
+  runjs(jscode)
 
   #getPage<-function() {
   # return(includeHTML("boxplot.html"))

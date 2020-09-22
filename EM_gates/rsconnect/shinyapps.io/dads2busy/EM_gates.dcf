@@ -1,0 +1,13 @@
+name: EM_gates
+title: EM_gates
+username:
+account: dads2busy
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2863471
+bundleId: 3658466
+url: https://dads2busy.shinyapps.io/EM_gates/
+when: 1600802500.40334
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: app_Riya.R|boxplot.html|em_master_data.xlsx|lollipop code.Rmd|lollipop-code.html|policing_profiling.Rmd|cesar_code|plots
